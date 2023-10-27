@@ -1,4 +1,4 @@
-package com.example.crawling;
+package com.example.crawling.main;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -11,9 +11,9 @@ public class News {
 //        String[] productInfo = new String[]{"모델번호 : ", "출시일 : ", "컬러 : ", "발매가 : "};
 
         //뉴스번호 7753100번부터 7753110번까지 스크래핑
-        for (int newsNo = 7753100; newsNo <= 7753110; newsNo++) {
+        for (int newsNo = 7803750; newsNo <= 7803770; newsNo++) {
 
-            final String url = "https://news.kbs.co.kr/news/view.do?ncd="+newsNo;
+            final String url = "https://news.kbs.co.kr/news/pc/view/view.do?ncd="+newsNo;
 
             try {
                 Connection conn = Jsoup.connect(url);
@@ -23,16 +23,16 @@ public class News {
 //                Element imageUrl = document.getElementsByAttributeValue("alt", "동영상 링크").first();
 
                 //기사 제목
-                Element title = document.getElementsByClass("tit-s").first();
+                Element title = document.getElementsByClass("headline-title").first();
 
                 //보도 날짜
-                Element date = document.getElementsByClass("date").first();
+                Element date = document.getElementsByClass("input-date").first();
 
                 //본문
                 Elements detail = document.getElementsByClass("detail-body");
 
                 //기자 이름
-                Elements reporter = document.getElementsByClass("name");
+                Elements reporter = document.getElementsByClass("reporter-name");
 
                 //기자 이메일
                 Elements email = document.getElementsByClass("ico-email");

@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.6'
 	id 'io.spring.dependency-management' version '1.1.2'
+	id 'io.freefair.lombok' version '4.1.6'
 }
 
 group = 'com.example'
@@ -15,6 +16,10 @@ repositories {
 	mavenCentral()
 }
 
+subprojects {
+	apply plugin: 'io.freefair.lombok'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
@@ -22,6 +27,19 @@ dependencies {
 	implementation 'javax.servlet:jstl'
 	implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
 	implementation 'org.jsoup:jsoup:1.15.3'
+
+//	//lombok
+//	implementation 'org.projectlombok:lombok'
+
+	//logback
+	implementation('org.slf4j:jcl-over-slf4j')
+	implementation('ch.qos.logback:logback-classic')
+
+	//MongoDB
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+	// Swagger
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 }
 
 tasks.named('test') {
