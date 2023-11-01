@@ -8,6 +8,6 @@
 </head>
 <body>
 hello!!!
-이 컨트롤러의 NAME은 ${name} 입니다12.
+이 컨트롤러의 NAME은 ${name} 입니다.
 </body>
 </html>
