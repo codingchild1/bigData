@@ -5,17 +5,18 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import javax.annotation.Resource;
+
 @SpringBootApplication
 public class MongoinsertApplication {
 
-    @Autowired
+    @Resource
     private MongoRepository mongoRepository;
 
     public static void main(String[] args) {
@@ -27,7 +28,7 @@ public class MongoinsertApplication {
         return args -> {
 
             //뉴스번호 7753100번부터 7753110번까지 스크래핑
-            for (int newsNo = 7803750; newsNo <= 7803770; newsNo++) {
+            for (int newsNo = 7803770; newsNo <= 7803780; newsNo++) {
 
                 final String url = "https://news.kbs.co.kr/news/pc/view/view.do?ncd="+newsNo;
 
@@ -46,6 +47,10 @@ public class MongoinsertApplication {
 
                     //본문
                     Elements detail = document.getElementsByClass("detail-body");
+                    String strDetail = detail.html();
+                    strDetail = strDetail.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", " ");
+                    strDetail = strDetail.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9/\\s/g]", "");
+                    strDetail = strDetail.replaceAll("서비스 기사   기사본문 필요한 부분을 치환  ", "");
 
                     //기자 이름
                     Elements reporter = document.getElementsByClass("reporter-name");
@@ -60,7 +65,7 @@ public class MongoinsertApplication {
 //                System.out.println("상품 이미지 URL : " + imageUrl.attr("abs:src"));
                     System.out.println("기사 제목 : " + title.text());
                     System.out.println("기사 날짜 : " + date.text());
-                    System.out.println("본문 : " + detail.html());
+                    System.out.println("본문 : " + strDetail);
                     System.out.println("기자 : " + reporter.text());
                     System.out.println("이메일 : " + email.text());
 //                for (int infoIdx = 0; infoIdx < info.size(); infoIdx++) {
@@ -72,7 +77,7 @@ public class MongoinsertApplication {
                     book.setNewsNo(newsNo);
                     book.setTitle(title.text());
                     book.setDate(date.text());
-                    book.setDetail(detail.html());
+                    book.setDetail(strDetail);
                     book.setReporter(reporter.text());
                     book.setEmail(email.text());
 
