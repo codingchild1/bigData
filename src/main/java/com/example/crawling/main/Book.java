@@ -14,5 +14,6 @@ public class Book {
     private String detail;
     private String reporter;
     private String email;
+    private String test;
 
 }

@@ -7,13 +7,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import javax.annotation.Resource;
 
-@SpringBootApplication
+// @SpringBootApplication
 public class MongoinsertApplication {
 
     @Resource
@@ -28,7 +27,7 @@ public class MongoinsertApplication {
         return args -> {
 
             //뉴스번호 7753100번부터 7753110번까지 스크래핑
-            for (int newsNo = 7803770; newsNo <= 7803780; newsNo++) {
+            for (int newsNo = 7803750; newsNo <= 7803760; newsNo++) {
 
                 final String url = "https://news.kbs.co.kr/news/pc/view/view.do?ncd="+newsNo;
 
@@ -80,6 +79,7 @@ public class MongoinsertApplication {
                     book.setDetail(strDetail);
                     book.setReporter(reporter.text());
                     book.setEmail(email.text());
+                    book.setTest("테스트");
 
                     mongoRepository.insert(book);
 
