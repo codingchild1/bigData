@@ -7,16 +7,19 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 import javax.annotation.Resource;
 
-// @SpringBootApplication
+ @SpringBootApplication
 public class MongoinsertApplication {
 
+//    @Resource
+//    private MongoRepository mongoRepository;
+
     @Resource
-    private MongoRepository mongoRepository;
+    private BookRepository bookRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(MongoinsertApplication.class, args);
@@ -25,6 +28,8 @@ public class MongoinsertApplication {
     @Bean
     public ApplicationRunner applicationRunner() {
         return args -> {
+
+//            bookRepository.deleteAll();   //데이터 삭제
 
             //뉴스번호 7753100번부터 7753110번까지 스크래핑
             for (int newsNo = 7803750; newsNo <= 7803760; newsNo++) {
@@ -72,22 +77,24 @@ public class MongoinsertApplication {
 //                }
                     System.out.println("---------------------------");
 
-                    Book book = new Book();
-                    book.setNewsNo(newsNo);
-                    book.setTitle(title.text());
-                    book.setDate(date.text());
-                    book.setDetail(strDetail);
-                    book.setReporter(reporter.text());
-                    book.setEmail(email.text());
-                    book.setTest("테스트");
-
-                    mongoRepository.insert(book);
+//                    Book book = new Book();
+//                    book.setNewsNo(newsNo);
+//                    book.setTitle(title.text());
+//                    book.setDate(date.text());
+//                    book.setDetail(strDetail);
+//                    book.setReporter(reporter.text());
+//                    book.setEmail(email.text());
+//
+//                    bookRepository.insert(book);
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
 
+            for (Book book: bookRepository.findAll()) {
+                System.out.println(book.toString());
+            }
         };
     }
 }
