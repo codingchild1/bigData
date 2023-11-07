@@ -8,7 +8,7 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = '11'
 }
 
 repositories {
@@ -43,6 +43,10 @@ dependencies {
 
 	// Swagger
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
+	// https://mvnrepository.com/artifact/org.python/jython-standalone
+	implementation 'org.python:jython-standalone:2.7.3'
+
 }
 
 tasks.named('test') {
