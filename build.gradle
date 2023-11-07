@@ -13,6 +13,7 @@ java {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://jitpack.io' }
 }
 
 subprojects {
@@ -46,6 +47,7 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.python/jython-standalone
 	implementation 'org.python:jython-standalone:2.7.3'
+	implementation 'com.github.shin285:KOMORAN:3.3.9'
 
 }
 

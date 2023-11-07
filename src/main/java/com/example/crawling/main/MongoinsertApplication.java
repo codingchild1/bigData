@@ -1,8 +1,9 @@
 package com.example.crawling.main;
 
-import org.python.core.PyFunction;
-import org.python.core.PyInteger;
-import org.python.core.PyObject;
+import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
+import kr.co.shineware.nlp.komoran.core.Komoran;
+import kr.co.shineware.nlp.komoran.model.KomoranResult;
+import kr.co.shineware.nlp.komoran.model.Token;
 import org.python.util.PythonInterpreter;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import javax.annotation.Resource;
+import java.util.List;
 
  @SpringBootApplication
 public class MongoinsertApplication {
@@ -97,23 +99,35 @@ public class MongoinsertApplication {
 //                System.out.println(book.getTitle().toString());
 //            }
 
-            System.out.println("파이썬 코드");
-            System.setProperty("python.import.site", "false");
-
-            interpreter = new PythonInterpreter();
-//            interpreter.exec(
-//                    "import sys\n"
-//                            +"sys.argv = ['Foo', 'Bar']");
-            interpreter.execfile("src/main/jython/test.py");
-            interpreter.exec("print('python running')");
-
-            PyFunction pyFunction = interpreter.get("testFunc", PyFunction.class);
+//            System.out.println("파이썬 코드");
+//            System.setProperty("python.import.site", "false");
 //
-            int a = 10;
-            int b = 20;
+//            interpreter = new PythonInterpreter();
+////            interpreter.exec(
+////                    "import sys\n"
+////                            +"sys.argv = ['Foo', 'Bar']");
+//            interpreter.execfile("src/main/jython/test.py");
+//            interpreter.exec("print('python running')");
 //
-            PyObject pyobj = pyFunction.__call__(new PyInteger(a), new PyInteger(b));
-            System.out.println(pyobj.toString());
+//            PyFunction pyFunction = interpreter.get("testFunc", PyFunction.class);
+////
+//            int a = 10;
+//            int b = 20;
+////
+//            PyObject pyobj = pyFunction.__call__(new PyInteger(a), new PyInteger(b));
+//            System.out.println(pyobj.toString());
+
+            Komoran komoran = new Komoran(DEFAULT_MODEL.FULL);
+            String strToAnalyze = "대한민국은 민주공화국이다.";
+
+            KomoranResult analyzeResultList = komoran.analyze(strToAnalyze);
+
+            System.out.println(analyzeResultList.getPlainText());
+
+            List<Token> tokenList = analyzeResultList.getTokenList();
+            for (Token token : tokenList) {
+                System.out.format("(%2d, %2d) %s/%s\n", token.getBeginIndex(), token.getEndIndex(), token.getMorph(), token.getPos());
+            }
 
         };
     }
