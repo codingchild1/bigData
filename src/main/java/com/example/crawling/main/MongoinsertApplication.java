@@ -101,14 +101,17 @@ public class MongoinsertApplication {
             System.setProperty("python.import.site", "false");
 
             interpreter = new PythonInterpreter();
-            interpreter.execfile("C:/Users/ncloud/IdeaProjects/crawling/src/main/resources/jython/test.py");
-            interpreter.exec("print(testFunc(5, 10)");
+//            interpreter.exec(
+//                    "import sys\n"
+//                            +"sys.argv = ['Foo', 'Bar']");
+            interpreter.execfile("src/main/jython/test.py");
+            interpreter.exec("print('python running')");
 
             PyFunction pyFunction = interpreter.get("testFunc", PyFunction.class);
-
+//
             int a = 10;
             int b = 20;
-
+//
             PyObject pyobj = pyFunction.__call__(new PyInteger(a), new PyInteger(b));
             System.out.println(pyobj.toString());
 
