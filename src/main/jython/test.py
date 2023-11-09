@@ -1,7 +1,5 @@
-# import sys
-#
-# print(sys.argv)
+# -*- coding: utf-8 -*-
 
-def testFunc(a, b):
+def testFunc():
     c = a + b
     return c

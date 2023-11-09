@@ -1,7 +1,8 @@
-package com.example.crawling.main;
+package com.example.crawling.dao;
 
 import java.util.List;
 
+import com.example.crawling.vo.Customer;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface CustomerRepository extends MongoRepository<Customer, String> {

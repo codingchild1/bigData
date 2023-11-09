@@ -16,10 +16,12 @@
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
-        <file>test.txt</file>
+        <file>./log/crawling_application.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>test-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <fileNamePattern>C:\Users\ncloud\IdeaProjects\crawling\log\test-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 파일 개수 최대 30개 그 이상가면 삭제 -->
+            <maxHistory>30</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- or whenever the file size reaches 100MB -->
@@ -30,6 +32,11 @@
             <pattern>[%-5level] %d{HH:mm:ss.SSS} %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
+
+    <!-- name 패키지에 속한 클래스에서 출력하는 로그는 info 이상의 레벨에 해당하는 것으로 출력 -->
+    <logger name="org.springframework" level="info"/>
+    <logger name="com.study.redistest" level="debug"/>
+
     <root level="debug">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="ROLLING"/>

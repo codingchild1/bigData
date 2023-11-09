@@ -1,5 +1,6 @@
 package com.example.crawling.main;
 
+import com.example.crawling.vo.Book;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

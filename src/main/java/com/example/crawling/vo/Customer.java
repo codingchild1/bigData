@@ -1,4 +1,4 @@
-package com.example.crawling.main;
+package com.example.crawling.vo;
 
 import org.springframework.data.annotation.Id;
 
