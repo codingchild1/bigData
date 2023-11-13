@@ -47,7 +47,7 @@ public class MongoinsertApplication {
                 crawledNewsDataRepository.deleteAll();    //데이터 삭제
 
                 //뉴스번호 7753100번부터 7753110번까지 스크래핑
-                for (int newsNo = 7803770; newsNo <= 7803890; newsNo++) {
+                for (int newsNo = 7803850; newsNo <= 7803890; newsNo++) {
                     if ((Integer) newsNo == null) break;
 
                     //크롤링을 하려는 주소
@@ -150,13 +150,13 @@ public class MongoinsertApplication {
                     String tokenDetailStr = "";
                     for (int j = 0; j < tokenListTitle.size(); j++) {
                         if (tokenListTitle.get(j).getPos().equals("NNP") || tokenListTitle.get(j).getPos().equals("NNG")) {
-                            tokenTitleStr += tokenListTitle.get(j).getMorph() + ", ";
+                            tokenTitleStr += tokenListTitle.get(j).getMorph() + " ";
                         }
                     }
                     for (int j = 0; j < tokenListDetail.size(); j++) {
                         if (tokenListDetail.get(j).getPos().equals("NNP") || tokenListDetail.get(j).getPos().equals("NNG")) {
 //                        System.out.format("(%2d, %2d) %s/%s\n", token.getBeginIndex(), token.getEndIndex(), token.getMorph(), token.getPos());
-                            tokenDetailStr += tokenListDetail.get(j).getMorph() + ", ";
+                            tokenDetailStr += tokenListDetail.get(j).getMorph() + " ";
                         }
                     }
 
