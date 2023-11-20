@@ -6,8 +6,9 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
 </head>
+<link rel="stylesheet" type="text/css" href="/css/test.css" />
 <body>
 hello!!!
-이 컨트롤러의 NAME은 ${name} 입니다.
+<span class="test">이 컨트롤러의 NAME은 ${name} 입니다.</span>
 </body>
 </html>
