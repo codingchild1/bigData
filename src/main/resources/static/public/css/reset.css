@@ -1,0 +1,306 @@
+/* reset.css */
+@charset "utf-8";
+
+/* Pretendard - 400 */
+@font-face {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Pretendard Regular'),
+    url('../fonts/Pretendard-Regular.woff2') format('woff2'),
+    url('../fonts/Pretendard-Regular.woff') format('woff');
+}
+
+/* Pretendard - 500 */
+@font-face {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Pretendard Medium'),
+    url('../fonts/Pretendard-Medium.woff2') format('woff2'),
+    url('../fonts/Pretendard-Medium.woff') format('woff');
+}
+
+/* Pretendard - 700 */
+@font-face {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Pretendard Bold'),
+    url('../fonts/Pretendard-Bold.woff2') format('woff2'),
+    url('../fonts/Pretendard-Bold.woff') format('woff');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* Correct `block` display not defined in IE 8/9. */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section, summary {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* elements */
+body {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Pretendard', sans-serif;
+    color: var(--black);
+    line-height: 1.5;
+    -webkit-text-size-adjust: none;
+    -ms-interpolation-mode: bicubic;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, div, li, dt, dd,
+input, textarea, select {
+    font-family: 'Pretendard', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+img,
+video,
+audio,
+object,
+embed,
+iframe {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+    border: 0 none;
+    line-height: 0;
+}
+
+ul,
+ol,
+dl {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    margin: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th,
+td {
+    padding: 0;
+    vertical-align: middle;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    color: #111;
+    vertical-align: baseline;
+    background: transparent;
+    text-decoration: none;
+    line-height: inherit;
+    cursor: pointer;
+}
+
+input,
+button {
+    overflow: visible;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="reset"],
+input[type="submit"],
+input[type="tel"],
+input[type="number"],
+input[type="email"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="search"] {
+    font-size: 16px;
+    background: var(--gray1);
+    border-radius: 8px;
+    border: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 8px;
+    cursor: pointer;
+    color: var(--black);
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    font-size: inherit;
+    color: var(--black);
+    -webkit-text-fill-color: #111;
+    -webkit-box-shadow: 0 0 0px 1000px var(--gray1) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input[type=radio] {
+    border-radius: 100%;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+i {
+    font-style: normal;
+    display: inline-block;
+}
+
+textarea {
+    overflow-y: auto;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+select {
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    color: var(--black);
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+button {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+button:focus,
+button:active,
+input:focus,
+input:active,
+select:focus,
+select:active,
+textarea:focus,
+textarea:active {
+    outline: 0;
+}
+
+em {
+    font-style: normal;
+}
+
+br {
+    font-family: dotum;
+}
+
+/* selection */
+::-moz-selection,
+::selection,
+::-moz-selection {
+    background: var(--blue);
+    background: rgba(0, 153, 255, .35);
+    color: #fff;
+}
+
+
+/* scroll style */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gray3);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    min-height: 30px;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+    background: var(--gray4);
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::-webkit-scrollbar-corner {
+    background: #212121;
+}
