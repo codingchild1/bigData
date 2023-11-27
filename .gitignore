@@ -47,3 +47,5 @@ gen
 build
 .log
 *.log
+.gitignore
+gitignore
