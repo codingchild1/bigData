@@ -99,7 +99,7 @@
                     </p>
                 </div>
                 <%--키워드 들어가는 공간--%>
-                <div class="main-keyword-txt">여기역여기이겨이겨ㅣㅇ겨ㅣ여깅겨ㅣ</div>
+                <div class="main-keyword-txt"></div>
             </div>
         </div>
     </div>
