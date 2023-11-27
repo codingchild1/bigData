@@ -46,8 +46,8 @@ public class MongoinsertApplication {
             PythonInterpreter interpreter = new PythonInterpreter();
 
             try {
-                bookRepository.deleteAll();   //데이터 삭제
-                crawledNewsDataRepository.deleteAll();    //데이터 삭제
+//                bookRepository.deleteAll();   //데이터 삭제
+//                crawledNewsDataRepository.deleteAll();    //데이터 삭제
 
                 //뉴스번호 7753100번부터 7753110번까지 스크래핑
                 List<Map<String, Object>> originData = new ArrayList<>();
@@ -124,7 +124,7 @@ public class MongoinsertApplication {
                     book.setEmail(email.text());
 
                     //DB에 연결하기 위한 Repository
-                    bookRepository.insert(book);
+//                    bookRepository.insert(book);
 
                     // db 값 update
                     // id 값 필요 (setId)
@@ -206,8 +206,7 @@ public class MongoinsertApplication {
                     book.setNounDetail(tokenListDetail);
                     book.setCrawlDate(originData.get(i).get("regDate").toString());
 
-//                    crawledNewsDataRepository.insert(newsVO);
-                    bookRepository.save(book);
+//                    bookRepository.save(book);
 
                 }
                 System.out.println("형태소 분석 완료");
