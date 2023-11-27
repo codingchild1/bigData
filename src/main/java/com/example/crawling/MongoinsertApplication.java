@@ -1,5 +1,7 @@
-package com.example.crawling.main;
+package com.example.crawling;
 
+import com.example.crawling.dao.BookRepository;
+import com.example.crawling.dao.CrawledNewsDataRepository;
 import com.example.crawling.vo.Book;
 import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
 import kr.co.shineware.nlp.komoran.core.Komoran;
@@ -24,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SpringBootApplication(scanBasePackages = "com.example.crawling.dao")
+@SpringBootApplication
 public class MongoinsertApplication {
 
     @Resource

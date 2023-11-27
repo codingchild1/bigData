@@ -1,4 +1,4 @@
-package com.example.crawling.main;
+package com.example.crawling.dao;
 
 import com.example.crawling.vo.Book;
 import org.springframework.data.mongodb.repository.MongoRepository;
