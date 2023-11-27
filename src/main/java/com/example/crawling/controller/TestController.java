@@ -19,13 +19,13 @@ public class TestController {
 
     private final BoardRepository boardRepository;
 
-    @RequestMapping("/test")
+    @RequestMapping("/index")
     public String test(Model model) {
 
         String name = "name";
 
         model.addAttribute("name", name);
-        return "/test";
+        return "/index";
     }
 
     @PutMapping("test/{id}")
