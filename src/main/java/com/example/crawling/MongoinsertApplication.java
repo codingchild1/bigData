@@ -86,7 +86,7 @@ public class MongoinsertApplication {
                     map.put("regDate", formatedNow);
                     originData.add(map);
 
-                    strDetail = strDetail.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", " ");
+                    strDetail = strDetail.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
                     strDetail = strDetail.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9/\\s/g]", "");
                     strDetail = strDetail.replaceAll("서비스 기사   기사본문 필요한 부분을 치환  ", "");
                     strDetail = strDetail.replaceAll("앵커", "");
@@ -148,6 +148,8 @@ public class MongoinsertApplication {
 
                 //형태소 분석을 위한 Komoran
                 Komoran komoran = new Komoran(DEFAULT_MODEL.FULL);
+                String userDicPath = "src/main/java/com/example/crawling/dicUser.txt";
+                komoran.setUserDic(userDicPath);
                 for (int i = 0; i < list.size(); i++) {
                     String strToAnalyzeTitle = list.get(i).get("title").toString();
                     String strToAnalyzeDetail = list.get(i).get("detail").toString();
@@ -164,13 +166,34 @@ public class MongoinsertApplication {
                     List<Token> tokenListTitle = analyzeTitleResultList.getTokenList();
                     List<Token> tokenListDetail = analyzeDetailResultList.getTokenList();
                     for (int tokenIdx = 0; tokenIdx < tokenListTitle.size(); tokenIdx++) {
-                        String str = tokenListTitle.get(tokenIdx).getMorph().toString().replaceAll("[^\uAC00-\uD7A3a-zA-Z]", "");
+                        String str = tokenListTitle.get(tokenIdx).getMorph().toString().replaceAll("[^\uAC00-\uD7A3a-zA-Z]", " ");
                         tokenListTitle.get(tokenIdx).setMorph(str);
 
                     }
                     for (int tokenIdx = 0; tokenIdx < tokenListDetail.size(); tokenIdx++) {
-                        tokenListDetail.get(tokenIdx).setMorph(tokenListDetail.get(tokenIdx).getMorph().toString().replaceAll("[^\\uAC00-\\uD7A3a-zA-Z]", ""));
+                        tokenListDetail.get(tokenIdx).setMorph(tokenListDetail.get(tokenIdx).getMorph().toString().replaceAll("[^\\uAC00-\\uD7A3a-zA-Z]", " "));
                     }
+
+                    int nonIdxTitle = 0;    //tokenListTitle remove 한 후 다음 index 받기 위한 값
+                    int nonIdxDetail = 0;   //tokenListDetail remove 한 후 다음 index 받기 위한 값
+                    int tokenTitleSize = tokenListTitle.size();
+                    int tokenDetailSize = tokenListDetail.size();
+                    /*품사 NNG NNP 이외에 제거*/
+                    for (int idx = 0; idx < tokenTitleSize; idx++) {
+                        if (!tokenListTitle.get(nonIdxTitle).getPos().equals("NNP") && !tokenListTitle.get(nonIdxTitle).getPos().equals("NNG")) {   //NNG, NNP 가 아닌 모든 품사 제거
+                            tokenListTitle.remove(nonIdxTitle);
+                        } else {
+                            nonIdxTitle += 1;   //remove가 실행되지 않을 경우 다음 index로 체크
+                        }
+                    }
+                    for (int idx = 0; idx < tokenDetailSize; idx++) {
+                        if (!tokenListDetail.get(nonIdxDetail).getPos().equals("NNP") && !tokenListDetail.get(nonIdxDetail).getPos().equals("NNG")) {
+                            tokenListDetail.remove(nonIdxDetail);
+                        } else {
+                            nonIdxDetail += 1;
+                        }
+                    }
+                    /*품사 NNG NNP 이외에 제거*/
 
 
                     //품사 태깅을 위한 작업
