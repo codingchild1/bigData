@@ -33,48 +33,14 @@
                 </div>
                 <div class="main-issue-list-cont">
                     <ul>
-                        <li>
-                            <button type="button">
-                                <p class="main-issue-list-txt1">소상공인 57만명 재난지원금 8000억 회수 안하기로</p>
-                                <p class="main-issue-list-txt2">국민일보</p>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <p class="main-issue-list-txt1">“코로나 지원금 57만명 8000억 환수 면제”</p>
-                                <p class="main-issue-list-txt2">강원도민일보</p>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <p class="main-issue-list-txt1">고위 당·정·대 협의회, 선지급된 소상공인 재난지원금 환수 면제</p>
-                                <p class="main-issue-list-txt2">국민일보</p>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <p class="main-issue-list-txt1">코로나 재난지원금 환수 백지화…소상공인 한시름 던다</p>
-                                <p class="main-issue-list-txt2">중앙일보</p>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <p class="main-issue-list-txt1">[사설] 자영업자에 단비 될 재난지원금 환수 백지화</p>
-                                <p class="main-issue-list-txt2">국민일보</p>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <p class="main-issue-list-txt1">당정 “57만 소상공인 재난지원금 환수 면제”</p>
-                                <p class="main-issue-list-txt2">경상일보</p>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <p class="main-issue-list-txt1">코로나 지원금 줬다 뺏기?…“백지화” 결정에 57만 소상공인 안도</p>
-                                <p class="main-issue-list-txt2">국민일보</p>
-                            </button>
-                        </li>
+                        <c:forEach var="newsList" items="${newsDataList}" varStatus="status" end="7">
+                            <li>
+                                <button type="button">
+                                    <p class="main-issue-list-txt1">${newsList.nontagTitle}</p>
+                                    <p class="main-issue-list-txt2">${newsList.media}</p>
+                                </button>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
