@@ -245,15 +245,7 @@ button {
     font-family: inherit;
     cursor: pointer;
 }
-
-button:focus,
-button:active,
-input:focus,
-input:active,
-select:focus,
-select:active,
-textarea:focus,
-textarea:active {
+:where(button, input, select, textarea):where(:focus, :active) {
     outline: 0;
 }
 
@@ -270,7 +262,7 @@ br {
 ::selection,
 ::-moz-selection {
     background: var(--blue);
-    background: rgba(0, 153, 255, .35);
+    background: rgba(17, 109, 217, .35);
     color: #fff;
 }
 
@@ -302,5 +294,5 @@ br {
 }
 
 ::-webkit-scrollbar-corner {
-    background: #212121;
+    background: var(--white);
 }
