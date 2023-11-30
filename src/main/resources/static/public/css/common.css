@@ -1,8 +1,6 @@
 /* common.css */
 @charset "utf-8";
 
-/* 임시지정 - 단어가 붙은 부분은 추후 삭제 필요 */
-
 :root {
     /* color */
     --blue: #116DD9;
@@ -59,8 +57,7 @@
 }
 
 /* button style */
-button,
-.a-btn {
+:where(button, .a-btn) {
     display: inline-block;
 }
 
@@ -74,17 +71,12 @@ button,
     justify-content: space-between;
 }
 
-.btn-group2 input,
-.btn-group2 button,
-.btn-group2 .a-btn {
+.btn-group2 :where(input, button, .a-btn) {
     width: 49%;
     border: none;
 }
 
-.form-btn,
-.a-btn,
-.modal-btn,
-.radius-btn {
+:where(.form-btn, .a-btn, .modal-btn, .radius-btn) {
     width: 100%;
     border-radius: var(--border-radius);
 }
@@ -106,9 +98,7 @@ button,
     border-radius: var(--border-radius);
 }
 
-.blue-line-btn:hover,
-.blue-line-btn:focus,
-.blue-line-btn:active {
+.blue-line-btn:where(:hover, :focus, :active) {
     color: var(--blue2);
     border: 1px solid var(--blue2);
     background-color: #e7f2ff;
@@ -127,9 +117,7 @@ button,
     border-radius: var(--border-radius);
 }
 
-.gray-line-btn:hover,
-.gray-line-btn:focus,
-.gray-line-btn:active {
+.gray-line-btn:where(:hover, :focus, :active) {
     color: var(--gray6);
     border: 1px solid var(--gray5);
     transition: all 0.1s;
@@ -240,8 +228,6 @@ button,
     padding: 60px 16px 40px 40px;
     text-align: left;
     background-color: var(--white);
-    border-radius: var(--border-radius);
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
 }
 
 .modal-news .modal-body .modal-news-close {
@@ -264,10 +250,12 @@ button,
     margin-bottom: 24px;
     border-bottom: 1px solid var(--gray2);
 }
+
 .modal-news .modal-body .modal-news-header .modal-news-logo {
     width: auto;
     height: 20px;
 }
+
 .modal-news .modal-body .modal-news-header .modal-news-logo img {
     width: auto;
     height: 100%;
@@ -312,14 +300,17 @@ button,
 .modal-news .modal-body .modal-news-header .modal-news-info .modal-news-info-btn button:not(:first-child) {
     margin-left: 4px;
 }
+
 .modal-news .modal-body .modal-news-cont .modal-news-cont-img {
     text-align: center;
     margin-bottom: 16px;
 }
+
 .modal-news .modal-body .modal-news-cont .modal-news-cont-img img {
     width: auto;
     max-height: 300px;
 }
+
 .modal-news .modal-body .modal-news-cont .modal-news-cont-img p {
     font-size: 14px;
     color: var(--gray5);
@@ -330,7 +321,7 @@ button,
     padding-bottom: 16px;
 }
 
-    /* input */
+/* input */
 input[type="text"].input-l,
 input[type="password"].input-l,
 input[type="reset"].input-l,
@@ -368,8 +359,7 @@ input:disabled {
     cursor: default;
 }
 
-input::placeholder,
-textarea::placeholder {
+:where(input, textarea)::placeholder {
     font-size: inherit;
     color: var(--gray4);
 }
@@ -388,8 +378,7 @@ input::-webkit-search-results-decoration {
     display: none;
 }
 
-input[type="date"],
-input[type="datetime-local"] {
+:where(input[type="date"], input[type="datetime-local"]) {
     position: relative;
     cursor: default;
 }
@@ -407,8 +396,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     z-index: 1;
 }
 
-input[type="date"].input-s:before,
-input[type="datetime-local"].input-s:before {
+:where(input[type="date"], input[type="datetime-local"]).input-s:before {
     content: '';
     position: absolute;
     top: 50%;
@@ -419,8 +407,7 @@ input[type="datetime-local"].input-s:before {
     background: url("../images/calendar.svg") no-repeat center/16px 16px;
 }
 
-input[type="date"].input-l:before,
-input[type="datetime-local"].input-l:before {
+:where(input[type="date"], input[type="datetime-local"]).input-l:before {
     content: '';
     position: absolute;
     top: 50%;
@@ -726,8 +713,7 @@ select option {
     background-size: 16px 16px;
 }
 
-.search-box button.sch-icon:hover,
-.search-box button.sch-icon:focus {
+.search-box button.sch-icon:where(:hover, :focus, :active) {
     background-image: url("../images/search_hover.png");
 }
 
@@ -1088,23 +1074,19 @@ table tbody tr:last-child td {
     vertical-align: middle;
 }
 
-.paging .pagination a.first-prev,
-.paging .pagination a.end-next {
+.paging .pagination a:where(.first-prev, .end-next) {
     background: url("../images/paging2.png") no-repeat center/24px 24px;
 }
 
-.paging .pagination a.prev,
-.paging .pagination a.next {
+.paging .pagination a:where(.prev, .next) {
     background: url("../images/paging1.png") no-repeat center/24px 24px;
 }
 
-.paging .pagination a.end-next,
-.paging .pagination a.next {
+.paging .pagination a:where(.end-next, .next) {
     transform: rotate(180deg);
 }
 
-.paging .pagination a:not(.paging-icon).active,
-.paging .pagination a:not(.paging-icon):hover {
+.paging .pagination a:not(.paging-icon):where(.active, :hover) {
     background-color: var(--blue);
     color: var(--white);
 }
@@ -1132,9 +1114,7 @@ table tbody tr:last-child td {
     background: url("../images/txtbtn_right.svg") no-repeat center / 18px 18px;
 }
 
-.txt-btn:hover,
-.txt-btn:focus,
-.txt-btn:active {
+.txt-btn:where(:hover, :focus, :active) {
     color: var(--black);
 }
 
@@ -1241,6 +1221,7 @@ table tbody tr:last-child td {
 
 .main-keyword {
     margin-top: var(--main-cont-top-margin);
+    margin-bottom: 20px;
 }
 
 .main-keyword .main-keyword-cont {
@@ -1257,9 +1238,6 @@ table tbody tr:last-child td {
     position: absolute;
     top: 16px;
     left: 24px;
-}
-
-.main-keyword .main-keyword-cont .main-keyword-legend {
     display: flex;
     flex-wrap: wrap;
 }

@@ -1,224 +1,65 @@
-[INFO ] 11:27:07.214 c.e.crawling.MongoinsertApplication - Starting MongoinsertApplication using Java 11.0.21 on Ncloud5 with PID 20244 (C:\Users\nCloud\IdeaProjects\bigData\build\classes\java\main started by nCloud in C:\Users\nCloud\IdeaProjects\bigData)
-[INFO ] 11:27:07.218 c.e.crawling.MongoinsertApplication - No active profile set, falling back to 1 default profile: "default"
-[INFO ] 11:27:07.985 o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
-[INFO ] 11:27:08.038 o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 4 MongoDB repository interfaces.
-[INFO ] 11:27:08.223 o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$5a150f41] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-[INFO ] 11:27:08.257 o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-[INFO ] 11:27:08.479 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8280 (http)
-[INFO ] 11:27:08.488 o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8280"]
-[INFO ] 11:27:08.489 o.a.catalina.core.StandardService - Starting service [Tomcat]
-[INFO ] 11:27:08.489 o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
-[INFO ] 11:27:08.694 org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-[INFO ] 11:27:08.699 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-[INFO ] 11:27:08.699 o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1447 ms
-[INFO ] 11:27:08.872 org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.6.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Amazon.com Inc./11.0.21+9-LTS"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='bigdata', source='admin', password=<hidden>, mechanismProperties=<hidden>}, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.Jep395RecordCodecProvider@4861cca9]}, clusterSettings={hosts=[192.168.0.170:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
-[INFO ] 11:27:08.883 org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:613}] to 192.168.0.170:27017
-[INFO ] 11:27:09.472 o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
-[INFO ] 11:27:09.570 o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8280"]
-[INFO ] 11:27:09.590 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8280 (http) with context path ''
-[INFO ] 11:27:09.619 c.e.crawling.MongoinsertApplication - Started MongoinsertApplication in 2.783 seconds (JVM running for 6.948)
-[INFO ] 11:27:09.876 org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:614}] to 192.168.0.170:27017
-[INFO ] 11:27:09.876 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=2077400}
-[INFO ] 11:27:16.450 org.mongodb.driver.connection - Opened connection [connectionId{localValue:3, serverValue:615}] to 192.168.0.170:27017
-[INFO ] 12:55:21.497 org.mongodb.driver.cluster - Exception in monitor thread while connecting to server 192.168.0.170:27017
-com.mongodb.MongoSocketReadTimeoutException: Timeout while receiving message
-	at com.mongodb.internal.connection.InternalStreamConnection.translateReadException(InternalStreamConnection.java:696)
+[INFO ] 09:18:52.736 c.e.crawling.MongoinsertApplication - Starting MongoinsertApplication using Java 11.0.21 on Ncloud5 with PID 24060 (C:\Users\nCloud\IdeaProjects\bigData\out\production\classes started by nCloud in C:\Users\nCloud\IdeaProjects\bigData)
+[INFO ] 09:18:52.741 c.e.crawling.MongoinsertApplication - No active profile set, falling back to 1 default profile: "default"
+[INFO ] 09:18:53.455 o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+[INFO ] 09:18:53.516 o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 56 ms. Found 4 MongoDB repository interfaces.
+[INFO ] 09:18:53.733 o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$72801fc3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO ] 09:18:53.771 o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+[INFO ] 09:18:54.035 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8280 (http)
+[INFO ] 09:18:54.044 o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8280"]
+[INFO ] 09:18:54.044 o.a.catalina.core.StandardService - Starting service [Tomcat]
+[INFO ] 09:18:54.045 o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
+[INFO ] 09:18:54.253 org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+[INFO ] 09:18:54.258 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[INFO ] 09:18:54.259 o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1477 ms
+[INFO ] 09:18:54.440 org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.6.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Amazon.com Inc./11.0.21+9-LTS"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='bigdata', source='admin', password=<hidden>, mechanismProperties=<hidden>}, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.Jep395RecordCodecProvider@5f6494c0]}, clusterSettings={hosts=[192.168.0.170:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
+[INFO ] 09:18:54.455 org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:718}] to 192.168.0.170:27017
+[INFO ] 09:18:54.456 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=16411200}
+[INFO ] 09:18:55.093 o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+[INFO ] 09:18:55.195 o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8280"]
+[INFO ] 09:18:55.216 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8280 (http) with context path ''
+[INFO ] 09:18:55.253 c.e.crawling.MongoinsertApplication - Started MongoinsertApplication in 2.944 seconds (JVM running for 5.755)
+[INFO ] 09:18:55.444 org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:719}] to 192.168.0.170:27017
+[INFO ] 09:19:01.374 org.mongodb.driver.connection - Opened connection [connectionId{localValue:3, serverValue:720}] to 192.168.0.170:27017
+[INFO ] 09:20:30.035 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 09:20:30.036 o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+[INFO ] 09:20:30.037 o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+[WARN ] 09:20:30.692 o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [206] milliseconds.
+[INFO ] 12:57:23.981 org.mongodb.driver.cluster - Exception in monitor thread while connecting to server 192.168.0.170:27017
+com.mongodb.MongoSocketReadException: Exception receiving message
+	at com.mongodb.internal.connection.InternalStreamConnection.translateReadException(InternalStreamConnection.java:702)
 	at com.mongodb.internal.connection.InternalStreamConnection.receiveMessageWithAdditionalTimeout(InternalStreamConnection.java:574)
 	at com.mongodb.internal.connection.InternalStreamConnection.receiveCommandMessageResponse(InternalStreamConnection.java:410)
 	at com.mongodb.internal.connection.InternalStreamConnection.receive(InternalStreamConnection.java:369)
 	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.lookupServerDescription(DefaultServerMonitor.java:221)
 	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:157)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-Caused by: java.net.SocketTimeoutException: Read timed out
-	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
-	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
-	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
+Caused by: java.net.SocketException: Connection reset
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:186)
 	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
 	at com.mongodb.internal.connection.SocketStream.read(SocketStream.java:110)
 	at com.mongodb.internal.connection.SocketStream.read(SocketStream.java:135)
 	at com.mongodb.internal.connection.InternalStreamConnection.receiveResponseBuffers(InternalStreamConnection.java:713)
 	at com.mongodb.internal.connection.InternalStreamConnection.receiveMessageWithAdditionalTimeout(InternalStreamConnection.java:571)
 	... 5 common frames omitted
-[INFO ] 12:55:21.503 org.mongodb.driver.connection - Opened connection [connectionId{localValue:4, serverValue:616}] to 192.168.0.170:27017
-[INFO ] 12:55:21.504 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=1826200}
-[INFO ] 12:55:30.083 org.mongodb.driver.connection - Opened connection [connectionId{localValue:5, serverValue:617}] to 192.168.0.170:27017
-[INFO ] 13:18:48.190 org.mongodb.driver.cluster - Exception in monitor thread while connecting to server 192.168.0.170:27017
-com.mongodb.MongoSocketReadTimeoutException: Timeout while receiving message
-	at com.mongodb.internal.connection.InternalStreamConnection.translateReadException(InternalStreamConnection.java:696)
-	at com.mongodb.internal.connection.InternalStreamConnection.receiveMessageWithAdditionalTimeout(InternalStreamConnection.java:574)
-	at com.mongodb.internal.connection.InternalStreamConnection.receiveCommandMessageResponse(InternalStreamConnection.java:410)
-	at com.mongodb.internal.connection.InternalStreamConnection.receive(InternalStreamConnection.java:369)
-	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.lookupServerDescription(DefaultServerMonitor.java:221)
+[INFO ] 12:57:24.000 org.mongodb.driver.cluster - Exception in monitor thread while connecting to server 192.168.0.170:27017
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:70)
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.lookupServerDescription(DefaultServerMonitor.java:193)
 	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:157)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-Caused by: java.net.SocketTimeoutException: Read timed out
-	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
-	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
-	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
-	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
-	at com.mongodb.internal.connection.SocketStream.read(SocketStream.java:110)
-	at com.mongodb.internal.connection.SocketStream.read(SocketStream.java:135)
-	at com.mongodb.internal.connection.InternalStreamConnection.receiveResponseBuffers(InternalStreamConnection.java:713)
-	at com.mongodb.internal.connection.InternalStreamConnection.receiveMessageWithAdditionalTimeout(InternalStreamConnection.java:571)
-	... 5 common frames omitted
-[INFO ] 13:18:48.194 org.mongodb.driver.connection - Opened connection [connectionId{localValue:6, serverValue:631}] to 192.168.0.170:27017
-[INFO ] 13:18:48.194 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=1548800}
-[INFO ] 13:37:09.656 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-[INFO ] 13:37:09.656 o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-[INFO ] 13:37:09.670 o.s.web.servlet.DispatcherServlet - Completed initialization in 14 ms
-[WARN ] 13:37:11.580 o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [223] milliseconds.
-[INFO ] 13:59:13.574 org.mongodb.driver.connection - Opened connection [connectionId{localValue:7, serverValue:643}] to 192.168.0.170:27017
-[INFO ] 14:00:20.361 c.e.crawling.MongoinsertApplication - Starting MongoinsertApplication using Java 11.0.21 on Ncloud5 with PID 18604 (C:\Users\nCloud\IdeaProjects\bigData\build\classes\java\main started by nCloud in C:\Users\nCloud\IdeaProjects\bigData)
-[INFO ] 14:00:20.362 c.e.crawling.MongoinsertApplication - No active profile set, falling back to 1 default profile: "default"
-[INFO ] 14:00:20.893 o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
-[INFO ] 14:00:20.935 o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 4 MongoDB repository interfaces.
-[INFO ] 14:00:21.076 o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$d06f51c6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-[INFO ] 14:00:21.109 o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-[INFO ] 14:00:21.324 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8280 (http)
-[INFO ] 14:00:21.332 o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8280"]
-[INFO ] 14:00:21.332 o.a.catalina.core.StandardService - Starting service [Tomcat]
-[INFO ] 14:00:21.332 o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
-[INFO ] 14:00:21.529 org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-[INFO ] 14:00:21.535 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-[INFO ] 14:00:21.535 o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1144 ms
-[INFO ] 14:00:21.661 org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.6.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Amazon.com Inc./11.0.21+9-LTS"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='bigdata', source='admin', password=<hidden>, mechanismProperties=<hidden>}, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.Jep395RecordCodecProvider@12567179]}, clusterSettings={hosts=[192.168.0.170:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
-[INFO ] 14:00:21.670 org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:644}] to 192.168.0.170:27017
-[INFO ] 14:00:21.670 org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:645}] to 192.168.0.170:27017
-[INFO ] 14:00:21.673 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=14601000}
-[INFO ] 14:00:22.151 o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
-[INFO ] 14:00:22.225 o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8280"]
-[INFO ] 14:00:22.241 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8280 (http) with context path ''
-[INFO ] 14:00:22.271 c.e.crawling.MongoinsertApplication - Started MongoinsertApplication in 2.232 seconds (JVM running for 3.063)
-[INFO ] 14:00:27.669 org.mongodb.driver.connection - Opened connection [connectionId{localValue:3, serverValue:646}] to 192.168.0.170:27017
-[INFO ] 14:22:40.511 org.mongodb.driver.connection - Opened connection [connectionId{localValue:4, serverValue:647}] to 192.168.0.170:27017
-[INFO ] 14:22:51.047 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-[INFO ] 14:22:51.047 o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-[INFO ] 14:22:51.048 o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-[WARN ] 14:22:51.562 o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [200] milliseconds.
-[INFO ] 14:28:49.961 c.e.crawling.MongoinsertApplication - Starting MongoinsertApplication using Java 11.0.21 on Ncloud5 with PID 28648 (C:\Users\nCloud\IdeaProjects\bigData\build\classes\java\main started by nCloud in C:\Users\nCloud\IdeaProjects\bigData)
-[INFO ] 14:28:49.962 c.e.crawling.MongoinsertApplication - No active profile set, falling back to 1 default profile: "default"
-[INFO ] 14:28:50.543 o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
-[INFO ] 14:28:50.585 o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 4 MongoDB repository interfaces.
-[INFO ] 14:28:50.743 o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$46d6e13e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-[INFO ] 14:28:50.770 o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-[INFO ] 14:28:50.957 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8280 (http)
-[INFO ] 14:28:50.963 o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8280"]
-[INFO ] 14:28:50.964 o.a.catalina.core.StandardService - Starting service [Tomcat]
-[INFO ] 14:28:50.964 o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
-[INFO ] 14:28:51.145 org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-[INFO ] 14:28:51.149 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-[INFO ] 14:28:51.150 o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1157 ms
-[INFO ] 14:28:51.276 org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.6.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Amazon.com Inc./11.0.21+9-LTS"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='bigdata', source='admin', password=<hidden>, mechanismProperties=<hidden>}, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.Jep395RecordCodecProvider@5dcf0772]}, clusterSettings={hosts=[192.168.0.170:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
-[INFO ] 14:28:51.285 org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:649}] to 192.168.0.170:27017
-[INFO ] 14:28:51.285 org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:648}] to 192.168.0.170:27017
-[INFO ] 14:28:51.286 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=15268400}
-[INFO ] 14:28:51.794 o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
-[INFO ] 14:28:51.889 o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8280"]
-[INFO ] 14:28:51.909 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8280 (http) with context path ''
-[INFO ] 14:28:51.942 c.e.crawling.MongoinsertApplication - Started MongoinsertApplication in 2.304 seconds (JVM running for 3.041)
-[INFO ] 14:28:51.988 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-[INFO ] 14:28:51.988 o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-[INFO ] 14:28:51.990 o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-[WARN ] 14:28:52.577 o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [209] milliseconds.
-[INFO ] 14:28:57.362 org.mongodb.driver.connection - Opened connection [connectionId{localValue:3, serverValue:650}] to 192.168.0.170:27017
-[INFO ] 14:36:45.141 c.e.crawling.MongoinsertApplication - Starting MongoinsertApplication using Java 11.0.21 on Ncloud5 with PID 31412 (C:\Users\nCloud\IdeaProjects\bigData\build\classes\java\main started by nCloud in C:\Users\nCloud\IdeaProjects\bigData)
-[INFO ] 14:36:45.142 c.e.crawling.MongoinsertApplication - No active profile set, falling back to 1 default profile: "default"
-[INFO ] 14:36:45.673 o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
-[INFO ] 14:36:45.711 o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 4 MongoDB repository interfaces.
-[INFO ] 14:36:45.853 o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$db5fa5af] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-[INFO ] 14:36:45.874 o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-[INFO ] 14:36:46.046 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8280 (http)
-[INFO ] 14:36:46.051 o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8280"]
-[INFO ] 14:36:46.051 o.a.catalina.core.StandardService - Starting service [Tomcat]
-[INFO ] 14:36:46.052 o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
-[INFO ] 14:36:46.233 org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-[INFO ] 14:36:46.237 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-[INFO ] 14:36:46.237 o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1067 ms
-[INFO ] 14:36:46.379 org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.6.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Amazon.com Inc./11.0.21+9-LTS"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='bigdata', source='admin', password=<hidden>, mechanismProperties=<hidden>}, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.Jep395RecordCodecProvider@307c59ea]}, clusterSettings={hosts=[192.168.0.170:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
-[INFO ] 14:36:46.389 org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:651}] to 192.168.0.170:27017
-[INFO ] 14:36:46.389 org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:652}] to 192.168.0.170:27017
-[INFO ] 14:36:46.390 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=16402600}
-[INFO ] 14:36:46.857 o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
-[INFO ] 14:36:46.938 o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8280"]
-[INFO ] 14:36:46.955 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8280 (http) with context path ''
-[INFO ] 14:36:46.986 c.e.crawling.MongoinsertApplication - Started MongoinsertApplication in 2.134 seconds (JVM running for 2.772)
-[INFO ] 14:36:52.138 org.mongodb.driver.connection - Opened connection [connectionId{localValue:3, serverValue:653}] to 192.168.0.170:27017
-[INFO ] 14:40:09.854 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-[INFO ] 14:40:09.854 o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-[INFO ] 14:40:09.856 o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-[WARN ] 14:40:10.466 o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [239] milliseconds.
-[INFO ] 14:40:58.468 c.e.crawling.MongoinsertApplication - Starting MongoinsertApplication using Java 11.0.21 on Ncloud5 with PID 7100 (C:\Users\nCloud\IdeaProjects\bigData\out\production\classes started by nCloud in C:\Users\nCloud\IdeaProjects\bigData)
-[INFO ] 14:40:58.471 c.e.crawling.MongoinsertApplication - No active profile set, falling back to 1 default profile: "default"
-[INFO ] 14:40:59.186 o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
-[INFO ] 14:40:59.225 o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 4 MongoDB repository interfaces.
-[INFO ] 14:40:59.368 o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$cf76ec57] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-[INFO ] 14:40:59.389 o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-[INFO ] 14:40:59.594 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8280 (http)
-[INFO ] 14:40:59.602 o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8280"]
-[INFO ] 14:40:59.603 o.a.catalina.core.StandardService - Starting service [Tomcat]
-[INFO ] 14:40:59.603 o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
-[INFO ] 14:40:59.806 org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-[INFO ] 14:40:59.812 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-[INFO ] 14:40:59.812 o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1307 ms
-[INFO ] 14:40:59.965 org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.6.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Amazon.com Inc./11.0.21+9-LTS"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='bigdata', source='admin', password=<hidden>, mechanismProperties=<hidden>}, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.Jep395RecordCodecProvider@3b6c2be6]}, clusterSettings={hosts=[192.168.0.170:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
-[INFO ] 14:40:59.977 org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:654}] to 192.168.0.170:27017
-[INFO ] 14:40:59.977 org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:655}] to 192.168.0.170:27017
-[INFO ] 14:40:59.978 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=18751000}
-[INFO ] 14:41:00.498 o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
-[INFO ] 14:41:00.570 o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8280"]
-[INFO ] 14:41:00.586 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8280 (http) with context path ''
-[INFO ] 14:41:00.614 c.e.crawling.MongoinsertApplication - Started MongoinsertApplication in 2.529 seconds (JVM running for 3.569)
-[INFO ] 14:41:06.057 org.mongodb.driver.connection - Opened connection [connectionId{localValue:3, serverValue:656}] to 192.168.0.170:27017
-[INFO ] 14:41:34.781 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-[INFO ] 14:41:34.781 o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-[INFO ] 14:41:34.782 o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-[WARN ] 14:41:35.347 o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [192] milliseconds.
-[INFO ] 16:47:13.196 org.mongodb.driver.cluster - Exception in monitor thread while connecting to server 192.168.0.170:27017
-com.mongodb.MongoSocketReadTimeoutException: Timeout while receiving message
-	at com.mongodb.internal.connection.InternalStreamConnection.translateReadException(InternalStreamConnection.java:696)
-	at com.mongodb.internal.connection.InternalStreamConnection.receiveMessageWithAdditionalTimeout(InternalStreamConnection.java:574)
-	at com.mongodb.internal.connection.InternalStreamConnection.receiveCommandMessageResponse(InternalStreamConnection.java:410)
-	at com.mongodb.internal.connection.InternalStreamConnection.receive(InternalStreamConnection.java:369)
-	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.lookupServerDescription(DefaultServerMonitor.java:221)
-	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:157)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-Caused by: java.net.SocketTimeoutException: Read timed out
-	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
-	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:115)
-	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:168)
-	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
-	at com.mongodb.internal.connection.SocketStream.read(SocketStream.java:110)
-	at com.mongodb.internal.connection.SocketStream.read(SocketStream.java:135)
-	at com.mongodb.internal.connection.InternalStreamConnection.receiveResponseBuffers(InternalStreamConnection.java:713)
-	at com.mongodb.internal.connection.InternalStreamConnection.receiveMessageWithAdditionalTimeout(InternalStreamConnection.java:571)
-	... 5 common frames omitted
-[INFO ] 16:47:13.204 org.mongodb.driver.connection - Opened connection [connectionId{localValue:4, serverValue:670}] to 192.168.0.170:27017
-[INFO ] 16:47:13.204 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=1695300}
-[INFO ] 16:47:22.063 org.mongodb.driver.connection - Opened connection [connectionId{localValue:5, serverValue:671}] to 192.168.0.170:27017
-[INFO ] 18:01:05.901 org.mongodb.driver.connection - Opened connection [connectionId{localValue:6, serverValue:701}] to 192.168.0.170:27017
-[INFO ] 18:04:42.170 c.e.crawling.MongoinsertApplication - Starting MongoinsertApplication using Java 11.0.21 on Ncloud5 with PID 33376 (C:\Users\nCloud\IdeaProjects\bigData\out\production\classes started by nCloud in C:\Users\nCloud\IdeaProjects\bigData)
-[INFO ] 18:04:42.172 c.e.crawling.MongoinsertApplication - No active profile set, falling back to 1 default profile: "default"
-[INFO ] 18:04:42.734 o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
-[INFO ] 18:04:42.774 o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 4 MongoDB repository interfaces.
-[INFO ] 18:04:42.921 o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$624f75b9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-[INFO ] 18:04:42.944 o.s.w.s.a.s.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
-[INFO ] 18:04:43.130 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8280 (http)
-[INFO ] 18:04:43.136 o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8280"]
-[INFO ] 18:04:43.136 o.a.catalina.core.StandardService - Starting service [Tomcat]
-[INFO ] 18:04:43.136 o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.69]
-[INFO ] 18:04:43.314 org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
-[INFO ] 18:04:43.321 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-[INFO ] 18:04:43.321 o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1117 ms
-[INFO ] 18:04:43.455 org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.6.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Amazon.com Inc./11.0.21+9-LTS"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='bigdata', source='admin', password=<hidden>, mechanismProperties=<hidden>}, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.Jep395RecordCodecProvider@38c761e9]}, clusterSettings={hosts=[192.168.0.170:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
-[INFO ] 18:04:43.464 org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:705}] to 192.168.0.170:27017
-[INFO ] 18:04:43.464 org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:704}] to 192.168.0.170:27017
-[INFO ] 18:04:43.466 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=14768300}
-[INFO ] 18:04:43.959 o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
-[INFO ] 18:04:44.046 o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8280"]
-[INFO ] 18:04:44.062 o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8280 (http) with context path ''
-[INFO ] 18:04:44.093 c.e.crawling.MongoinsertApplication - Started MongoinsertApplication in 2.306 seconds (JVM running for 3.207)
-[INFO ] 18:04:49.818 org.mongodb.driver.connection - Opened connection [connectionId{localValue:3, serverValue:706}] to 192.168.0.170:27017
-[INFO ] 18:05:20.750 o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-[INFO ] 18:05:20.750 o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-[INFO ] 18:05:20.751 o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-[WARN ] 18:05:21.282 o.a.c.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [193] milliseconds.
+Caused by: java.net.NoRouteToHostException: No route to host: connect
+	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
+	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
+	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:412)
+	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:255)
+	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:237)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.base/java.net.Socket.connect(Socket.java:609)
+	at com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:107)
+	at com.mongodb.internal.connection.SocketStream.initializeSocket(SocketStream.java:79)
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:65)
+	... 4 common frames omitted
+[INFO ] 12:57:33.977 org.mongodb.driver.connection - Opened connection [connectionId{localValue:5, serverValue:739}] to 192.168.0.170:27017
+[INFO ] 12:57:34.006 org.mongodb.driver.connection - Opened connection [connectionId{localValue:6, serverValue:740}] to 192.168.0.170:27017
+[INFO ] 12:57:34.006 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=1404500}
