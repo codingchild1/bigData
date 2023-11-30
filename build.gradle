@@ -52,6 +52,8 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.json/json
 	implementation("org.json:json:20230227")
 
+    // devtools
+    compileOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 tasks.named('test') {
