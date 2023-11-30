@@ -14,6 +14,7 @@
     <link rel="shortcut icon" href="../../public/images/favicon.ico">
     <link rel="stylesheet" href="../../public/css/reset.css">
     <link rel="stylesheet" href="../../public/css/common.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
 <body>
@@ -35,9 +36,9 @@
                     <ul>
                         <c:forEach var="newsList" items="${newsDataList}" varStatus="status" end="7">
                             <li>
-                                <button type="button">
-                                    <p class="main-issue-list-txt1">${newsList.nontagTitle}</p>
-                                    <p class="main-issue-list-txt2">${newsList.media}</p>
+                                <button type="button" class="news_title_btn" _id_no="${newsList.newsNo}">
+                                    <p class="main-issue-list-txt1" style="z-index: -1">${newsList.nontagTitle}</p>
+                                    <p class="main-issue-list-txt2" style="z-index: -1">${newsList.media}</p>
                                 </button>
                             </li>
                         </c:forEach>
@@ -71,6 +72,14 @@
     </div>
 </div>
 
+<%--<script>--%>
+<%--    $().ready(function () {--%>
+<%--        $(".news_title_btn").on('click', function (e) {--%>
+<%--            console.log(e.target.attr("_id_no"));--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
+<script src="/js/newsController.js"></script>
 </body>
 
 </html>
