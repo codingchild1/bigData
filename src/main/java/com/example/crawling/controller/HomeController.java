@@ -33,6 +33,7 @@ public class HomeController {
 		try {
 			List<Map<String, Object>> list = homeService.selectNewsData();
 			model.addAttribute("newsDataList", list);
+			System.out.println("aaa");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
