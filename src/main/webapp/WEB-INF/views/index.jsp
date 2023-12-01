@@ -199,6 +199,7 @@
                 data: {},
                 success: function (result, status) {
                     const count = getEsCount(result);
+                    console.log(count);
 
                     // json -> 객체 배열 형태로 변환
                     const dataArray = Object.keys(count).map(key => {
@@ -218,7 +219,7 @@
                     series.accuracy = 4;
                     series.step = 15;
                     series.rotationThreshold = 0.7;
-                    // series.labels.template.tooltipText = "{word}: {value}";
+                    series.labels.template.tooltipText = "{word}: {value}";
 
                     // 색상 랜덤 적용
                     series.colors = new am4core.ColorSet();
@@ -233,26 +234,14 @@
                     // series.maxFontSize = am4core.percent(30);
                     // series.colors.reuse = true;
 
-                    // // 워드 클라우드 클릭 이벤트
-                    // series.labels.template.events.on("click", function (ev) {
-                    //     debugger;
-                    //
-                    //     const clickWord = ev.target.dataItem.dataContext.category;
-                    //     const category = ev.target.dataItem.get("tag");
-                    //     let url = ev.target.dataItem.dataContext.url;
-                    //     if (url == undefined) {
-                    //         url = "http://www.daum.net"
-                    //     }
-                    //     window.open(url);
-                    // });
+                    // 워드 클라우드 클릭 이벤트
+                    series.labels.template.events.on("hit", function (ev) {
+                        const clickWord = ev.target.dataItem.dataContext.tag;
+                        console.log(clickWord);
+                        sendKeyword(clickWord);
+                    });
 
-                    series.labels.template.url = "https://naver.com";
-
-                    // 형태소 분석한 값으로 워드클라우드 만들기
-
-
-
-                    // console.log(count);
+                    series.labels.template.url = "http://localhost:8280/search";
                 },
                 fail: function () {
                     console.log(arguments)
@@ -260,6 +249,22 @@
             });
         }
 
+        function sendKeyword(keyword) {
+            $.ajax({
+                type: "get",
+                url: "/search",
+                dataType: 'json',
+                data: {
+                    keyword: keyword
+                },
+                success: function (result, status) {
+                    console.log(result);
+                },
+                fail: function () {
+                    console.log(arguments)
+                }
+            });
+        }
     });
 
 
