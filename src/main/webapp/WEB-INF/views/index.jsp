@@ -16,9 +16,10 @@
     <link rel="stylesheet" href="../../public/css/common.css">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
-    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/wc.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 </head>
 
 <body>
@@ -54,7 +55,6 @@
     <div class="main-keyword">
         <div class="layout">
             <p class="main-tit">오늘의 키워드</p>
-            <button id="call" style="background-color: blue;">불러오기</button>
             <div class="main-keyword-cont">
                 <%--                <div class="main-keyword-legend">--%>
                 <%--                    <p class="legend legend1">--%>
@@ -160,8 +160,38 @@
     // 이지영
     $document.ready(() => {
 
-        $document.on('click', '#call', () => {
+        drawAmChart();
 
+        // get ElasticSearch count
+        function getEsCount(list) {
+            let counts = {};
+            let url = {}
+
+            const c = 'count';
+
+            const hits = list.hits.hits;
+            hits.reduce((a, hit) => {
+                const source = hit._source;
+                const detail = source.nounDetail;
+
+                /*
+                url[i] = hit._id;
+                url[u] = source.url;
+                */
+                detail.reduce((b, noun) => {
+                    const morph = noun.morph;
+                    if (undefined == counts[morph]) {
+                        counts[morph] = 0;
+                        // counts[morph][id] = 0;
+                    }
+                    counts[morph]++;
+                }, {});
+            }, {});
+            return counts;
+        }
+
+        // ajax and draw amchart
+        function drawAmChart() {
             $.ajax({
                 type: "get",
                 url: "/jylee/proxy/proxy.jsp?url=" + "http://192.168.0.170:9200/newsanalyst.crawling/_search",
@@ -173,130 +203,61 @@
                     // json -> 객체 배열 형태로 변환
                     const dataArray = Object.keys(count).map(key => {
                         return {
-                            category: key,
-                            value: count[key],
+                            tag: key,
+                            weight: count[key],
                         }
                     })
 
-                    // Create root element
-                    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-                    var root = am5.Root.new("chartDiv");
+                    am4core.useTheme(am4themes_animated);
+                    var chart = am4core.create("chartDiv", am4plugins_wordCloud.WordCloud);
+                    var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+
+                    series.data = dataArray;
+                    series.dataFields.word = "tag";
+                    series.dataFields.value = "weight";
+                    series.accuracy = 4;
+                    series.step = 15;
+                    series.rotationThreshold = 0.7;
+                    // series.labels.template.tooltipText = "{word}: {value}";
+
+                    // 색상 랜덤 적용
+                    series.colors = new am4core.ColorSet();
+                    series.colors.passOptions = {};
+
+                    // 사용 안되는 변수
+                    // series.maxCount = 10;
+                    // series.minWordLength = 2;
+
+                    // 유용한 옵션
+                    // series.fontFamily = "'M PLUS 1p', sans-serif";
+                    // series.maxFontSize = am4core.percent(30);
+                    // series.colors.reuse = true;
+
+                    // // 워드 클라우드 클릭 이벤트
+                    // series.labels.template.events.on("click", function (ev) {
+                    //     debugger;
+                    //
+                    //     const clickWord = ev.target.dataItem.dataContext.category;
+                    //     const category = ev.target.dataItem.get("tag");
+                    //     let url = ev.target.dataItem.dataContext.url;
+                    //     if (url == undefined) {
+                    //         url = "http://www.daum.net"
+                    //     }
+                    //     window.open(url);
+                    // });
+
+                    series.labels.template.url = "https://naver.com";
+
+                    // 형태소 분석한 값으로 워드클라우드 만들기
 
 
-                    // Set themes
-                    // https://www.amcharts.com/docs/v5/concepts/themes/
-                    root.setThemes([
-                        am5themes_Animated.new(root)
-                    ]);
 
-
-                    // Add wrapper container
-                    var container = root.container.children.push(am5.Container.new(root, {
-                        width: am5.percent(100),
-                        height: am5.percent(100),
-                        layout: root.verticalLayout
-                    }));
-
-
-                    // Add chart title
-                    var title = container.children.push(am5.Label.new(root, {
-                        text: "Most popular languages on StackOverflow",
-                        fontSize: 20,
-                        x: am5.percent(50),
-                        centerX: am5.percent(50)
-                    }));
-
-
-                    // Add series
-                    // https://www.amcharts.com/docs/v5/charts/word-cloud/
-                    var series = container.children.push(am5wc.WordCloud.new(root, {
-                        categoryField: "tag",
-                        valueField: "value",
-                        calculateAggregates: true, // this is needed for heat rules to work
-                        randomness: 0
-                        //     maxCount:100,
-                        //     minWordLength:2,
-                        //     maxFontSize:am5.percent(35)
-                    }));
-
-                    // Set up heat rules
-                    // https://www.amcharts.com/docs/v5/charts/word-cloud/#Via_heat_rules
-                    series.set("heatRules", [{
-                        target: series.labels.template,
-                        dataField: "value",
-                        min: am5.color(0xFFD4C2),
-                        max: am5.color(0xFF621F),
-                        key: "fill"
-                    }]);
-
-                    // Configure labels
-                    series.labels.template.setAll({
-                        paddingTop: 5,
-                        paddingBottom: 5,
-                        paddingLeft: 5,
-                        paddingRight: 5,
-                        fontFamily: "Courier New",
-                        cursorOverStyle: "pointer"
-                    });
-
-                    // 워드 클라우드 클릭 이벤트
-                    series.labels.template.events.on("click", function (ev) {
-                        debugger;
-                        const category = ev.target.dataItem.get("category");
-                        let url = ev.target.dataItem.dataContext.url;
-                        if(url == undefined){
-                            url = "http://www.daum.net"
-                        }
-                        window.open(url);
-                    });
-
-                    // series.data.setAll([
-                    //     {category: "JavaScript", value: 64.96, url: "http://naver.com"},
-                    //     {category: "HTML/CSS", value: 56.07},
-                    //     {category: "Python", value: 48.24},
-                    //     {category: "SQL", value: 47.08},
-                    //     {category: "Java", value: 35.35},
-                    //     {category: "Node.js", value: 33.91},
-                    //     {category: "TypeScript", value: 30.19},
-                    //     {category: "Ty23peScript", value: 30.19},
-                    //     {category: "TypeS23cript", value: 40.19},
-                    //     {category: "TypeSc1ript", value: 50.19},
-                    //     {category: "TypeSc23ript", value: 60.19},
-                    //     {category: "TypfeScdript", value: 70.19},
-                    //     {category: "TypeScdeript", value: 80.19},
-                    //     {category: "TypeaaScript", value: 90.19},
-                    // ]);
-
-                    series.data.setAll(dataArray);
-
-
-                    // 워드 클라우드 생성 함수 호출
-                    // createWordCloud(counts);
-
-                    console.log(count);
+                    // console.log(count);
                 },
                 fail: function () {
                     console.log(arguments)
                 }
             });
-
-        });
-
-        // get ElasticSearch count
-        function getEsCount(list){
-            let counts = {};
-            const hits = list.hits.hits;
-            hits.reduce((a, hit) => {
-                const detail = hit._source.nounDetail;
-                detail.reduce((b, noun) => {
-                    const morph = noun.morph;
-                    if(undefined == counts[morph]){
-                        counts[morph] = 0;
-                    }
-                    counts[morph]++;
-                }, {});
-            }, {});
-            return counts;
         }
 
     });
