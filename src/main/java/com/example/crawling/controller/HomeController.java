@@ -37,7 +37,7 @@ public class HomeController {
 
 			Map<String, String> map = new HashMap<>();
 			map.put("keyword", "중국");
-			map.put("searchType", "title");
+			map.put("searchType", "content");
 			List<Book> searchMap = homeService.searchMap(map);   // 검색용
 
 			model.addAttribute("newsDataList", list);

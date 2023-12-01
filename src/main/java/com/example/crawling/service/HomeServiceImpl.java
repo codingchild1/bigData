@@ -46,20 +46,20 @@ public class HomeServiceImpl implements HomeService {
 	@Override
 	public List<Book> searchMap(Map<String, String> searchKeyword) throws Exception {
 
-		List<Book> list = new ArrayList<>();
+		List<Book> result = new ArrayList<>();
 
-		switch(searchKeyword.get("searchType")){
+		switch (searchKeyword.get("searchType")) {
 			case "title":
-				List<Book> titleList = bookRepository.findByTitleRegex(searchKeyword.get("keyword"));
-				return titleList;
+				result = bookRepository.findByTitleRegex(searchKeyword.get("keyword"));
+				break;
 			case "content":
-				List<Book> contentList = bookRepository.findByDetailRegex(searchKeyword.get("keyword"));
-				return contentList;
+				result = bookRepository.findByDetailRegex(searchKeyword.get("keyword"));
+				break;
 			case "reporter":
-				List<Book> reporterList = bookRepository.findByReporterRegex(searchKeyword.get("keyword"));
-				return reporterList;
+				result = bookRepository.findByReporterRegex(searchKeyword.get("keyword"));
+				break;
 		}
 
-		return list;
+		return result;
 	}
 }
