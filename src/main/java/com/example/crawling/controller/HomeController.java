@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +34,12 @@ public class HomeController {
 
 		try {
 			List<Map<String, Object>> list = homeService.selectNewsData();
-			List<Book> searchMap = homeService.searchMap("김민정 ");   // 검색용
+
+			Map<String, String> map = new HashMap<>();
+			map.put("keyword", "중국");
+			map.put("searchType", "title");
+			List<Book> searchMap = homeService.searchMap(map);   // 검색용
+
 			model.addAttribute("newsDataList", list);
 			System.out.println(searchMap);
 			System.out.println("aaa");

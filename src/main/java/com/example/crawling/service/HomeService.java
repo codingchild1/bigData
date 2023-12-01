@@ -9,5 +9,5 @@ public interface HomeService {
 
 	List<Map<String, Object>> selectNewsData() throws Exception;
 
-	List<Book> searchMap(String reporter) throws Exception;
+	List<Book> searchMap(Map<String, String> searchKeyword) throws Exception;
 }
