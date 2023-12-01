@@ -28,6 +28,15 @@ public class TestController {
         return "/index";
     }
 
+    @RequestMapping("/search")
+    public String test2(Model model) {
+
+        String name = "name";
+
+        model.addAttribute("name", name);
+        return "/search";
+    }
+
     @PutMapping("test/{id}")
     public void update(@RequestBody BoardSaveDto dto, @PathVariable String id) {
         Board board = new Board();
