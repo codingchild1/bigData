@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="../../public/css/reset.css">
     <link rel="stylesheet" href="../../public/css/common.css">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/wc.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 </head>
 
 <body>
@@ -50,23 +54,24 @@
     <div class="main-keyword">
         <div class="layout">
             <p class="main-tit">오늘의 키워드</p>
+            <button id="call" style="background-color: blue;">불러오기</button>
             <div class="main-keyword-cont">
-<%--                <div class="main-keyword-legend">--%>
-<%--                    <p class="legend legend1">--%>
-<%--                        <span class="legend-color"></span>--%>
-<%--                        <span class="legend-txt">Text1</span>--%>
-<%--                    </p>--%>
-<%--                    <p class="legend legend2">--%>
-<%--                        <span class="legend-color"></span>--%>
-<%--                        <span class="legend-txt">Text2</span>--%>
-<%--                    </p>--%>
-<%--                    <p class="legend legend3">--%>
-<%--                        <span class="legend-color"></span>--%>
-<%--                        <span class="legend-txt">Text3</span>--%>
-<%--                    </p>--%>
-<%--                </div>--%>
+                <%--                <div class="main-keyword-legend">--%>
+                <%--                    <p class="legend legend1">--%>
+                <%--                        <span class="legend-color"></span>--%>
+                <%--                        <span class="legend-txt">Text1</span>--%>
+                <%--                    </p>--%>
+                <%--                    <p class="legend legend2">--%>
+                <%--                        <span class="legend-color"></span>--%>
+                <%--                        <span class="legend-txt">Text2</span>--%>
+                <%--                    </p>--%>
+                <%--                    <p class="legend legend3">--%>
+                <%--                        <span class="legend-color"></span>--%>
+                <%--                        <span class="legend-txt">Text3</span>--%>
+                <%--                    </p>--%>
+                <%--                </div>--%>
                 <%--키워드 들어가는 공간--%>
-                <div class="main-keyword-txt">
+                <div class="main-keyword-txt" id="chartDiv">
                     <!-- <iframe src="http://192.168.0.170:5601/app/dashboards#/view/53d6d5e0-8da6-11ee-a28b-a73ae6d6f567?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))" height="100%" width="100%"></iframe> -->
 
                 </div>
@@ -128,7 +133,8 @@
                         <br><br>
                         최종 PT에서도 사우디발 '오일 머니' 공세에 맞서 일회성이 아닌 지속 가능한 연대와 협력을 강조하며 정면 승부를 선택했기에 더 진한 여운이 남습니다.
                         <br><br>
-                        [김이태 / 부산대 관광컨벤션학과 교수 (부산엑스포 유치위 자문) : (사우디가) 엑스포 개최를 위해서 10조 원 이상의 투자를 저개발 국가에다 천문학적 개발 차관과 원조 기금을 주는 역할을 함으로 인해 금전적인 투표가….]
+                        [김이태 / 부산대 관광컨벤션학과 교수 (부산엑스포 유치위 자문) : (사우디가) 엑스포 개최를 위해서 10조 원 이상의 투자를 저개발 국가에다 천문학적 개발 차관과 원조
+                        기금을 주는 역할을 함으로 인해 금전적인 투표가….]
                         <br><br>
                         유치전에선 고배를 마셨지만, 성과가 없는 건 아닙니다.
                         민관 합동으로 전 세계를 돌며 만들어진 글로벌 외교 네트워크는 돈으로 환산할 수 없는 소중한 가치라는 평가입니다.
@@ -143,7 +149,161 @@
     </div>
 </div>
 
+
 <script src="/js/newsController.js"></script>
+
+<script>
+    window.dd = window.console.log.bind(console);
+
+    const $document = $(document);
+
+    // 이지영
+    $document.ready(() => {
+
+        $document.on('click', '#call', () => {
+
+            $.ajax({
+                type: "get",
+                url: "/jylee/proxy/proxy.jsp?url=" + "http://192.168.0.170:9200/newsanalyst.crawling/_search",
+                dataType: 'json',
+                data: {},
+                success: function (result, status) {
+                    const count = getEsCount(result);
+
+                    // json -> 객체 배열 형태로 변환
+                    const dataArray = Object.keys(count).map(key => {
+                        return {
+                            category: key,
+                            value: count[key],
+                        }
+                    })
+
+                    // Create root element
+                    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                    var root = am5.Root.new("chartDiv");
+
+
+                    // Set themes
+                    // https://www.amcharts.com/docs/v5/concepts/themes/
+                    root.setThemes([
+                        am5themes_Animated.new(root)
+                    ]);
+
+
+                    // Add wrapper container
+                    var container = root.container.children.push(am5.Container.new(root, {
+                        width: am5.percent(100),
+                        height: am5.percent(100),
+                        layout: root.verticalLayout
+                    }));
+
+
+                    // Add chart title
+                    var title = container.children.push(am5.Label.new(root, {
+                        text: "Most popular languages on StackOverflow",
+                        fontSize: 20,
+                        x: am5.percent(50),
+                        centerX: am5.percent(50)
+                    }));
+
+
+                    // Add series
+                    // https://www.amcharts.com/docs/v5/charts/word-cloud/
+                    var series = container.children.push(am5wc.WordCloud.new(root, {
+                        categoryField: "tag",
+                        valueField: "value",
+                        calculateAggregates: true, // this is needed for heat rules to work
+                        randomness: 0
+                        //     maxCount:100,
+                        //     minWordLength:2,
+                        //     maxFontSize:am5.percent(35)
+                    }));
+
+                    // Set up heat rules
+                    // https://www.amcharts.com/docs/v5/charts/word-cloud/#Via_heat_rules
+                    series.set("heatRules", [{
+                        target: series.labels.template,
+                        dataField: "value",
+                        min: am5.color(0xFFD4C2),
+                        max: am5.color(0xFF621F),
+                        key: "fill"
+                    }]);
+
+                    // Configure labels
+                    series.labels.template.setAll({
+                        paddingTop: 5,
+                        paddingBottom: 5,
+                        paddingLeft: 5,
+                        paddingRight: 5,
+                        fontFamily: "Courier New",
+                        cursorOverStyle: "pointer"
+                    });
+
+                    // 워드 클라우드 클릭 이벤트
+                    series.labels.template.events.on("click", function (ev) {
+                        debugger;
+                        const category = ev.target.dataItem.get("category");
+                        let url = ev.target.dataItem.dataContext.url;
+                        if(url == undefined){
+                            url = "http://www.daum.net"
+                        }
+                        window.open(url);
+                    });
+
+                    // series.data.setAll([
+                    //     {category: "JavaScript", value: 64.96, url: "http://naver.com"},
+                    //     {category: "HTML/CSS", value: 56.07},
+                    //     {category: "Python", value: 48.24},
+                    //     {category: "SQL", value: 47.08},
+                    //     {category: "Java", value: 35.35},
+                    //     {category: "Node.js", value: 33.91},
+                    //     {category: "TypeScript", value: 30.19},
+                    //     {category: "Ty23peScript", value: 30.19},
+                    //     {category: "TypeS23cript", value: 40.19},
+                    //     {category: "TypeSc1ript", value: 50.19},
+                    //     {category: "TypeSc23ript", value: 60.19},
+                    //     {category: "TypfeScdript", value: 70.19},
+                    //     {category: "TypeScdeript", value: 80.19},
+                    //     {category: "TypeaaScript", value: 90.19},
+                    // ]);
+
+                    series.data.setAll(dataArray);
+
+
+                    // 워드 클라우드 생성 함수 호출
+                    // createWordCloud(counts);
+
+                    console.log(count);
+                },
+                fail: function () {
+                    console.log(arguments)
+                }
+            });
+
+        });
+
+        // get ElasticSearch count
+        function getEsCount(list){
+            let counts = {};
+            const hits = list.hits.hits;
+            hits.reduce((a, hit) => {
+                const detail = hit._source.nounDetail;
+                detail.reduce((b, noun) => {
+                    const morph = noun.morph;
+                    if(undefined == counts[morph]){
+                        counts[morph] = 0;
+                    }
+                    counts[morph]++;
+                }, {});
+            }, {});
+            return counts;
+        }
+
+    });
+
+
+</script>
+
 </body>
 
 </html>
