@@ -2,9 +2,12 @@ package com.example.crawling.controller;
 
 import com.example.crawling.dao.BoardRepository;
 import com.example.crawling.dto.BoardSaveDto;
+import com.example.crawling.service.HomeService;
 import com.example.crawling.vo.Board;
+import com.example.crawling.vo.Book;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,19 +15,32 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+import java.util.Map;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-public class TestController {
+public class HomeController {
+
+	@Autowired
+	HomeService homeService;
 
     private final BoardRepository boardRepository;
 
     @RequestMapping("/index")
-    public String test(Model model) {
+    public String test(Model model) throws Exception {
 
-        String name = "name";
+		try {
+			List<Map<String, Object>> list = homeService.selectNewsData();
+			List<Book> searchMap = homeService.searchMap("김민정 ");   // 검색용
+			model.addAttribute("newsDataList", list);
+			System.out.println(searchMap);
+			System.out.println("aaa");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-        model.addAttribute("name", name);
         return "/index";
     }
 

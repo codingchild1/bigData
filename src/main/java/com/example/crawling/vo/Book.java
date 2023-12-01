@@ -28,6 +28,7 @@ public class Book {
     private List<?> nounDetail;
     private List<?> nounTitle;
     private String crawlDate;
+	private String media;
 
 //    public Book() {}
 
