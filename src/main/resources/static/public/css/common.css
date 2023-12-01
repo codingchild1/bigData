@@ -1150,7 +1150,7 @@ table tbody tr:last-child td {
 .main-keyword .main-keyword-cont {
     position: relative;
     width: 100%;
-    height: 360px;
+    height: 650px;
     padding: 16px;
     border: 1px solid var(--gray2);
     border-radius: var(--border-radius);
@@ -1209,4 +1209,9 @@ table tbody tr:last-child td {
     justify-content: center;
     width: 100%;
     height: 100%;
+}
+
+/* iframe css 변경 부분*/
+.react-grid-item.react-draggable.react-resizable{
+    width: 100% !important;
 }

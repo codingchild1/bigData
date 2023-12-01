@@ -84,22 +84,25 @@
         <div class="layout">
             <p class="main-tit">오늘의 키워드</p>
             <div class="main-keyword-cont">
-                <div class="main-keyword-legend">
-                    <p class="legend legend1">
-                        <span class="legend-color"></span>
-                        <span class="legend-txt">Text1</span>
-                    </p>
-                    <p class="legend legend2">
-                        <span class="legend-color"></span>
-                        <span class="legend-txt">Text2</span>
-                    </p>
-                    <p class="legend legend3">
-                        <span class="legend-color"></span>
-                        <span class="legend-txt">Text3</span>
-                    </p>
-                </div>
+<%--                <div class="main-keyword-legend">--%>
+<%--                    <p class="legend legend1">--%>
+<%--                        <span class="legend-color"></span>--%>
+<%--                        <span class="legend-txt">Text1</span>--%>
+<%--                    </p>--%>
+<%--                    <p class="legend legend2">--%>
+<%--                        <span class="legend-color"></span>--%>
+<%--                        <span class="legend-txt">Text2</span>--%>
+<%--                    </p>--%>
+<%--                    <p class="legend legend3">--%>
+<%--                        <span class="legend-color"></span>--%>
+<%--                        <span class="legend-txt">Text3</span>--%>
+<%--                    </p>--%>
+<%--                </div>--%>
                 <%--키워드 들어가는 공간--%>
-                <div class="main-keyword-txt"></div>
+                <div class="main-keyword-txt">
+                    <!-- <iframe src="http://192.168.0.170:5601/app/dashboards#/view/53d6d5e0-8da6-11ee-a28b-a73ae6d6f567?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))" height="100%" width="100%"></iframe> -->
+
+                </div>
             </div>
         </div>
     </div>
