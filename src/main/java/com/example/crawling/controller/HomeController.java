@@ -4,6 +4,7 @@ import com.example.crawling.dao.BoardRepository;
 import com.example.crawling.dto.BoardSaveDto;
 import com.example.crawling.service.HomeService;
 import com.example.crawling.vo.Board;
+import com.example.crawling.vo.Book;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,9 @@ public class HomeController {
 
 		try {
 			List<Map<String, Object>> list = homeService.selectNewsData();
+			List<Book> searchMap = homeService.searchMap("김민정 ");   // 검색용
 			model.addAttribute("newsDataList", list);
+			System.out.println(searchMap);
 			System.out.println("aaa");
 		} catch (Exception e) {
 			e.printStackTrace();
