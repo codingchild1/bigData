@@ -42,4 +42,12 @@ public class HomeServiceImpl implements HomeService {
 
 		return list;
 	}
+
+	@Override
+	public List<Book> searchMap(String reporter) throws Exception {
+		List<Book> list = bookRepository.findByReporter(reporter);
+
+		return list;
+
+	}
 }
