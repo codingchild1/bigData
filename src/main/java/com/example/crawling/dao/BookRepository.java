@@ -16,4 +16,6 @@ public interface BookRepository extends MongoRepository<Book, String> {
 	public List<Book> findByDetailRegex(String detail);
 	public List<Book> findByReporterRegex(String reporter);
 
+	public Book findByUrl(String newsUrl);
+
 }

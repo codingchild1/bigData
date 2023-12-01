@@ -62,4 +62,10 @@ public class HomeServiceImpl implements HomeService {
 
 		return list;
 	}
+
+	@Override
+	public Book findByUrl(String newsUrl) throws Exception {
+		Book list = bookRepository.findByUrl(newsUrl);
+		return list;
+	}
 }
