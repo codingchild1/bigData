@@ -159,10 +159,9 @@ input[type="date"],
 input[type="datetime-local"],
 input[type="search"] {
     font-size: 16px;
-    background: var(--gray1);
+    background: var(--white);
+    border: 1px solid var(--gray2);
     border-radius: 8px;
-    border: none;
-    -webkit-appearance: none;
     -webkit-border-radius: 8px;
     cursor: pointer;
     color: var(--black);
@@ -181,7 +180,7 @@ select:-webkit-autofill:focus {
     font-size: inherit;
     color: var(--black);
     -webkit-text-fill-color: #111;
-    -webkit-box-shadow: 0 0 0px 1000px var(--gray1) inset;
+    -webkit-box-shadow: 0 0 0 1000px var(--gray1) inset;
     transition: background-color 5000s ease-in-out 0s;
 }
 
