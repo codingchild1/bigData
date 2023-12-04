@@ -35,16 +35,18 @@
             <p class="main-tit">뉴스 검색</p>
             <div class="main-news-search-cont">
                 <form action="/search" method="get" id="selectInput">
-                    <div>
-                        <select name="searchType">
-                            <option value="content">기사 내용</option>
-                            <option value="title">기사 제목</option>
-                            <option value="reporter">기자 이름</option>
-                        </select>
-                    </div>
-                    <div class="input-search">
-                        <input class="input-l" type="text" placeholder="검색어를 입력하세요." name="keyword">
-                        <button type="submit" class="blue-btn btn-l">검색</button>
+                    <div class="input-group">
+                        <div>
+                            <select name="searchType" class="select-m">
+                                <option value="content">기사 내용</option>
+                                <option value="title">기사 제목</option>
+                                <option value="reporter">기자 이름</option>
+                            </select>
+                        </div>
+                        <div class="input-search">
+                            <input class="input-l" type="text" placeholder="검색어를 입력하세요." name="keyword">
+                            <button type="submit" class="blue-btn btn-l">검색</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -92,6 +94,9 @@
             </div>
         </div>
     </div>
+</div>
+<div class="main-link-btn">
+    <a href="/index">메인</a>
 </div>
 <script src="/js/newsController.js"></script>
 </body>
