@@ -262,7 +262,6 @@
                         moveKeywordPage(clickWord);
                     });
 
-                    // 페이지 이동
                     // series.labels.template.url = "http://localhost:8280/search";
                 },
                 fail: function () {
