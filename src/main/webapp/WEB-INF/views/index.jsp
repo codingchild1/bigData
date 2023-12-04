@@ -216,7 +216,6 @@
                 success: function (result, status) {
                     const count = getEsCount(result);
                     console.log(count);
-
                     // json -> 객체 배열 형태로 변환
                     const dataArray = Object.keys(count).map(key => {
                         return {
@@ -224,27 +223,33 @@
                             weight: count[key],
                         }
                     })
-
+                    let filterData = dataArray.filter(item => {
+                        return item.weight > 2 && item.tag.length >= 2;
+                    })
                     am4core.useTheme(am4themes_animated);
                     var chart = am4core.create("chartDiv", am4plugins_wordCloud.WordCloud);
                     var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
-
-                    series.data = dataArray;
+                    //series.maxCount = 10;
+                    // 글자크기 선정
+                    series.maxFontSize = 100;
+                    series.minFontSize = 15;
+                    // weight값이 1이상인 값만 추출
+                    series.data = filterData;
                     series.dataFields.word = "tag";
                     series.dataFields.value = "weight";
+                    // 글자간의 겹침 방지 (숫자가 커질수록 글자 겹침)
                     series.accuracy = 4;
-                    series.step = 15;
-                    series.rotationThreshold = 0.7;
+                    // 글자와 글자사이 간격
+                    series.step = 25;
+                    // 단어 배치(가로 고정)
+                    series.rotationThreshold = 0;
                     series.labels.template.tooltipText = "{word}: {value}";
-
                     // 색상 랜덤 적용
                     series.colors = new am4core.ColorSet();
                     series.colors.passOptions = {};
-
-                    // 사용 안되는 변수
+                    // 사용 안되는 변수(확인필요)
                     // series.maxCount = 10;
-                    // series.minWordLength = 2;
-
+                    // series.minWordLength = 100;
                     // 유용한 옵션
                     // series.fontFamily = "'M PLUS 1p', sans-serif";
                     // series.maxFontSize = am4core.percent(30);
