@@ -191,7 +191,6 @@ org.apache.jasper.JasperException: /WEB-INF/views/search.jsp (line: [196], colum
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
->>>>>>>>> Temporary merge branch 2
 	at java.base/java.lang.Thread.run(Thread.java:829)
 [ERROR] 15:17:14.922 o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [/WEB-INF/views/search.jsp (line: [196], column: [16]) The end tag "&lt;/c:if" is unbalanced] with root cause
 org.apache.jasper.JasperException: /WEB-INF/views/search.jsp (line: [196], column: [16]) The end tag "&lt;/c:if" is unbalanced
@@ -598,21 +597,4 @@ org.apache.jasper.JasperException: /WEB-INF/views/search.jsp (line: [191], colum
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-<<<<<<<<< Temporary merge branch 1
-Caused by: java.net.NoRouteToHostException: No route to host: connect
-	at java.base/java.net.PlainSocketImpl.waitForConnect(Native Method)
-	at java.base/java.net.PlainSocketImpl.socketConnect(PlainSocketImpl.java:107)
-	at java.base/java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:412)
-	at java.base/java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:255)
-	at java.base/java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:237)
-	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
-	at java.base/java.net.Socket.connect(Socket.java:609)
-	at com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:107)
-	at com.mongodb.internal.connection.SocketStream.initializeSocket(SocketStream.java:79)
-	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:65)
-	... 4 common frames omitted
-[INFO ] 12:57:33.977 org.mongodb.driver.connection - Opened connection [connectionId{localValue:5, serverValue:739}] to 192.168.0.170:27017
-[INFO ] 12:57:34.006 org.mongodb.driver.connection - Opened connection [connectionId{localValue:6, serverValue:740}] to 192.168.0.170:27017
-[INFO ] 12:57:34.006 org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=192.168.0.170:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=1404500}
-=========
->>>>>>>>> Temporary merge branch 2
+[WARN ] 14:48:06.212 o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'keyword' for method parameter type String is not present]

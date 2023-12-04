@@ -4,6 +4,7 @@
 :root {
     /* color */
     --blue: #116DD9;
+    --blue-hover: #0458BA;
     --blue2: #3083E3;
     --red: #ff3e33;
     --white: #ffffff;
@@ -20,7 +21,7 @@
     --border-radius: 8px;
 
     /* main - contents */
-    --main-cont-top-margin: 40px;
+    --main-cont-top-margin: 30px;
 }
 
 .ir-text {
@@ -89,6 +90,11 @@
     color: var(--white);
     background-color: var(--blue);
     border-radius: var(--border-radius);
+}
+
+.blue-btn:where(:hover, :focus, :active) {
+    background-color: var(--blue-hover);
+    transition: all 0.2s;
 }
 
 .blue-btn:disabled {
@@ -613,40 +619,37 @@ textarea {
 
 select {
     width: 100%;
-    height: 34px;
-    font-size: 12px;
-    padding: 8px 20px 8px 8px;
-    border: 1px solid vaR(--gray2);
-    background: url("../images/arrow_solid.svg") no-repeat center right 8px/8px 8px;
+    background: #fff url("../images/arrow.png") no-repeat center right 16px / 16px 16px;
 }
 
 select option {
-    background: var(--gray6);
-    height: 34px;
-    font-size: 12px;
-    color: var(--gray5);
     padding: 8px;
+    background: #fff;
+}
+
+select.select-m {
+    height: 50px;
+    padding: 0 40px 0 16px;
+    font-size: 16px;
+}
+
+select.select-s {
+    height: 40px;
+    padding: 0 40px 0 16px;
+    font-size: 16px;
 }
 
 .select2 {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .select2 select {
-    width: 50%;
-}
-
-.select2 select:first-child {
-    border-right: 1px solid var(--white);
-    border-radius: 8px 0 0 8px;
-}
-
-.select2 select:last-child {
-    border-radius: 0px 8px 8px 0;
+    width: 49%;
 }
 
 /* search */
@@ -1144,7 +1147,7 @@ table tbody tr:last-child td {
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
-    padding: 40px 60px;
+    padding: 30px 50px;
     border: 1px solid var(--gray2);
     border-radius: var(--border-radius);
 }
@@ -1183,7 +1186,7 @@ table tbody tr:last-child td {
 }
 
 .main-issue .main-issue-cont .main-issue-list-cont {
-    width: 620px;
+    width: 650px;
 }
 
 .main-issue .main-issue-cont .main-issue-list-cont ul li:not(:first-child) {
@@ -1195,10 +1198,11 @@ table tbody tr:last-child td {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .main-issue .main-issue-cont .main-issue-list-cont ul li button .main-issue-list-txt1 {
-    width: 490px;
+    width: calc(100% - 130px);
     font-size: 16px;
     font-weight: 500;
     line-height: 1.5;
@@ -1231,7 +1235,7 @@ table tbody tr:last-child td {
 .main-keyword .main-keyword-cont {
     position: relative;
     width: 100%;
-    height: 360px;
+    height: 380px;
     padding: 16px;
     border: 1px solid var(--gray2);
     border-radius: var(--border-radius);
@@ -1302,6 +1306,15 @@ table tbody tr:last-child td {
     background-color: var(--gray1);
 }
 
+.main-news-search .main-news-search-cont .input-group {
+    justify-content: center;
+}
+
+.main-news-search .main-news-search-cont select {
+    width: 200px;
+    margin-right: 8px;
+}
+
 .main-news-search .main-news-search-cont .input-search {
     font-size: 0;
 }
@@ -1312,7 +1325,7 @@ table tbody tr:last-child td {
 
 .main-news-search .main-news-search-cont .input-search button {
     width: 120px;
-    margin-left: 16px;
+    margin-left: 8px;
 }
 
 .main-news-list {
@@ -1334,7 +1347,7 @@ table tbody tr:last-child td {
     align-items: flex-end;
     justify-content: space-between;
     width: 100%;
-    padding: 20px;
+    padding: 20px 16px;
     border-bottom: 1px solid var(--gray2);
 }
 
@@ -1343,7 +1356,7 @@ table tbody tr:last-child td {
 }
 
 .main-news-list .main-news-list-cont ul li a > div {
-    width: 780px;
+    width: 740px;
 }
 
 .main-news-list .main-news-list-cont ul li a > div > p {
@@ -1379,7 +1392,7 @@ table tbody tr:last-child td {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    max-width: 380px;
+    max-width: 420px;
 }
 
 .main-news-list .main-news-list-cont ul li a .main-news-list-stxt span {
@@ -1395,11 +1408,36 @@ table tbody tr:last-child td {
     border-left: 0;
 }
 
+.main-news-list .main-news-list-cont ul li a .main-news-list-stxt span:last-child {
+    padding-right: 0;
+}
+
 .main-news-list .main-news-list-cont ul li.no-data {
     padding: 100px 0 100px;
     border-top: 1px solid var(--gray2);
     border-bottom: 1px solid var(--gray2);
 }
 
+.main-link-btn {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+}
+
+.main-link-btn a {
+    display: block;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: var(--white);
+    border-radius: 50%;
+    background-color: var(--gray4);
+}
+
+.main-link-btn a:where(:hover, :focus, :active) {
+    background-color: var(--gray5);
+    transition: all 0.2s;
+}
 
 
