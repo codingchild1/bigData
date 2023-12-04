@@ -46,8 +46,9 @@ public class HomeController {
 
     @GetMapping("/search")
     public String getSearch(Model model, @RequestParam String keyword) throws Exception{
-
 	    Map map = new HashMap<String, String>();
+
+
 	    map.put("keyword", keyword);
 	    map.put("searchType", "content");
 	    List<Book> searchMap = homeService.searchMap(map);   // 검색용

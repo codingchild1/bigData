@@ -3,6 +3,8 @@ package com.example.crawling.service;
 import com.example.crawling.dao.BookRepository;
 import com.example.crawling.vo.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -48,12 +50,16 @@ public class HomeServiceImpl implements HomeService {
 
 		List<Book> result = new ArrayList<>();
 
-		switch (searchKeyword.get("searchType")) {
+		PageRequest pageable = PageRequest.of(1, 1);
+
+				switch (searchKeyword.get("searchType")) {
 			case "title":
 				result = bookRepository.findByTitleRegex(searchKeyword.get("keyword"));
 				break;
 			case "content":
-				result = bookRepository.findByDetailRegex(searchKeyword.get("keyword"));
+				Page<Book> test = bookRepository.findByDetailRegex(searchKeyword.get("keyword"), pageable);
+				result = test.getContent();
+//				result = bookRepository.findByDetailRegex(searchKeyword.get("keyword"));
 				break;
 			case "reporter":
 				result = bookRepository.findByReporterRegex(searchKeyword.get("keyword"));

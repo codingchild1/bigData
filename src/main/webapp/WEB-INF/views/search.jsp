@@ -21,7 +21,8 @@
     <link rel="icon" href="../../public/images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="../../public/images/favicon.ico">
     <link rel="stylesheet" href="../../public/css/reset.css">
-    <link rel="stylesheet" href="../../public/css/common.css"
+    <link rel="stylesheet" href="../../public/css/common.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
     <%-- module --%>
     <script src="/sangwon/sangwon_module.js"></script>
@@ -77,22 +78,22 @@
                 </ul>
                 <div class="paging">
                     <div class="pagination">
-                        <a href="#" class="first-prev paging-icon"></a>
-                        <a href="#" class="prev paging-icon"></a>
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#" class="next paging-icon"></a>
-                        <a href="#" class="end-next paging-icon"></a>
+<%--                        <a href="#" class="first-prev paging-icon"></a>--%>
+<%--                        <a href="#" class="prev paging-icon"></a>--%>
+<%--                        <a href="#" class="active">1</a>--%>
+<%--                        <a href="#">2</a>--%>
+<%--                        <a href="#">3</a>--%>
+<%--                        <a href="#">4</a>--%>
+<%--                        <a href="#">5</a>--%>
+<%--                        <a href="#" class="next paging-icon"></a>--%>
+<%--                        <a href="#" class="end-next paging-icon"></a>--%>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<script src="/js/newsController.js"></script>
 </body>
 
 </html>
