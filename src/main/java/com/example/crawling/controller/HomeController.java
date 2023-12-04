@@ -44,19 +44,37 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/search")
-    public String getSearch(Model model, @RequestParam String keyword) throws Exception{
-	    Map map = new HashMap<String, String>();
+
+	@RequestMapping("/detail")
+	@ResponseBody
+	public ResponseEntity<Book> newsUrl(@RequestParam("newsUrl") String newsUrl) throws Exception{
+
+		Book detail = new Book();
+
+		try {
+			detail = homeService.findByUrl(newsUrl);
+			// mv.addObject("title", detail);
+			// System.out.println("");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<Book>(detail, HttpStatus.OK);
+	}
+
+	@GetMapping("/search")
+	public String getSearch(Model model, @RequestParam String keyword) throws Exception{
+		Map map = new HashMap<String, String>();
 
 
-	    map.put("keyword", keyword);
-	    map.put("searchType", "content");
-	    List<Book> searchMap = homeService.searchMap(map);   // 검색용
+		map.put("keyword", keyword);
+		map.put("searchType", "content");
+		List<Book> searchMap = homeService.searchMap(map);   // 검색용
 
-	    model.addAttribute("searchResult", searchMap);
+		model.addAttribute("searchResult", searchMap);
 
-        return "search";
-    }
+		return "search";
+	}
 
 	@PostMapping("/search")
 	public ResponseEntity<List<Book>> postSearch(@RequestParam Map<String, String> param) throws Exception{
@@ -65,13 +83,12 @@ public class HomeController {
 		return new ResponseEntity<List<Book>>(searchMap, HttpStatus.OK);
 	}
 
-    @PutMapping("test/{id}")
-    public void update(@RequestBody BoardSaveDto dto, @PathVariable String id) {
-        Board board = new Board();
-        board.set_id(id);   // save 함수는 같은 아이디 일 경우 수정한다.
+	@PutMapping("test/{id}")
+	public void update(@RequestBody BoardSaveDto dto, @PathVariable String id) {
+		Board board = new Board();
+		board.set_id(id);   // save 함수는 같은 아이디 일 경우 수정한다.
 
-        boardRepository.save(board);
-    }
+		boardRepository.save(board);
+	}
 }
-
 
