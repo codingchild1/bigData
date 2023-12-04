@@ -2,11 +2,8 @@ package com.example.crawling;
 
 import com.example.crawling.dao.BookRepository;
 import com.example.crawling.dao.CrawledNewsDataRepository;
-import org.python.util.PythonInterpreter;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 import javax.annotation.Resource;
 
@@ -23,20 +20,20 @@ public class MongoinsertApplication {
         SpringApplication.run(MongoinsertApplication.class, args);
     }
 
-    @Bean
-    public ApplicationRunner applicationRunner() {
-        return args -> {
-
-            PythonInterpreter interpreter = new PythonInterpreter();
-
-            try {
+//    @Bean
+//    public ApplicationRunner applicationRunner() {
+//        return args -> {
+//
+//            PythonInterpreter interpreter = new PythonInterpreter();
+//
+//            try {
 //                bookRepository.deleteAll();   //데이터 삭제
 //                crawledNewsDataRepository.deleteAll();    //데이터 삭제
-
-                //뉴스번호 7753100번부터 7753110번까지 스크래핑
+//
+//                /*뉴스번호 7753100번부터 7753110번까지 스크래핑*/
 //                List<Map<String, Object>> originData = new ArrayList<>();
-//                for (int newsNo = 7803870; newsNo <= 7803890; newsNo++) {
-//                    if ((Integer) newsNo == null) break;
+//                for (int newsNo = 7803870; newsNo <= 7804890; newsNo++) {
+//                    if ((Integer) newsNo == null) continue;
 //
 //                    // 현재 날짜/시간
 //                    LocalDateTime now = LocalDateTime.now();
@@ -55,6 +52,7 @@ public class MongoinsertApplication {
 //
 //                    //기사 제목
 //                    Element title = document.getElementsByClass("headline-title").first();
+//					if (title == null) continue;
 //
 //                    //보도 날짜
 //                    Element date = document.getElementsByClass("input-date").first();
@@ -86,17 +84,17 @@ public class MongoinsertApplication {
 //                /* html() : 태그까지 가져오기
 //                   text() : 내용만 가져오기 */
 //
-//                    System.out.println("newsNo : " + newsNo);
-////                System.out.println("상품 이미지 URL : " + imageUrl.attr("abs:src"));
-//                    System.out.println("기사 제목 : " + title.text());
-//                    System.out.println("기사 날짜 : " + date.text());
-//                    System.out.println("본문 : " + strDetail);
-//                    System.out.println("기자 : " + strRepoter);
-//                    System.out.println("이메일 : " + email.text());
-////                for (int infoIdx = 0; infoIdx < info.size(); infoIdx++) {
-////                    System.out.println(productInfo[infoIdx] + info.get(infoIdx).text());
-////                }
-//                    System.out.println("---------------------------");
+////                    System.out.println("newsNo : " + newsNo);
+//////                System.out.println("상품 이미지 URL : " + imageUrl.attr("abs:src"));
+////                    System.out.println("기사 제목 : " + title.text());
+////                    System.out.println("기사 날짜 : " + date.text());
+////                    System.out.println("본문 : " + strDetail);
+////                    System.out.println("기자 : " + strRepoter);
+////                    System.out.println("이메일 : " + email.text());
+//////                for (int infoIdx = 0; infoIdx < info.size(); infoIdx++) {
+//////                    System.out.println(productInfo[infoIdx] + info.get(infoIdx).text());
+//////                }
+////                    System.out.println("---------------------------");
 //
 //                    //DB에 collection 에 접근 하기 위한 VO 객체
 //                    Book book = new Book();
@@ -108,7 +106,7 @@ public class MongoinsertApplication {
 //                    book.setEmail(email.text());
 //
 //                    //DB에 연결하기 위한 Repository
-////                    bookRepository.insert(book);
+//                    bookRepository.insert(book);
 //
 //                    // db 값 update
 //                    // id 값 필요 (setId)
@@ -217,36 +215,36 @@ public class MongoinsertApplication {
 //                    book.setCrawlDate(originData.get(i).get("regDate").toString());
 //					book.setMedia("KBS 뉴스");
 //
-////                    bookRepository.save(book);
+//                    bookRepository.save(book);
 //
 //                }
 //                System.out.println("형태소 분석 완료");
+////
+////                //DB 조회
+////                List<Map<String, Object>> morphList = new ArrayList<>();
+////                for (NewsVO newsVO : crawledNewsDataRepository.findAll()) {
+////                    Map<String, Object> map = new HashMap<>();
+////                    map.put("titleMap", newsVO.getTitle());
+////                    morphList.add(map);
+////                }
+////                System.out.println(morphList);
+////
+////                interpreter.execfile("src/main/jython/text.py");
+////
+////                PyObject countFunction = interpreter.get("counter");
+////
+////                List<String> javaList = Arrays.asList("one", "two", "three", "two", "three", "three");
+////                PyList pyList = new PyList(javaList);
+////
+////                PyObject result = countFunction.__call__(pyList);
+////                Map<String, Integer> map = (Map<String, Integer>) result.__tojava__(Map.class);
+////
+////                System.out.println(map);
 //
-//                //DB 조회
-//                List<Map<String, Object>> morphList = new ArrayList<>();
-//                for (NewsVO newsVO : crawledNewsDataRepository.findAll()) {
-//                    Map<String, Object> map = new HashMap<>();
-//                    map.put("titleMap", newsVO.getTitle());
-//                    morphList.add(map);
-//                }
-//                System.out.println(morphList);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
 //
-//                interpreter.execfile("src/main/jython/text.py");
-//
-//                PyObject countFunction = interpreter.get("counter");
-//
-//                List<String> javaList = Arrays.asList("one", "two", "three", "two", "three", "three");
-//                PyList pyList = new PyList(javaList);
-//
-//                PyObject result = countFunction.__call__(pyList);
-//                Map<String, Integer> map = (Map<String, Integer>) result.__tojava__(Map.class);
-//
-//                System.out.println(map);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        };
-    }
+//        };
+//    }
 }
