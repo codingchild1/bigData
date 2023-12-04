@@ -60,6 +60,11 @@ public class HomeServiceImpl implements HomeService {
 				break;
 		}
 
+		int resultSize = result.size();
+		for (int searchSize = 0; searchSize < resultSize; searchSize++) {
+			String[] emailSplit = result.get(searchSize).getEmail().split("\\s+");
+			result.get(searchSize).setEmail(emailSplit[0]);
+		}
 		return result;
 	}
 }
