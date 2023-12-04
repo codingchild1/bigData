@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="../../public/css/common.css">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
-    <script src="https://www.amcharts.com/lib/4/core.js"></script>
-    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
-    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="//cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="//cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="//cdn.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+    <script src="//cdn.amcharts.com/lib/4/themes/animated.js"></script>
 </head>
 
 <body>
@@ -209,25 +209,38 @@
                         }
                     })
 
+                    let filterData = dataArray.filter(item => {
+                        return item.weight > 2 && item.tag.length >= 2;
+                    })
+
                     am4core.useTheme(am4themes_animated);
                     var chart = am4core.create("chartDiv", am4plugins_wordCloud.WordCloud);
                     var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
 
-                    series.data = dataArray;
+                    //series.maxCount = 10;
+                    // 글자크기 선정
+                    series.maxFontSize = 100;
+                    series.minFontSize = 15;
+                    // weight값이 1이상인 값만 추출
+                    series.data = filterData;
                     series.dataFields.word = "tag";
                     series.dataFields.value = "weight";
+                    // 글자간의 겹침 방지 (숫자가 커질수록 글자 겹침)
                     series.accuracy = 4;
-                    series.step = 15;
-                    series.rotationThreshold = 0.7;
+                    // 글자와 글자사이 간격
+                    series.step = 25;
+                    // 단어 배치(가로 고정)
+                    series.rotationThreshold = 0;
+
                     series.labels.template.tooltipText = "{word}: {value}";
 
                     // 색상 랜덤 적용
                     series.colors = new am4core.ColorSet();
                     series.colors.passOptions = {};
 
-                    // 사용 안되는 변수
+                    // 사용 안되는 변수(확인필요)
                     // series.maxCount = 10;
-                    // series.minWordLength = 2;
+                    // series.minWordLength = 100;
 
                     // 유용한 옵션
                     // series.fontFamily = "'M PLUS 1p', sans-serif";
@@ -241,7 +254,8 @@
                         sendKeyword(clickWord);
                     });
 
-                    series.labels.template.url = "http://localhost:8280/search";
+                    // 클릭시 페이지 이동
+                    // series.labels.template.url = "http://localhost:8280/search";
                 },
                 fail: function () {
                     console.log(arguments)
