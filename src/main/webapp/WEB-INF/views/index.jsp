@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="../../public/css/reset.css">
     <link rel="stylesheet" href="../../public/css/common.css">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 </head>
 
 <body>
@@ -51,19 +56,24 @@
         <div class="layout">
             <p class="main-tit">오늘의 키워드</p>
             <div class="main-keyword-cont">
-                <div class="main-keyword-legend">
-                    <p class="legend legend1">
-                        <span class="legend-color"></span>
-                        <span class="legend-txt">Text1</span>
-                    </p>
-                    <p class="legend legend2">
-                        <span class="legend-color"></span>
-                        <span class="legend-txt">Text2</span>
-                    </p>
-                    <p class="legend legend3">
-                        <span class="legend-color"></span>
-                        <span class="legend-txt">Text3</span>
-                    </p>
+                <%--                <div class="main-keyword-legend">--%>
+                <%--                    <p class="legend legend1">--%>
+                <%--                        <span class="legend-color"></span>--%>
+                <%--                        <span class="legend-txt">Text1</span>--%>
+                <%--                    </p>--%>
+                <%--                    <p class="legend legend2">--%>
+                <%--                        <span class="legend-color"></span>--%>
+                <%--                        <span class="legend-txt">Text2</span>--%>
+                <%--                    </p>--%>
+                <%--                    <p class="legend legend3">--%>
+                <%--                        <span class="legend-color"></span>--%>
+                <%--                        <span class="legend-txt">Text3</span>--%>
+                <%--                    </p>--%>
+                <%--                </div>--%>
+                <%--키워드 들어가는 공간--%>
+                <div class="main-keyword-txt" id="chartDiv">
+                    <!-- <iframe src="http://192.168.0.170:5601/app/dashboards#/view/53d6d5e0-8da6-11ee-a28b-a73ae6d6f567?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))" height="100%" width="100%"></iframe> -->
+
                 </div>
                 <%--키워드 들어가는 공간--%>
                 <div class="main-keyword-txt"></div>
@@ -103,14 +113,134 @@
                     <p>[이미지출처=보도화면 캡처]</p>
                 </div>
                 <div class="modal-news-cont-txt">
-                    <p><span id="modal_detail"></span></p>
+					<p><span id="modal_detail"></span></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
 <script src="/js/newsController.js"></script>
+
+<script>
+    window.dd = window.console.log.bind(console);
+
+    const $document = $(document);
+
+    // 이지영
+    $document.ready(() => {
+
+        drawAmChart();
+
+        // get ElasticSearch count
+        function getEsCount(list) {
+            let counts = {};
+            let url = {}
+
+            const c = 'count';
+
+            const hits = list.hits.hits;
+            hits.reduce((a, hit) => {
+                const source = hit._source;
+                const detail = source.nounDetail;
+
+                /*
+                url[i] = hit._id;
+                url[u] = source.url;
+                */
+                detail.reduce((b, noun) => {
+                    const morph = noun.morph;
+                    if (undefined == counts[morph]) {
+                        counts[morph] = 0;
+                        // counts[morph][id] = 0;
+                    }
+                    counts[morph]++;
+                }, {});
+            }, {});
+            return counts;
+        }
+
+        // ajax and draw amchart
+        function drawAmChart() {
+            $.ajax({
+                type: "get",
+                url: "/jylee/proxy/proxy.jsp?url=" + "http://192.168.0.170:9200/newsanalyst.crawling/_search",
+                dataType: 'json',
+                data: {},
+                success: function (result, status) {
+                    const count = getEsCount(result);
+                    console.log(count);
+
+                    // json -> 객체 배열 형태로 변환
+                    const dataArray = Object.keys(count).map(key => {
+                        return {
+                            tag: key,
+                            weight: count[key],
+                        }
+                    })
+
+                    am4core.useTheme(am4themes_animated);
+                    var chart = am4core.create("chartDiv", am4plugins_wordCloud.WordCloud);
+                    var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+
+                    series.data = dataArray;
+                    series.dataFields.word = "tag";
+                    series.dataFields.value = "weight";
+                    series.accuracy = 4;
+                    series.step = 15;
+                    series.rotationThreshold = 0.7;
+                    series.labels.template.tooltipText = "{word}: {value}";
+
+                    // 색상 랜덤 적용
+                    series.colors = new am4core.ColorSet();
+                    series.colors.passOptions = {};
+
+                    // 사용 안되는 변수
+                    // series.maxCount = 10;
+                    // series.minWordLength = 2;
+
+                    // 유용한 옵션
+                    // series.fontFamily = "'M PLUS 1p', sans-serif";
+                    // series.maxFontSize = am4core.percent(30);
+                    // series.colors.reuse = true;
+
+                    // 워드 클라우드 클릭 이벤트
+                    series.labels.template.events.on("hit", function (ev) {
+                        const clickWord = ev.target.dataItem.dataContext.tag;
+                        console.log(clickWord);
+                        sendKeyword(clickWord);
+                    });
+
+                    series.labels.template.url = "http://localhost:8280/search";
+                },
+                fail: function () {
+                    console.log(arguments)
+                }
+            });
+        }
+
+        function sendKeyword(keyword) {
+            $.ajax({
+                type: "get",
+                url: "/search",
+                dataType: 'json',
+                data: {
+                    keyword: keyword
+                },
+                success: function (result, status) {
+                    console.log(result);
+                },
+                fail: function () {
+                    console.log(arguments)
+                }
+            });
+        }
+    });
+
+
+</script>
+
 </body>
 
 </html>

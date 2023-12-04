@@ -72,6 +72,15 @@ public class HomeController {
 
         boardRepository.save(board);
     }
+
+	@RequestMapping("/search")
+	public String test2(Model model) {
+
+		String name = "name";
+
+		model.addAttribute("name", name);
+		return "/search";
+	}
 }
 
 

@@ -19,11 +19,11 @@ $().ready(function () {
             dataType:"json",
             success:function(returnData, status){
                 console.log("성공");
-                $("#modal_title").text(returnData.nontagTitle);
+                $("#modal_title").html(returnData.title);
                 $("#modal_date").text(returnData.date);
                 $("#modal_media").text(returnData.media);
                 $("#modal_email").text(returnData.email);
-                $("#modal_detail").text(returnData.nontagDetail);
+                $("#modal_detail").html(returnData.detail);
 
             },
             fail:function() {
