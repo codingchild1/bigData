@@ -4,6 +4,15 @@
 
 <html lang="ko">
 
+<%
+
+    String SERVER_SCHEME = request.getScheme();
+    String SERVER_NAME = request.getServerName();
+    String SERVER_PORT = String.valueOf(request.getServerPort());
+	String CONTEXT_PATH = request.getContextPath();
+
+%>
+
 <head>
     <meta charset="UTF-8"/>
     <title>Ncloud</title>
@@ -14,12 +23,19 @@
     <link rel="shortcut icon" href="../../public/images/favicon.ico">
     <link rel="stylesheet" href="../../public/css/reset.css">
     <link rel="stylesheet" href="../../public/css/common.css">
+
+    <%-- script import 순서 변경 금지 --%>
+    <script>window.SERVER_SCHEME = '<%=SERVER_SCHEME%>';window.SERVER_NAME = '<%=SERVER_NAME%>';window.SERVER_PORT = '<%=SERVER_PORT%>';window.CONTEXT_PATH = '<%=CONTEXT_PATH%>';</script>
+
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
     <script src="https://www.amcharts.com/lib/4/core.js"></script>
     <script src="https://www.amcharts.com/lib/4/charts.js"></script>
     <script src="https://www.amcharts.com/lib/4/plugins/wordCloud.js"></script>
     <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <%-- module --%>
+    <script src="/sangwon/sangwon_module.js"></script>
 </head>
 
 <body>
@@ -171,7 +187,6 @@
                 success: function (result, status) {
                     const count = getEsCount(result);
                     console.log(count);
-
                     // json -> 객체 배열 형태로 변환
                     const dataArray = Object.keys(count).map(key => {
                         return {
@@ -179,27 +194,33 @@
                             weight: count[key],
                         }
                     })
-
+                    let filterData = dataArray.filter(item => {
+                        return item.weight > 2 && item.tag.length >= 2;
+                    })
                     am4core.useTheme(am4themes_animated);
                     var chart = am4core.create("chartDiv", am4plugins_wordCloud.WordCloud);
                     var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
-
-                    series.data = dataArray;
+                    //series.maxCount = 10;
+                    // 글자크기 선정
+                    series.maxFontSize = 100;
+                    series.minFontSize = 15;
+                    // weight값이 1이상인 값만 추출
+                    series.data = filterData;
                     series.dataFields.word = "tag";
                     series.dataFields.value = "weight";
+                    // 글자간의 겹침 방지 (숫자가 커질수록 글자 겹침)
                     series.accuracy = 4;
-                    series.step = 15;
-                    series.rotationThreshold = 0.7;
+                    // 글자와 글자사이 간격
+                    series.step = 25;
+                    // 단어 배치(가로 고정)
+                    series.rotationThreshold = 0;
                     series.labels.template.tooltipText = "{word}: {value}";
-
                     // 색상 랜덤 적용
                     series.colors = new am4core.ColorSet();
                     series.colors.passOptions = {};
-
-                    // 사용 안되는 변수
+                    // 사용 안되는 변수(확인필요)
                     // series.maxCount = 10;
-                    // series.minWordLength = 2;
-
+                    // series.minWordLength = 100;
                     // 유용한 옵션
                     // series.fontFamily = "'M PLUS 1p', sans-serif";
                     // series.maxFontSize = am4core.percent(30);
@@ -209,10 +230,10 @@
                     series.labels.template.events.on("hit", function (ev) {
                         const clickWord = ev.target.dataItem.dataContext.tag;
                         console.log(clickWord);
-                        sendKeyword(clickWord);
+                        moveKeywordPage(clickWord);
                     });
 
-                    series.labels.template.url = "http://localhost:8280/search";
+                    // series.labels.template.url = "http://localhost:8280/search";
                 },
                 fail: function () {
                     console.log(arguments)
@@ -220,22 +241,25 @@
             });
         }
 
-        function sendKeyword(keyword) {
-            $.ajax({
-                type: "get",
-                url: "/search",
-                dataType: 'json',
-                data: {
-                    keyword: keyword
-                },
-                success: function (result, status) {
-                    console.log(result);
-                },
-                fail: function () {
-                    console.log(arguments)
-                }
-            });
+        // # start : moveKeywordPage
+        function moveKeywordPage(keyword){
+            const _json = {
+                keyword: keyword
+            };
+
+            const ctx = Sangwon.getContextPath();
+            const qs = Sangwon.jsonToQueryString(_json);
+
+            window.console.log(Sangwon);
+
+            const url = ctx+'/search'+qs;
+
+            window.location.href = url;
+
         }
+        // end : moveKeywordPage
+
+
     });
 
 
