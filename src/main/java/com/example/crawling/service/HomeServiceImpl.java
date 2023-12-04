@@ -3,6 +3,8 @@ package com.example.crawling.service;
 import com.example.crawling.dao.BookRepository;
 import com.example.crawling.vo.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,10 +46,31 @@ public class HomeServiceImpl implements HomeService {
 	}
 
 	@Override
-	public List<Book> searchMap(String reporter) throws Exception {
-		List<Book> list = bookRepository.findByReporter(reporter);
+	public List<Book> searchMap(Map<String, String> searchKeyword) throws Exception {
 
-		return list;
+		List<Book> result = new ArrayList<>();
 
+		PageRequest pageable = PageRequest.of(1, 1);
+
+				switch (searchKeyword.get("searchType")) {
+			case "title":
+				result = bookRepository.findByTitleRegex(searchKeyword.get("keyword"));
+				break;
+			case "content":
+				Page<Book> test = bookRepository.findByDetailRegex(searchKeyword.get("keyword"), pageable);
+				result = test.getContent();
+//				result = bookRepository.findByDetailRegex(searchKeyword.get("keyword"));
+				break;
+			case "reporter":
+				result = bookRepository.findByReporterRegex(searchKeyword.get("keyword"));
+				break;
+		}
+
+		int resultSize = result.size();
+		for (int searchSize = 0; searchSize < resultSize; searchSize++) {
+			String[] emailSplit = result.get(searchSize).getEmail().split("\\s+");
+			result.get(searchSize).setEmail(emailSplit[0]);
+		}
+		return result;
 	}
 }
