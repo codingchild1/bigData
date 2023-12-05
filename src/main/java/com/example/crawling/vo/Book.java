@@ -29,6 +29,7 @@ public class Book {
     private List<?> nounTitle;
     private String crawlDate;
 	private String media;
+	private String img;
 
 //    public Book() {}
 

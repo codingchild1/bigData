@@ -50,7 +50,7 @@ public class HomeServiceImpl implements HomeService {
 
 		List<Book> result = new ArrayList<>();
 
-		PageRequest pageable = PageRequest.of(0, 5);
+		PageRequest pageable = PageRequest.of(Integer.parseInt(searchKeyword.get("page")), 3);
 
 				switch (searchKeyword.get("searchType")) {
 			case "title":
