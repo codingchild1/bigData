@@ -59,7 +59,7 @@
                 <p class="main-news-list-info">뉴스 검색 결과 <span class="red-txt">192,168</span> 건입니다.</p>
                 <%-- list 한페이지 10개 --%>
                 <ul>
-                    <%--<li class="no-data">검색 결과가 없습니다.<br>검색어를 다시 입력해 주세요.</li>--%>
+                <%--<li class="no-data">검색 결과가 없습니다.<br>검색어를 다시 입력해 주세요.</li>--%>
                     <c:forEach var="result" items="${searchResult}" varStatus="status">
                         <li>
                             <a href="">
@@ -80,15 +80,15 @@
                 </ul>
                 <div class="paging">
                     <div class="pagination">
-                        <%--                        <a href="#" class="first-prev paging-icon"></a>--%>
-                        <%--                        <a href="#" class="prev paging-icon"></a>--%>
-                        <%--                        <a href="#" class="active">1</a>--%>
-                        <%--                        <a href="#">2</a>--%>
-                        <%--                        <a href="#">3</a>--%>
-                        <%--                        <a href="#">4</a>--%>
-                        <%--                        <a href="#">5</a>--%>
-                        <%--                        <a href="#" class="next paging-icon"></a>--%>
-                        <%--                        <a href="#" class="end-next paging-icon"></a>--%>
+<%--                        <a href="#" class="first-prev paging-icon"></a>--%>
+<%--                        <a href="#" class="prev paging-icon"></a>--%>
+<%--                        <a href="#" class="active">1</a>--%>
+<%--                        <a href="#">2</a>--%>
+<%--                        <a href="#">3</a>--%>
+<%--                        <a href="#">4</a>--%>
+<%--                        <a href="#">5</a>--%>
+<%--                        <a href="#" class="next paging-icon"></a>--%>
+<%--                        <a href="#" class="end-next paging-icon"></a>--%>
                     </div>
                 </div>
             </div>
