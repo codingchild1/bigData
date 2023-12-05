@@ -50,7 +50,7 @@ public class HomeServiceImpl implements HomeService {
 
 		List<Book> result = new ArrayList<>();
 
-		PageRequest pageable = PageRequest.of(0, 5);
+		PageRequest pageable = PageRequest.of(Integer.parseInt(searchKeyword.get("page")), 3);
 
 				switch (searchKeyword.get("searchType")) {
 			case "title":
@@ -72,5 +72,11 @@ public class HomeServiceImpl implements HomeService {
 			result.get(searchSize).setEmail(emailSplit[0]);
 		}
 		return result;
+	}
+
+	@Override
+	public Book findByUrl(String newsUrl) throws Exception {
+		Book list = bookRepository.findByUrl(newsUrl);
+		return list;
 	}
 }

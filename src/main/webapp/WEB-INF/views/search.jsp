@@ -44,7 +44,7 @@
                             </select>
                         </div>
                         <div class="input-search">
-                            <input class="input-l" type="text" placeholder="검색어를 입력하세요." name="keyword">
+                            <input class="input-l" type="text" placeholder="검색어를 입력하세요." name="keyword" value="${keyword}">
                             <button type="submit" class="blue-btn btn-l">검색</button>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
             <div class="main-news-list-cont">
                 <p class="main-news-list-info">뉴스 검색 결과 <span class="red-txt">192,168</span> 건입니다.</p>
                 <%-- list 한페이지 10개 --%>
-                <ul>
+                <ul class="news_list_search">
                 <%--<li class="no-data">검색 결과가 없습니다.<br>검색어를 다시 입력해 주세요.</li>--%>
                     <c:forEach var="result" items="${searchResult}" varStatus="status">
                         <li>
@@ -76,7 +76,6 @@
                             </a>
                         </li>
                     </c:forEach>
-                    <li>
                 </ul>
                 <div class="paging">
                     <div class="pagination">
