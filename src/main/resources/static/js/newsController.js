@@ -25,7 +25,7 @@ $().ready(function () {
                 $("#modal_media").text(returnData.media);
                 $("#modal_email").text(returnData.email);
                 $("#modal_detail").html(returnData.detail);
-
+                $(".modal-news-cont-img").find("img").attr("src", returnData.img)
             },
             fail:function() {
                 console.log("실패");

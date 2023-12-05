@@ -52,8 +52,7 @@ public class HomeController {
 
 		try {
 			detail = homeService.findByUrl(newsUrl);
-			// mv.addObject("title", detail);
-			// System.out.println("");
+			 System.out.println("");
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

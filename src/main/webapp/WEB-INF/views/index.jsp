@@ -89,10 +89,7 @@
                 <%--키워드 들어가는 공간--%>
                 <div class="main-keyword-txt" id="chartDiv">
                     <!-- <iframe src="http://192.168.0.170:5601/app/dashboards#/view/53d6d5e0-8da6-11ee-a28b-a73ae6d6f567?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))" height="100%" width="100%"></iframe> -->
-
                 </div>
-                <%--키워드 들어가는 공간--%>
-                <div class="main-keyword-txt"></div>
             </div>
         </div>
     </div>
