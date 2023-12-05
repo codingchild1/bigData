@@ -60,6 +60,9 @@
                 <%-- list 한페이지 10개 --%>
                 <ul class="news_list_search">
                 <%--<li class="no-data">검색 결과가 없습니다.<br>검색어를 다시 입력해 주세요.</li>--%>
+                    <c:if test="${empty searchResult}">
+                        <li class="no-data">검색 결과가 없습니다.<br>검색어를 다시 입력해 주세요.</li>
+                    </c:if>
                     <c:forEach var="result" items="${searchResult}" varStatus="status">
                         <li>
                             <a href="">

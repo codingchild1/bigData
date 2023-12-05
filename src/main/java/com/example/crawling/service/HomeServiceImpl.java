@@ -50,19 +50,20 @@ public class HomeServiceImpl implements HomeService {
 
 		List<Book> result = new ArrayList<>();
 
-		PageRequest pageable = PageRequest.of(Integer.parseInt(searchKeyword.get("page")), 3);
+		PageRequest pageable = PageRequest.of(Integer.parseInt(searchKeyword.get("page")), 5);
 
 				switch (searchKeyword.get("searchType")) {
 			case "title":
-				result = bookRepository.findByTitleRegex(searchKeyword.get("keyword"));
+				Page<Book> title = bookRepository.findByTitleRegex(searchKeyword.get("keyword"), pageable);
+				result = title.getContent();
 				break;
 			case "content":
-				Page<Book> test = bookRepository.findByDetailRegex(searchKeyword.get("keyword"), pageable);
-				result = test.getContent();
-//				result = bookRepository.findByDetailRegex(searchKeyword.get("keyword"));
+				Page<Book> content = bookRepository.findByDetailRegex(searchKeyword.get("keyword"), pageable);
+				result = content.getContent();
 				break;
 			case "reporter":
-				result = bookRepository.findByReporterRegex(searchKeyword.get("keyword"));
+				Page<Book> reporter = bookRepository.findByReporterRegex(searchKeyword.get("keyword"), pageable);
+				result = reporter.getContent();
 				break;
 		}
 
