@@ -30,7 +30,7 @@ public class HomeController {
     private final BoardRepository boardRepository;
 
     @RequestMapping("/index")
-    public String test(Model model) throws Exception {
+    public String test(Model model, String newsUrl) throws Exception {
 
 	    SangwonUtil util = new SangwonUtil();
 
@@ -43,7 +43,6 @@ public class HomeController {
 
         return "index";
     }
-
 
 	@RequestMapping("/detail")
 	@ResponseBody
