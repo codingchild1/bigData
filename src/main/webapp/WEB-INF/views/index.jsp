@@ -178,7 +178,7 @@
         function drawAmChart() {
             $.ajax({
                 type: "get",
-                url: "/jylee/proxy/proxy.jsp?url=" + "http://192.168.0.170:9200/newsanalyst.crawling/_search",
+                url: "/jylee/proxy/proxy.jsp?url=" + "http://192.168.0.170:9200/newsanalyst.test/_search",
                 dataType: 'json',
                 data: {},
                 success: function (result, status) {
@@ -192,7 +192,7 @@
                         }
                     })
                     let filterData = dataArray.filter(item => {
-                        return item.weight > 2 && item.tag.length >= 2;
+                        return item.weight > 3 && item.tag.length >= 2;
                     })
                     am4core.useTheme(am4themes_animated);
                     var chart = am4core.create("chartDiv", am4plugins_wordCloud.WordCloud);
