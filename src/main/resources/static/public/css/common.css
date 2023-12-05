@@ -1067,7 +1067,7 @@ table tbody tr:last-child td {
     text-align: center;
 }
 
-.paging .pagination a {
+.paging .pagination :where(a, button) {
     display: inline-block;
     width: 32px;
     height: 32px;
@@ -1081,24 +1081,29 @@ table tbody tr:last-child td {
     vertical-align: middle;
 }
 
-.paging .pagination a:where(.first-prev, .end-next) {
+.paging .pagination a:where(.first-prev, .end-next),
+.paging .pagination button:where(.first-prev, .end-next) {
     background: url("../images/paging2.png") no-repeat center/24px 24px;
 }
 
-.paging .pagination a:where(.prev, .next) {
+.paging .pagination a:where(.prev, .next),
+.paging .pagination button:where(.prev, .next) {
     background: url("../images/paging1.png") no-repeat center/24px 24px;
 }
 
-.paging .pagination a:where(.end-next, .next) {
+.paging .pagination a:where(.end-next, .next),
+.paging .pagination button:where(.end-next, .next) {
     transform: rotate(180deg);
 }
 
-.paging .pagination a:not(.paging-icon):where(.active, :hover) {
+.paging .pagination a:not(.paging-icon):where(.active, :hover),
+.paging .pagination button:not(.paging-icon):where(.active, :hover) {
     background-color: var(--blue);
     color: var(--white);
 }
 
-.paging .pagination a.disabled {
+.paging .pagination a.disabled,
+.paging .pagination button.disabled {
     opacity: 0.5;
     pointer-events: none;
 }
