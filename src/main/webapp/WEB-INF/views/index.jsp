@@ -9,7 +9,7 @@
     String SERVER_SCHEME = request.getScheme();
     String SERVER_NAME = request.getServerName();
     String SERVER_PORT = String.valueOf(request.getServerPort());
-	String CONTEXT_PATH = request.getContextPath();
+    String CONTEXT_PATH = request.getContextPath();
 
 %>
 
@@ -104,7 +104,7 @@
         <div class="modal-news-wrap">
             <div class="modal-news-header">
                 <p class="modal-news-logo">
-<%--                    <img src="../../public/images/logo_ytn.png">--%>
+                    <%--                    <img src="../../public/images/logo_ytn.png">--%>
                 </p>
                 <p class="modal-news-tit"><span id="modal_title"></span></p>
                 <div class="modal-news-info">
@@ -126,7 +126,7 @@
                     <p>[이미지출처=보도화면 캡처]</p>
                 </div>
                 <div class="modal-news-cont-txt">
-					<p><span id="modal_detail"></span></p>
+                    <p><span id="modal_detail"></span></p>
                 </div>
             </div>
         </div>
@@ -178,7 +178,7 @@
         function drawAmChart() {
             $.ajax({
                 type: "get",
-                url: "/jylee/proxy/proxy.jsp?url=" + "http://192.168.0.170:9200/newsanalyst.crawling/_search",
+                url: "/jylee/proxy/proxy.jsp?url=" + "http://192.168.0.170:9200/newsanalyst.test/_search",
                 dataType: 'json',
                 data: {},
                 success: function (result, status) {
@@ -192,7 +192,7 @@
                         }
                     })
                     let filterData = dataArray.filter(item => {
-                        return item.weight > 2 && item.tag.length >= 2;
+                        return item.weight > 3 && item.tag.length >= 2;
                     })
                     am4core.useTheme(am4themes_animated);
                     var chart = am4core.create("chartDiv", am4plugins_wordCloud.WordCloud);
