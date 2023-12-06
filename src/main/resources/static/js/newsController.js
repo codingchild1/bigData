@@ -31,7 +31,6 @@ $().ready(function () {
             }
         });
     }
-});
 
     $(".pagination").append("<a href='#' class='active'>1</a>");
     $(".pagination").append("<a href='#'>2</a>");
@@ -51,4 +50,4 @@ $().ready(function () {
 
     })
 
-})
+});
