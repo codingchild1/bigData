@@ -44,8 +44,9 @@
                             </select>
                         </div>
                         <div class="input-search">
-                            <input class="input-l" type="text" placeholder="검색어를 입력하세요." name="keyword" value="${keyword}">
-                            <button type="submit" class="blue-btn btn-l">검색</button>
+                            <input class="input-l" type="text" placeholder="검색어를 입력하세요." name="keyword"
+                                   value="${keyword}">
+                            <button type="submit" class="blue-btn btn-l" id="btn_search">검색</button>
                         </div>
                     </div>
                 </form>
@@ -56,17 +57,18 @@
         <div class="layout">
             <p class="main-tit">검색 결과</p>
             <div class="main-news-list-cont">
-                <p class="main-news-list-info">뉴스 검색 결과 <span class="red-txt">192,168</span> 건입니다.</p>
+                <p class="main-news-list-info">뉴스 검색 결과 <span class="red-txt">${searchResult.rowcount}</span> 건입니다.</p>
                 <%-- list 한페이지 10개 --%>
                 <ul class="news_list_search">
-                <%--<li class="no-data">검색 결과가 없습니다.<br>검색어를 다시 입력해 주세요.</li>--%>
-                    <c:if test="${empty searchResult}">
+                    <%--<li class="no-data">검색 결과가 없습니다.<br>검색어를 다시 입력해 주세요.</li>--%>
+                    <c:if test="${empty searchResult.result}">
                         <li class="no-data">검색 결과가 없습니다.<br>검색어를 다시 입력해 주세요.</li>
                     </c:if>
-                    <c:forEach var="result" items="${searchResult}" varStatus="status">
+                    <c:forEach var="result" items="${searchResult.result}" varStatus="status">
+                        <%--                        <button type="button" class="news_title_btn" url="${result.url}">--%>
                         <li>
-                            <a href="">
-                                <div>
+                            <button type="button" class="news_title_btn" url="${result.url}">
+                                <div class="news-title-btn-div">
                                     <p class="main-news-list-tit">${result.nontagTitle}</p>
                                     <p class="main-news-list-txt">${result.nontagDetail}</p>
                                 </div>
@@ -76,21 +78,23 @@
                                     <span>${result.reporter}</span>
                                     <span>${result.email}</span>
                                 </p>
-                            </a>
+                            </button>
                         </li>
+                        <%--                        </button>--%>
+
                     </c:forEach>
                 </ul>
                 <div class="paging">
-                    <div class="pagination">
-<%--                        <a href="#" class="first-prev paging-icon"></a>--%>
-<%--                        <a href="#" class="prev paging-icon"></a>--%>
-<%--                        <a href="#" class="active">1</a>--%>
-<%--                        <a href="#">2</a>--%>
-<%--                        <a href="#">3</a>--%>
-<%--                        <a href="#">4</a>--%>
-<%--                        <a href="#">5</a>--%>
-<%--                        <a href="#" class="next paging-icon"></a>--%>
-<%--                        <a href="#" class="end-next paging-icon"></a>--%>
+                    <div class="pagination flex">
+                        <button type="button" class="prev pagination-btn paging-icon" disabled></button>
+                        <div class='pagination-wrapper'>
+                            <button type="button" class="active pagination-btn" pageindex=1>1</button>
+                            <button type="button" class="pagination-btn" pageindex=2>2</button>
+                            <button type="button" class="pagination-btn" pageindex=3>3</button>
+                            <button type="button" class="pagination-btn" pageindex=4>4</button>
+                            <button type="button" class="pagination-btn" pageindex=5>5</button>
+                        </div>
+                        <button type="button" class="next pagination-btn paging-icon" pageindex=6></button>
                     </div>
                 </div>
             </div>
@@ -100,6 +104,45 @@
 <div class="main-link-btn">
     <a href="/index">메인</a>
 </div>
+
+<%-- 활성화 class : show / <div class="modal modal-news show">--%>
+<div class="modal modal-news">
+    <div class="modal-body">
+        <button type="button" class="modal-news-close">
+            <img src="../../public/images/modal_news_close.svg">
+        </button>
+        <div class="modal-news-wrap">
+            <div class="modal-news-header">
+                <p class="modal-news-logo">
+                    <%--                    <img src="../../public/images/logo_ytn.png">--%>
+                </p>
+                <p class="modal-news-tit"><span id="modal_title"></span></p>
+                <div class="modal-news-info">
+                    <div class="modal-news-info-txt">
+                        <p><span id="modal_date"></span></p>
+                        <p><span id="modal_media"></span></p>
+                        <p><span id="modal_email"></span></p>
+                    </div>
+                    <div class="modal-news-info-btn">
+                        <button type="button" class="btn-xs gray-line-btn">기사원문</button>
+                        <button type="button" class="btn-xs gray-line-btn">스크랩</button>
+                        <button type="button" class="btn-xs gray-line-btn">뉴스 듣기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-news-cont">
+                <div class="modal-news-cont-img">
+                    <img src="../../public/images/sample_modal_news_cont_img.jpg">
+                    <p>[이미지출처=보도화면 캡처]</p>
+                </div>
+                <div class="modal-news-cont-txt">
+                    <p><span id="modal_detail"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="/js/newsController.js"></script>
 </body>
 
