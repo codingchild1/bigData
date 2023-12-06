@@ -50,7 +50,7 @@ public class HomeServiceImpl implements HomeService {
 	public List<Map<String, Object>> selectNewsData() throws Exception {
 
 		List<Map<String, Object>> list = new ArrayList<>();
-		for (Book books : bookRepository.findAll()) {
+		for (Book books : bookRepository.findAllByOrderByDateDesc()) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("url", books.getUrl());
 			map.put("newsNo", books.getNewsNo());

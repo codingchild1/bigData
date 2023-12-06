@@ -42,7 +42,7 @@
 <div class="wrap">
     <div class="main-issue">
         <div class="layout">
-            <p class="main-tit">오늘의 이슈</p>
+            <p class="main-tit">금주 이슈</p>
             <div class="main-issue-cont">
                 <div class="main-issue-img-cont">
                     <button type="button">
@@ -70,7 +70,7 @@
     </div>
     <div class="main-keyword">
         <div class="layout">
-            <p class="main-tit">오늘의 키워드</p>
+            <p class="main-tit">금주 키워드</p>
             <div class="main-keyword-cont">
                 <%--                <div class="main-keyword-legend">--%>
                 <%--                    <p class="legend legend1">--%>
