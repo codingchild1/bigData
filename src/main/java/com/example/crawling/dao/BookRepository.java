@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface BookRepository extends MongoRepository<Book, String> {
 
+	public List<Book> findAllByOrderByDateDesc();
+
 	// get total row count
 	public long count();
 
