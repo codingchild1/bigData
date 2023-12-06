@@ -51,7 +51,7 @@
                         </div>
                         <p class="main-issue-img-tit">"재난지원금 환수 면제‥보상금 전액 지급"</p>
                     </button>
-                    <a href="https://news.kbs.co.kr/news/pc/main/main.html" class="txt-btn">전체 뉴스보기</a>
+                    <a href="https://www.gwnews.org/" class="txt-btn">전체 뉴스보기</a>
                 </div>
                 <div class="main-issue-list-cont">
                     <ul>
@@ -246,8 +246,6 @@
 
             const ctx = Sangwon.getContextPath();
             const qs = Sangwon.jsonToQueryString(_json);
-
-            window.console.log(Sangwon);
 
             const url = ctx+'/search'+qs;
 

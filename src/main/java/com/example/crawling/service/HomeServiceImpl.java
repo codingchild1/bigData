@@ -18,6 +18,34 @@ public class HomeServiceImpl implements HomeService {
 	@Autowired
 	private BookRepository bookRepository;
 
+	public long countByTitleRegex(String title) throws Exception {
+		return (long) bookRepository.countByTitleRegex(title);
+	}
+
+	public long countByDetailRegex(String detail) throws Exception {
+		return (long) bookRepository.countByDetailRegex(detail);
+	}
+
+	public long countByReporterRegex(String reporter) throws Exception {
+		return (long) bookRepository.countByReporterRegex(reporter);
+	}
+
+	@Override
+	public long getTotalRowCount() throws Exception {
+		return (long) bookRepository.count();
+	}
+
+	@Override
+	public List<Book> getLatestNews() {
+		List<Book> latestNews = new ArrayList<Book>();
+		try {
+			latestNews = (List<Book>) bookRepository.findFirstByOrderByDateDesc();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return latestNews;
+	}
+
 	@Override
 	public List<Map<String, Object>> selectNewsData() throws Exception {
 
@@ -46,23 +74,35 @@ public class HomeServiceImpl implements HomeService {
 	}
 
 	@Override
-	public List<Book> searchMap(Map<String, String> searchKeyword) throws Exception {
+	public Map<String, Object> searchMap(Map<String, String> searchKeyword) throws Exception {
 
-		List<Book> result = new ArrayList<>();
+		Map<String, Object> m = new HashMap<String, Object>();
 
-		PageRequest pageable = PageRequest.of(Integer.parseInt(searchKeyword.get("page")), 5);
+		List<Book> result = new ArrayList<Book>();
+		long rowcount = 0;
 
-				switch (searchKeyword.get("searchType")) {
+		int PageSize = 5;
+		int nowPage = Integer.parseInt(searchKeyword.get("page"));
+
+		String keyword = (String) searchKeyword.get("keyword");
+		String searchType = (String) searchKeyword.get("searchType");
+
+		PageRequest pageable = PageRequest.of(nowPage, PageSize);
+
+		switch (searchType) {
 			case "title":
-				Page<Book> title = bookRepository.findByTitleRegex(searchKeyword.get("keyword"), pageable);
+				rowcount = (long) bookRepository.countByTitleRegex(keyword);
+				Page<Book> title = bookRepository.findByTitleRegex(keyword, pageable);
 				result = title.getContent();
 				break;
 			case "content":
-				Page<Book> content = bookRepository.findByDetailRegex(searchKeyword.get("keyword"), pageable);
+				rowcount = (long) bookRepository.countByDetailRegex(keyword);
+				Page<Book> content = bookRepository.findByDetailRegex(keyword, pageable);
 				result = content.getContent();
 				break;
 			case "reporter":
-				Page<Book> reporter = bookRepository.findByReporterRegex(searchKeyword.get("keyword"), pageable);
+				rowcount = (long) bookRepository.countByReporterRegex(keyword);
+				Page<Book> reporter = bookRepository.findByReporterRegex(keyword, pageable);
 				result = reporter.getContent();
 				break;
 		}
@@ -72,7 +112,11 @@ public class HomeServiceImpl implements HomeService {
 			String[] emailSplit = result.get(searchSize).getEmail().split("\\s+");
 			result.get(searchSize).setEmail(emailSplit[0]);
 		}
-		return result;
+
+		m.put("rowcount", rowcount);
+		m.put("result", result);
+
+		return m;
 	}
 
 	@Override
