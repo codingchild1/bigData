@@ -9,7 +9,7 @@
     String SERVER_SCHEME = request.getScheme();
     String SERVER_NAME = request.getServerName();
     String SERVER_PORT = String.valueOf(request.getServerPort());
-	String CONTEXT_PATH = request.getContextPath();
+    String CONTEXT_PATH = request.getContextPath();
 
 %>
 
@@ -104,7 +104,7 @@
         <div class="modal-news-wrap">
             <div class="modal-news-header">
                 <p class="modal-news-logo">
-<%--                    <img src="../../public/images/logo_ytn.png">--%>
+                    <%--                    <img src="../../public/images/logo_ytn.png">--%>
                 </p>
                 <p class="modal-news-tit"><span id="modal_title"></span></p>
                 <div class="modal-news-info">
@@ -126,7 +126,7 @@
                     <p>[이미지출처=보도화면 캡처]</p>
                 </div>
                 <div class="modal-news-cont-txt">
-					<p><span id="modal_detail"></span></p>
+                    <p><span id="modal_detail"></span></p>
                 </div>
             </div>
         </div>
@@ -246,8 +246,6 @@
 
             const ctx = Sangwon.getContextPath();
             const qs = Sangwon.jsonToQueryString(_json);
-
-            window.console.log(Sangwon);
 
             const url = ctx+'/search'+qs;
 
