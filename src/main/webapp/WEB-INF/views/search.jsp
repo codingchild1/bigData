@@ -35,16 +35,18 @@
             <p class="main-tit">뉴스 검색</p>
             <div class="main-news-search-cont">
                 <form action="/search" method="get" id="selectInput">
-                    <div>
-                        <select name="searchType">
-                            <option value="content">기사 내용</option>
-                            <option value="title">기사 제목</option>
-                            <option value="reporter">기자 이름</option>
-                        </select>
-                    </div>
-                    <div class="input-search">
-                        <input class="input-l" type="text" placeholder="검색어를 입력하세요." name="keyword">
-                        <button type="submit" class="blue-btn btn-l">검색</button>
+                    <div class="input-group">
+                        <div>
+                            <select name="searchType" class="select-m">
+                                <option value="content">기사 내용</option>
+                                <option value="title">기사 제목</option>
+                                <option value="reporter">기자 이름</option>
+                            </select>
+                        </div>
+                        <div class="input-search">
+                            <input class="input-l" type="text" placeholder="검색어를 입력하세요." name="keyword" value="${keyword}">
+                            <button type="submit" class="blue-btn btn-l">검색</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -56,8 +58,11 @@
             <div class="main-news-list-cont">
                 <p class="main-news-list-info">뉴스 검색 결과 <span class="red-txt">192,168</span> 건입니다.</p>
                 <%-- list 한페이지 10개 --%>
-                <ul>
+                <ul class="news_list_search">
                 <%--<li class="no-data">검색 결과가 없습니다.<br>검색어를 다시 입력해 주세요.</li>--%>
+                    <c:if test="${empty searchResult}">
+                        <li class="no-data">검색 결과가 없습니다.<br>검색어를 다시 입력해 주세요.</li>
+                    </c:if>
                     <c:forEach var="result" items="${searchResult}" varStatus="status">
                         <li>
                             <a href="">
@@ -74,7 +79,6 @@
                             </a>
                         </li>
                     </c:forEach>
-                    <li>
                 </ul>
                 <div class="paging">
                     <div class="pagination">
@@ -92,6 +96,9 @@
             </div>
         </div>
     </div>
+</div>
+<div class="main-link-btn">
+    <a href="/index">메인</a>
 </div>
 <script src="/js/newsController.js"></script>
 </body>

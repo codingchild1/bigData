@@ -9,7 +9,7 @@
     String SERVER_SCHEME = request.getScheme();
     String SERVER_NAME = request.getServerName();
     String SERVER_PORT = String.valueOf(request.getServerPort());
-	String CONTEXT_PATH = request.getContextPath();
+    String CONTEXT_PATH = request.getContextPath();
 
 %>
 
@@ -89,10 +89,7 @@
                 <%--키워드 들어가는 공간--%>
                 <div class="main-keyword-txt" id="chartDiv">
                     <!-- <iframe src="http://192.168.0.170:5601/app/dashboards#/view/53d6d5e0-8da6-11ee-a28b-a73ae6d6f567?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))" height="100%" width="100%"></iframe> -->
-
                 </div>
-                <%--키워드 들어가는 공간--%>
-                <div class="main-keyword-txt"></div>
             </div>
         </div>
     </div>
@@ -107,7 +104,7 @@
         <div class="modal-news-wrap">
             <div class="modal-news-header">
                 <p class="modal-news-logo">
-<%--                    <img src="../../public/images/logo_ytn.png">--%>
+                    <%--                    <img src="../../public/images/logo_ytn.png">--%>
                 </p>
                 <p class="modal-news-tit"><span id="modal_title"></span></p>
                 <div class="modal-news-info">
@@ -129,7 +126,7 @@
                     <p>[이미지출처=보도화면 캡처]</p>
                 </div>
                 <div class="modal-news-cont-txt">
-					<p><span id="modal_detail"></span></p>
+                    <p><span id="modal_detail"></span></p>
                 </div>
             </div>
         </div>
@@ -181,7 +178,7 @@
         function drawAmChart() {
             $.ajax({
                 type: "get",
-                url: "/jylee/proxy/proxy.jsp?url=" + "http://192.168.0.170:9200/newsanalyst.crawling/_search",
+                url: "/jylee/proxy/proxy.jsp?url=" + "http://192.168.0.170:9200/newsanalyst.test/_search",
                 dataType: 'json',
                 data: {},
                 success: function (result, status) {
@@ -195,7 +192,7 @@
                         }
                     })
                     let filterData = dataArray.filter(item => {
-                        return item.weight > 2 && item.tag.length >= 2;
+                        return item.weight > 3 && item.tag.length >= 2;
                     })
                     am4core.useTheme(am4themes_animated);
                     var chart = am4core.create("chartDiv", am4plugins_wordCloud.WordCloud);

@@ -15,9 +15,9 @@ public interface BookRepository extends MongoRepository<Book, String> {
 //    Book save(Book entity);   //repository 로 mongodb insert (update) 하기
 
 //	public List<Book> findByTitleRegex(String title);
-	public List<Book> findByTitleRegex(String title);
+	public Page<Book> findByTitleRegex(String title, Pageable pageable);
 	public Page<Book> findByDetailRegex(String detail, Pageable pageable);
-	public List<Book> findByReporterRegex(String reporter);
+	public Page<Book> findByReporterRegex(String reporter, Pageable pageable);
 
 	public Book findByUrl(String newsUrl);
 
