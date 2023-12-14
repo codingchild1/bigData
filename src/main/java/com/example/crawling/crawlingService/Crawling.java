@@ -16,11 +16,11 @@ public class Crawling {
 
 	@PostConstruct
 	public void scheduleCrawlTask() throws Exception{
-		/*강원신문*/
-		crawlingLogicServiceGwnews.crawlWebsite();
-		
-		/*전자신문*/
-		crawlingLogicServiceETNEWS.resetNewsNum();
-		crawlingLogicServiceETNEWS.crawlWebsite();
+//		/*강원신문*/
+//		crawlingLogicServiceGwnews.crawlWebsite();
+//
+//		/*전자신문*/
+//		crawlingLogicServiceETNEWS.resetNewsNum();
+//		crawlingLogicServiceETNEWS.crawlWebsite();
 	}
 }
