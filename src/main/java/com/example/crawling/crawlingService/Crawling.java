@@ -33,7 +33,7 @@ public class Crawling {
 //		crawlingLogicServiceBOANNEWS.crawlWebsite();
 
 		/*블로터*/
-		crawlingLogicServiceBLOTER.crawlWebsite();
+//		crawlingLogicServiceBLOTER.crawlWebsite();
 
 	}
 }
