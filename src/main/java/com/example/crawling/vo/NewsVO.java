@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class NewsVO {
 
     @Id
-    private int newsNo;
+    private long newsNo;
     private String title;
     private String date;
     private String detail;

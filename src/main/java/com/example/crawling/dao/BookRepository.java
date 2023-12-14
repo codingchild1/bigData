@@ -39,6 +39,6 @@ public interface BookRepository extends MongoRepository<Book, String> {
 
 	public Book findByUrl(String newsUrl);
 
-
+	public Book findByNewsNo(long newsNo);
 }
 

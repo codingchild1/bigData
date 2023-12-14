@@ -7,9 +7,11 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.annotation.Resource;
 
+@EnableScheduling   // 스케쥴러를 사용하기 위함 (애플리케이션 메인 클래스에 작성)
 @SpringBootApplication
 public class MongoinsertApplication {
 
@@ -35,7 +37,7 @@ public class MongoinsertApplication {
 //
 //                /*뉴스번호 7753100번부터 7753110번까지 스크래핑*/
 //                List<Map<String, Object>> originData = new ArrayList<>();
-//                for (int newsNo = 240030; newsNo <= 240930; newsNo++) {
+//                for (long newsNo = 240931; newsNo <= 240950; newsNo++) {
 //                    if ((Integer) newsNo == null) continue;
 //
 //                    // 현재 날짜/시간
@@ -121,7 +123,7 @@ public class MongoinsertApplication {
 //					book.setImg(imgUrl);
 //
 //                    //DB에 연결하기 위한 Repository
-////                    bookRepository.insert(book);
+//                    bookRepository.insert(book);
 //
 //                    // db 값 update
 //                    // id 값 필요 (setId)
@@ -233,7 +235,7 @@ public class MongoinsertApplication {
 //					book.setMedia(list.get(i).get("media").toString());
 //					book.setImg(list.get(i).get("imgUrl").toString());
 //
-////                    bookRepository.save(book);
+//                    bookRepository.save(book);
 //
 //                }
 //                System.out.println("형태소 분석 완료");

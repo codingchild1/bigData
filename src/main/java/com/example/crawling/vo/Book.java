@@ -14,7 +14,7 @@ import java.util.List;
 @Document(collection = "crawling")  /*MongoDB의 test 컬렉션과 연결하도록 설정*/
 public class Book {
     @Id
-    private int newsNo;
+    private long newsNo;
     private String url;    // URL 타입?
     private String title;
     private String date;
