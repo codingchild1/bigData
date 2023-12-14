@@ -11,7 +11,7 @@ public class News {
 //        String[] productInfo = new String[]{"모델번호 : ", "출시일 : ", "컬러 : ", "발매가 : "};
 
         //뉴스번호 7753100번부터 7753110번까지 스크래핑
-        for (int newsNo = 7803750; newsNo <= 7803770; newsNo++) {
+        for (long newsNo = 7803750; newsNo <= 7803770; newsNo++) {
 
             final String url = "https://news.kbs.co.kr/news/pc/view/view.do?ncd="+newsNo;
 
