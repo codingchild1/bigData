@@ -1,44 +1,45 @@
-package com.example.crawling.crawlingService;
-
-import com.example.crawling.dao.BookRepository;
-import com.example.crawling.dao.CrawledNewsDataRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-
-@Service
-public class CrawlingLogicServiceETNEWS {
-	private static final Logger logger = LoggerFactory.getLogger(CrawlingLogicServiceETNEWS.class);
-
-	@Resource
-	private BookRepository bookRepository;
-
-	@Resource
-	private CrawlingRepository crawlingRepository;
-
-	@Resource
-	private CrawledNewsDataRepository crawledNewsDataRepository;
-
-	/*전자신문 url 번호*/
-//	int newsNum = 1;
-//	String newsNumPattern = String.format("%06d", newsNum);
-//	String toDayPattern = "";
+//package com.example.crawling.crawlingService;
 //
-//	@Scheduled(cron = "0 0 0 * * MON-FRI") // 매일 자정에 실행
-//	public void resetNewsNum() {
-//		logger.info("변수 초기화 전 newsNum:" + newsNum);
-//		// 전역 변수 초기화
-//		newsNum = 1;
-//		logger.info("전자 신문 url 번호 초기화 완료");
+//import com.example.crawling.dao.BookRepository;
+//import com.example.crawling.dao.CrawledNewsDataRepository;
+//import com.example.crawling.vo.Book;
+//import kr.co.shineware.nlp.komoran.constant.DEFAULT_MODEL;
+//import kr.co.shineware.nlp.komoran.core.Komoran;
+//import kr.co.shineware.nlp.komoran.model.KomoranResult;
+//import kr.co.shineware.nlp.komoran.model.Token;
+//import org.jsoup.Connection;
+//import org.jsoup.Jsoup;
+//import org.jsoup.nodes.Document;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+//import org.springframework.scheduling.annotation.Scheduled;
+//import org.springframework.stereotype.Service;
 //
-//		// 서울 현재 날짜 (년월일) Time 라이브러리
-//		LocalDate toDay = LocalDate.now(ZoneId.of("Asia/Seoul"));
-//		toDayPattern = toDay.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-//	}
+//import javax.annotation.Resource;
+//import java.time.LocalDate;
+//import java.time.LocalDateTime;
+//import java.time.ZoneId;
+//import java.time.format.DateTimeFormatter;
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
+//
+//@Service
+//public class CrawlingLogicServiceBOANNEWS {
+//	private static final Logger logger = LoggerFactory.getLogger(CrawlingLogicServiceBOANNEWS.class);
+//
+//	@Resource
+//	private BookRepository bookRepository;
+//
+//	@Resource
+//	private CrawlingRepository crawlingRepository;
+//
+//	@Resource
+//	private CrawledNewsDataRepository crawledNewsDataRepository;
 //
 //	@Scheduled(cron = "0 */30 5/6 * * MON-FRI") // 매시 30분마다 6시간 텀으로 실행 (5시30분 기준) 5:30... 11:30...
+//
 //	public void crawlWebsite() throws NullPointerException {
 //
 //		// 서울 현재 날짜 (년월일) Time 라이브러리
@@ -48,16 +49,14 @@ public class CrawlingLogicServiceETNEWS {
 //		//크롤링 한 시간 log message 출력
 //		logger.info("fixedRate: 크롤링 시간 - {}", koreaDate);
 //
-//		String etNewsPatternStr = toDayPattern + newsNumPattern;
-//		long etNewsPattern = Long.parseLong(etNewsPatternStr);
-//
 //		/*크롤링 변수 - DB에 저장 및 불러오기 구현 start (마지막에 크롤링한 번호 남기기 위함)*/
-//		/*전자신문은 200개 정도*/
+//		/*강원신문은 40개 정도*/
 //		/*https://www.gwnews.org/news/articleView.html?idxno=*/
-//		String etNews = "newsByEtNews";
-//		long firstNewsNoByEtNews = etNewsPattern;  //크롤링 시작 번호
-//		long newsNoByEtNews = etNewsPattern;       //크롤링 데이터 카운트
-//		long lastNewsNoByEtNews = firstNewsNoByEtNews + 50;              //크롤링 끝 번호
+//		String gangwonNews = "newsByBoanNews";
+//		CrawlingEntity newsNoByBoanNewsList = crawlingRepository.findByMedia(gangwonNews);
+//		long firstNewsNoByBoanNews = newsNoByBoanNewsList.getNewsNo();  //크롤링 시작 번호
+//		long newsNoByBoanNews = newsNoByBoanNewsList.getNewsNo();       //크롤링 데이터 카운트
+//		long lastNewsNoByBoanNews = newsNoByBoanNews + 10;              //크롤링 끝 번호
 //
 //		CrawlingEntity crawlingEntity = new CrawlingEntity();
 //
@@ -67,7 +66,7 @@ public class CrawlingLogicServiceETNEWS {
 //		List<Map<String, Object>> originData = new ArrayList<>();
 //
 //		/*뉴스번호 240500 ~ 240900 스크래핑*/
-//		for (long newsNo = firstNewsNoByEtNews; newsNo <= lastNewsNoByEtNews; newsNo++) {
+//		for (long newsNo = (int) newsNoByBoanNews; newsNo <= lastNewsNoByBoanNews; newsNo++) {
 //			try {
 //				// 현재 날짜/시간
 //				LocalDateTime now = LocalDateTime.now();
@@ -75,7 +74,7 @@ public class CrawlingLogicServiceETNEWS {
 //				String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
 //
 //				//크롤링을 하려는 주소
-//				final String url = "https://www.etnews.com/" + newsNo;
+//				final String url = "https://www.boannews.com/media/view.asp?idx=" + newsNo;
 //
 //				//크롤링
 //				Connection conn = Jsoup.connect(url);
@@ -85,14 +84,14 @@ public class CrawlingLogicServiceETNEWS {
 ////                Element imageUrl = document.getElementsByAttributeValue("alt", "동영상 링크").first();
 //
 //				//기사 제목
-//				Element title = document.getElementsByClass("article_title").first();
+//				String title = document.select("div#news_title02 > h1").text();
 //
 //				//보도 날짜
-//				String date = document.getElementsByClass("date").text().split(" ")[2];
+//				String date = document.select("#news_util01").text().split(" ")[2];
 //				date = date.replaceAll("-", ".");
 //
 //				//본문 및 태그 제거 등 기타 내용 필터링
-//				String detail = document.select("div.article_body > div.article_txt > p").text();
+//				String detail = document.getElementById("div#news_content").text();
 //				String strDetail = detail;
 //
 //				Map<String, Object> map = new HashMap<>();
@@ -108,18 +107,18 @@ public class CrawlingLogicServiceETNEWS {
 //				strDetail = strDetail.replaceAll("앵커", "");
 //
 //				//기자 이름
-//				String reporter = "전자신문";
+//				String reporter = document.select("div#news_util05 > a > b").text();
 //				String strRepoter = reporter;
 ////                    strRepoter = strRepoter.replaceAll("기자", "");
 //
 //				//기자 이메일
-//				String email = "etnews@etnews.com";
+//				String email = document.select("div#news_content > a").text();
 //
 //				//언론사
-//				String media = document.select("ul.clearfix > li > a").text().split(" ")[0];
+//				String media = document.select("div#sns_home > ul > b").get(1).text();
 //
 //				//기사 이미지 URL
-//				String imgUrl = document.select("figure.article_image > a > img").attr("src");
+//				String imgUrl = "https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif";
 //
 //                /* html() : 태그까지 가져오기
 //                   text() : 내용만 가져오기 */
@@ -139,7 +138,7 @@ public class CrawlingLogicServiceETNEWS {
 //				//DB에 collection 에 접근 하기 위한 VO 객체
 //				Book book = new Book();
 //				book.setNewsNo(newsNo);
-//				book.setTitle(title.text());
+//				book.setTitle(title);
 //				book.setDate(date);
 //				book.setDetail(strDetail);
 //				book.setReporter(strRepoter);
@@ -154,26 +153,26 @@ public class CrawlingLogicServiceETNEWS {
 //				// id 값 필요 (setId)
 ////                    bookRepository.save(book);
 //
-//				newsNoByEtNews += 1;
-//				crawlingEntity.setMedia("newsByEtNews");
-//				crawlingEntity.setNewsNo(newsNoByEtNews);
+//				newsNoByBoanNews += 1;
+//				crawlingEntity.setMedia("newsByBoanNews");
+//				crawlingEntity.setNewsNo(newsNoByBoanNews);
 //				crawlingRepository.save(crawlingEntity);
 //
 //
 //			} catch (NullPointerException nullPointerException) {
-//				newsNoByEtNews += 1;
+//				newsNoByBoanNews += 1;
 //				logger.info(nullPointerException.toString());
-//				crawlingEntity.setMedia("newsByEtNews");
-//				crawlingEntity.setNewsNo(newsNoByEtNews);
+//				crawlingEntity.setMedia("newsByBoanNews");
+//				crawlingEntity.setNewsNo(newsNoByBoanNews);
 //				crawlingRepository.save(crawlingEntity);
 //				continue;
 //
 //			} catch (Exception e) {
 //				logger.info(e.toString());
 //				System.out.println("여기 에러");
-//				newsNoByEtNews += 1;
-//				crawlingEntity.setMedia("newsByEtNews");
-//				crawlingEntity.setNewsNo(newsNoByEtNews);
+//				newsNoByBoanNews += 1;
+//				crawlingEntity.setMedia("newsByBoanNews");
+//				crawlingEntity.setNewsNo(newsNoByBoanNews);
 //				crawlingRepository.save(crawlingEntity);
 //				continue;
 //			}
@@ -182,7 +181,7 @@ public class CrawlingLogicServiceETNEWS {
 //			//DB 조회
 //			List<Map<String, Object>> list = new ArrayList<>();
 ////			for (Book books : bookRepository.findAll()) {
-//			for (long newsNo = firstNewsNoByEtNews; newsNo < lastNewsNoByEtNews+1; newsNo++) {
+//			for (long newsNo = firstNewsNoByBoanNews; newsNo < lastNewsNoByBoanNews+1; newsNo++) {
 //				try {
 //					Book books = bookRepository.findByNewsNo((long) newsNo);
 //					Map<String, Object> map = new HashMap<>();
@@ -292,8 +291,8 @@ public class CrawlingLogicServiceETNEWS {
 //
 //                    bookRepository.save(book);
 //
-//				crawlingEntity.setMedia("newsByEtNews");
-//				crawlingEntity.setNewsNo(newsNoByEtNews);
+//				crawlingEntity.setMedia("newsByBoanNews");
+//				crawlingEntity.setNewsNo(newsNoByBoanNews);
 //				crawlingRepository.save(crawlingEntity);
 //			}
 //			System.out.println("크롤링 완료");
@@ -304,4 +303,4 @@ public class CrawlingLogicServiceETNEWS {
 //		}
 //
 //	}
-}
+//}
