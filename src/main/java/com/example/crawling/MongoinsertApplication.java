@@ -2,7 +2,6 @@ package com.example.crawling;
 
 import com.example.crawling.dao.BookRepository;
 import com.example.crawling.dao.CrawledNewsDataRepository;
-import org.python.util.PythonInterpreter;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,7 +28,7 @@ public class MongoinsertApplication {
     public ApplicationRunner applicationRunner() {
         return args -> {
 
-            PythonInterpreter interpreter = new PythonInterpreter();
+//            PythonInterpreter interpreter = new PythonInterpreter();
 
 //            try {
 ////                bookRepository.deleteAll();   //데이터 삭제
