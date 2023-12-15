@@ -39,27 +39,33 @@ public class CrawlingLogicServiceETNEWS {
 	@Resource
 	private CrawledNewsDataRepository crawledNewsDataRepository;
 
-	/*전자신문 url 번호*/
-	int newsNum = 1;
-	String newsNumPattern = String.format("%06d", newsNum);
-	String toDayPattern = "";
+	int crawlingCountByDay = 50;
 
-	@Scheduled(cron = "0 0 0 * * MON-FRI") // 매일 자정에 실행
+	@Scheduled(cron = "0 0 0 * * TUE-SAT") // 매일 자정에 실행
 	public void resetNewsNum() {
-		logger.info("변수 초기화 전 newsNum:" + newsNum);
+		logger.info("변수 초기화 전 newsNum:" + CrawlingVars.newsNum_ETNews);
 		// 전역 변수 초기화
-		newsNum = 1;
+		CrawlingVars.newsNum_ETNews = 0;
+		String newsNumPattern = String.format("%06d", CrawlingVars.newsNum_ETNews);
 		logger.info("전자 신문 url 번호 초기화 완료");
 
 		// 서울 현재 날짜 (년월일) Time 라이브러리
 		LocalDate toDay = LocalDate.now(ZoneId.of("Asia/Seoul"));
-		toDay.minusDays(1);
-		toDayPattern = toDay.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		toDay = toDay.minusDays(1);
+		String toDayPattern = toDay.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+		String newsPattern = toDayPattern + newsNumPattern;
+		CrawlingVars.newsPattern_ETNews = Long.parseLong(newsPattern);
+
+//		bookRepository.deleteAll();   //데이터 삭제
+//		crawledNewsDataRepository.deleteAll();    //데이터 삭제
 	}
 
-	@Scheduled(cron = "0 */30 5/6 * * MON-FRI") // 매시 30분마다 6시간 텀으로 실행 (5시30분 기준) 5:30... 11:30...
+//	 @Scheduled(cron = "0 */30 5/6 * * MON-FRI") // 매시 30분마다 6시간 텀으로 실행 (5시30분 기준) 5:30... 11:30...
+	@Scheduled(fixedRate = 20000) // 매시 30분마다 6시간 텀으로 실행 (5시30분 기준) 5:30... 11:30...
 	public void crawlWebsite() throws NullPointerException {
-		newsNum += 1;
+		CrawlingVars.newsPattern_ETNews++;
+
 		// 서울 현재 날짜 (년월일) Time 라이브러리
 		LocalDate localDate = LocalDate.now(ZoneId.of("Asia/Seoul"));
 		String koreaDate = localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -67,31 +73,31 @@ public class CrawlingLogicServiceETNEWS {
 		//크롤링 한 시간 log message 출력
 		logger.info("fixedRate: 크롤링 시간 - {}", koreaDate);
 
-		String etNewsPatternStr = toDayPattern + newsNumPattern;
-		long etNewsPattern = Long.parseLong(etNewsPatternStr);
-
 		/*크롤링 변수 - DB에 저장 및 불러오기 구현 start (마지막에 크롤링한 번호 남기기 위함)*/
 		/*전자신문은 200개 정도*/
 		/*https://www.gwnews.org/news/articleView.html?idxno=*/
 		String etNews = "newsByEtNews";
-		long firstNewsNoByEtNews = etNewsPattern;  //크롤링 시작 번호
-		long newsNoByEtNews = etNewsPattern;       //크롤링 데이터 카운트
-		long lastNewsNoByEtNews = firstNewsNoByEtNews + 50;              //크롤링 끝 번호
+
+		long initNewNo = CrawlingVars.newsPattern_ETNews;
+
+		long newsNo = CrawlingVars.newsPattern_ETNews;
+		CrawlingVars.newsPattern_ETNews += crawlingCountByDay;
+		long lastNewsNoByEtNews = CrawlingVars.newsPattern_ETNews;              //크롤링 끝 번호
 
 		CrawlingEntity crawlingEntity = new CrawlingEntity();
-
-//		bookRepository.deleteAll();   //데이터 삭제
-//		crawledNewsDataRepository.deleteAll();    //데이터 삭제
 
 		List<Map<String, Object>> originData = new ArrayList<>();
 
 		/*뉴스번호 240500 ~ 240900 스크래핑*/
-		for (long newsNo = firstNewsNoByEtNews; newsNo <= lastNewsNoByEtNews; newsNo++) {
+		for (; newsNo < lastNewsNoByEtNews; newsNo++) {
 			try {
 				// 현재 날짜/시간
 				LocalDateTime now = LocalDateTime.now();
 				// 포맷팅
 				String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
+
+//				String etNewsPatternCountStr =  toDayPattern + Long.toString(newsNo);
+//				Long etNewsPatternCountLong = Long.parseLong(etNewsPatternCountStr);
 
 				//크롤링을 하려는 주소
 				final String url = "https://www.etnews.com/" + newsNo;
@@ -178,38 +184,35 @@ public class CrawlingLogicServiceETNEWS {
 				// db 값 update
 				// id 값 필요 (setId)
 //                    bookRepository.save(book);
-
-				newsNoByEtNews += 1;
 				crawlingEntity.setMedia("newsByEtNews");
-				crawlingEntity.setNewsNo(newsNoByEtNews);
+				crawlingEntity.setNewsNo(newsNo);
 				crawlingRepository.save(crawlingEntity);
 
 
 			} catch (NullPointerException nullPointerException) {
-				newsNoByEtNews += 1;
 				logger.info(nullPointerException.toString());
 				crawlingEntity.setMedia("newsByEtNews");
-				crawlingEntity.setNewsNo(newsNoByEtNews);
+				crawlingEntity.setNewsNo(newsNo);
 				crawlingRepository.save(crawlingEntity);
 				continue;
 
 			} catch (Exception e) {
 				logger.info(e.toString());
 				System.out.println("여기 에러");
-				newsNoByEtNews += 1;
 				crawlingEntity.setMedia("newsByEtNews");
-				crawlingEntity.setNewsNo(newsNoByEtNews);
+				crawlingEntity.setNewsNo(newsNo);
 				crawlingRepository.save(crawlingEntity);
 				continue;
 			}
 		}
+
 		try {
 			//DB 조회
 			List<Map<String, Object>> list = new ArrayList<>();
 //			for (Book books : bookRepository.findAll()) {
-			for (long newsNo = firstNewsNoByEtNews; newsNo < lastNewsNoByEtNews+1; newsNo++) {
+			for (long i = initNewNo; i < lastNewsNoByEtNews; i++) {
 				try {
-					Book books = bookRepository.findByNewsNo((long) newsNo);
+					Book books = bookRepository.findByNewsNo((long) i);
 					Map<String, Object> map = new HashMap<>();
 //                System.out.println(book.getTitle().toString());
 					map.put("newsNo", books.getNewsNo());
@@ -315,17 +318,15 @@ public class CrawlingLogicServiceETNEWS {
 				book.setMedia(list.get(i).get("media").toString());
 				book.setImg(list.get(i).get("imgUrl").toString());
 
-                    bookRepository.save(book);
-
-				crawlingEntity.setMedia("newsByEtNews");
-				crawlingEntity.setNewsNo(newsNoByEtNews);
-				crawlingRepository.save(crawlingEntity);
+				bookRepository.save(book);
 			}
+
 			logger.info("전자신문 크롤링 완료");
+
 		} catch (Exception e) {
 			logger.info(e.toString());
-			e.printStackTrace();
 		}
 
 	}
+
 }

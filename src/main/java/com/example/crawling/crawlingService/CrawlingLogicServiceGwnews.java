@@ -39,8 +39,8 @@ public class CrawlingLogicServiceGwnews {
 	@Resource
 	private CrawledNewsDataRepository crawledNewsDataRepository;
 
-	@Scheduled(cron = "0 */30 5/6 * * MON-FRI") // 매시 30분마다 6시간 텀으로 실행 (5시30분 기준) 5:30... 11:30...
-
+//	@Scheduled(cron = "0 */30 5/6 * * MON-FRI") // 매시 30분마다 6시간 텀으로 실행 (5시30분 기준) 5:30... 11:30...
+@Scheduled(fixedRate = 20000) // 매시 30분마다 6시간 텀으로 실행 (5시30분 기준) 5:30... 11:30...
 	public void crawlWebsite() throws NullPointerException {
 
 		// 서울 현재 날짜 (년월일) Time 라이브러리
