@@ -8,7 +8,7 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '11'
+	sourceCompatibility = '17'
 }
 
 repositories {
@@ -46,7 +46,7 @@ dependencies {
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
 	// https://mvnrepository.com/artifact/org.python/jython-standalone
-	implementation 'org.python:jython-standalone:2.7.3'
+//	implementation 'org.python:jython-standalone:2.7.3'
 	implementation 'com.github.shin285:KOMORAN:3.3.9'
 
 	// https://mvnrepository.com/artifact/org.json/json

@@ -11,17 +11,19 @@ import java.util.List;
 @Repository
 public interface BookRepository extends MongoRepository<Book, String> {
 
+	public List<Book> findAllByOrderByDateDesc();
+
 	// get total row count
 	public long count();
 
 	// get total row count by title
-	public long countByTitleRegex(String title);
+	public long countByTitleRegexOrderByDateDesc(String title);
 
 	// get total row count by content
-	public long countByDetailRegex(String detail);
+	public long countByDetailRegexOrderByDateDesc(String detail);
 
 	// get total row count by reporter
-	public long countByReporterRegex(String reporter);
+	public long countByReporterRegexOrderByDateDesc(String reporter);
 
 	// get latest news
 	public List<Book> findFirstByOrderByDateDesc();
@@ -37,6 +39,6 @@ public interface BookRepository extends MongoRepository<Book, String> {
 
 	public Book findByUrl(String newsUrl);
 
-
+	public Book findByNewsNo(long newsNo);
 }
 

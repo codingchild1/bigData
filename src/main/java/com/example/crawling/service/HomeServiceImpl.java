@@ -19,15 +19,15 @@ public class HomeServiceImpl implements HomeService {
 	private BookRepository bookRepository;
 
 	public long countByTitleRegex(String title) throws Exception {
-		return (long) bookRepository.countByTitleRegex(title);
+		return (long) bookRepository.countByTitleRegexOrderByDateDesc(title);
 	}
 
 	public long countByDetailRegex(String detail) throws Exception {
-		return (long) bookRepository.countByDetailRegex(detail);
+		return (long) bookRepository.countByDetailRegexOrderByDateDesc(detail);
 	}
 
 	public long countByReporterRegex(String reporter) throws Exception {
-		return (long) bookRepository.countByReporterRegex(reporter);
+		return (long) bookRepository.countByReporterRegexOrderByDateDesc(reporter);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class HomeServiceImpl implements HomeService {
 	public List<Map<String, Object>> selectNewsData() throws Exception {
 
 		List<Map<String, Object>> list = new ArrayList<>();
-		for (Book books : bookRepository.findAll()) {
+		for (Book books : bookRepository.findAllByOrderByDateDesc()) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("url", books.getUrl());
 			map.put("newsNo", books.getNewsNo());
@@ -91,17 +91,17 @@ public class HomeServiceImpl implements HomeService {
 
 		switch (searchType) {
 			case "title":
-				rowcount = (long) bookRepository.countByTitleRegex(keyword);
+				rowcount = (long) bookRepository.countByTitleRegexOrderByDateDesc(keyword);
 				Page<Book> title = bookRepository.findByTitleRegex(keyword, pageable);
 				result = title.getContent();
 				break;
 			case "content":
-				rowcount = (long) bookRepository.countByDetailRegex(keyword);
+				rowcount = (long) bookRepository.countByDetailRegexOrderByDateDesc(keyword);
 				Page<Book> content = bookRepository.findByDetailRegex(keyword, pageable);
 				result = content.getContent();
 				break;
 			case "reporter":
-				rowcount = (long) bookRepository.countByReporterRegex(keyword);
+				rowcount = (long) bookRepository.countByReporterRegexOrderByDateDesc(keyword);
 				Page<Book> reporter = bookRepository.findByReporterRegex(keyword, pageable);
 				result = reporter.getContent();
 				break;
