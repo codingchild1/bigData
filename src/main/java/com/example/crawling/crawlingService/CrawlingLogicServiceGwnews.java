@@ -57,7 +57,7 @@ public class CrawlingLogicServiceGwnews {
 		CrawlingEntity newsNoByGangwonNewspaperList = crawlingRepository.findByMedia(gangwonNews);
 		long firstNewsNoByGangwonNewspaper = newsNoByGangwonNewspaperList.getNewsNo();  //크롤링 시작 번호
 		long newsNoByGangwonNewspaper = newsNoByGangwonNewspaperList.getNewsNo();       //크롤링 데이터 카운트
-		long lastNewsNoByGangwonNewspaper = newsNoByGangwonNewspaper + 50;              //크롤링 끝 번호
+		long lastNewsNoByGangwonNewspaper = newsNoByGangwonNewspaper + 20;              //크롤링 끝 번호
 
 		/*서울신문*/
 		// 패턴 : 날짜 + 500 + 001 ~ 999
@@ -93,10 +93,10 @@ public class CrawlingLogicServiceGwnews {
 				//기사 제목
 				Element title = document.getElementsByClass("heading").first();
 				String strTitle = title.toString();
-				strTitle = strTitle.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+				Document nTT = Jsoup.parse(strTitle);
+				String strNTT = nTT.text();             //크롤링 할 때 태그 삭제해서 가져오기
+//				strTitle = strTitle.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
 				strTitle = strTitle.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9/\\s/g]", "");
-				strTitle = strTitle.replaceAll("h3 classheading", "");
-				strTitle = strTitle.replaceAll("/h3", "");
 
 				//보도 날짜
 				String date = document.getElementsByClass("infomation").text().split(" ")[4];
@@ -149,7 +149,7 @@ public class CrawlingLogicServiceGwnews {
 				//DB에 collection 에 접근 하기 위한 VO 객체
 				Book book = new Book();
 				book.setNewsNo(newsNo);
-				book.setTitle(strTitle);
+				book.setTitle(strNTT);
 				book.setDate(date);
 				book.setDetail(strDetail);
 				book.setReporter(strRepoter);

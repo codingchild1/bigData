@@ -10,7 +10,7 @@ public class Crawling {
 
 	@Autowired
 	CrawlingLogicServiceGwnews crawlingLogicServiceGwnews;
-	
+
 	@Autowired
 	CrawlingLogicServiceETNEWS crawlingLogicServiceETNEWS;
 

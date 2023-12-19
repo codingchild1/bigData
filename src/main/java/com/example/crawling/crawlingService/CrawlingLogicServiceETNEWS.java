@@ -111,12 +111,12 @@ public class CrawlingLogicServiceETNEWS {
 
 				//기사 제목
 				Element title = document.getElementsByClass("article_title").first();
+				if (title.equals(null)) continue;
 				String strTitle = title.toString();
-				strTitle = strTitle.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
-				strTitle = strTitle.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9/\\s/g]", "");
-				strTitle = strTitle.replaceAll("\n", "");
-				strTitle = strTitle.replaceFirst(" ", "");
-				strTitle = strTitle.replaceFirst("/", "");
+				Document nTT = Jsoup.parse(strTitle);
+				String strNTT = nTT.text();             //크롤링 할 때 태그 삭제해서 가져오기
+//				String strTitleTag = strNtt.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+//				String nonTagTitle = strTitleTag.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9/\\s/g]", "");
 
 				//보도 날짜
 				String date = document.getElementsByClass("date").text().split(" ")[2];
@@ -125,6 +125,9 @@ public class CrawlingLogicServiceETNEWS {
 				//본문 및 태그 제거 등 기타 내용 필터링
 				String detail = document.select("div.article_body > div.article_txt > p").text();
 				String strDetail = detail;
+				Document nTD = Jsoup.parse(strDetail);
+				String strNTD = nTD.text();             //크롤링 할 때 태그 삭제해서 가져오기
+
 
 				Map<String, Object> map = new HashMap<>();
 				map.put("originTitle", title);
@@ -133,10 +136,6 @@ public class CrawlingLogicServiceETNEWS {
 				map.put("regDate", formatedNow);
 				originData.add(map);
 
-				strDetail = strDetail.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
-				strDetail = strDetail.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9/\\s/g]", "");
-				strTitle = strTitle.replaceAll("h2", "");
-				strTitle = strTitle.replaceAll("/h2", "");
 
 				//기자 이름
 				String reporter = "전자신문";
@@ -170,9 +169,9 @@ public class CrawlingLogicServiceETNEWS {
 				//DB에 collection 에 접근 하기 위한 VO 객체
 				Book book = new Book();
 				book.setNewsNo(newsNo);
-				book.setTitle(strTitle);
+				book.setTitle(strNTT);
 				book.setDate(date);
-				book.setDetail(strDetail);
+				book.setDetail(strNTD);
 				book.setReporter(strRepoter);
 				book.setEmail(email);
 				book.setMedia(media);
