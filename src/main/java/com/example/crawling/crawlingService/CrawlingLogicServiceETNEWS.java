@@ -100,7 +100,7 @@ public class CrawlingLogicServiceETNEWS {
 //				Long etNewsPatternCountLong = Long.parseLong(etNewsPatternCountStr);
 
 				//크롤링을 하려는 주소
-				final String url = "https://www.etnews.com/" + "20231214000154";
+				final String url = "https://www.etnews.com/" + newsNo;
 
 				//크롤링
 				Connection conn = Jsoup.connect(url);
@@ -178,21 +178,21 @@ public class CrawlingLogicServiceETNEWS {
 				book.setImg(imgUrl);
 
 				//DB에 연결하기 위한 Repository
-//                    bookRepository.insert(book);
+                    bookRepository.insert(book);
 
 				// db 값 update
 				// id 값 필요 (setId)
 //                    bookRepository.save(book);
 				crawlingEntity.setMedia("newsByEtNews");
 				crawlingEntity.setNewsNo(newsNo);
-//				crawlingRepository.save(crawlingEntity);
+				crawlingRepository.save(crawlingEntity);
 
 
 			} catch (NullPointerException nullPointerException) {
 				logger.info(nullPointerException.toString());
 				crawlingEntity.setMedia("newsByEtNews");
 				crawlingEntity.setNewsNo(newsNo);
-//				crawlingRepository.save(crawlingEntity);
+				crawlingRepository.save(crawlingEntity);
 				continue;
 
 			} catch (Exception e) {
@@ -200,7 +200,7 @@ public class CrawlingLogicServiceETNEWS {
 				System.out.println("여기 에러");
 				crawlingEntity.setMedia("newsByEtNews");
 				crawlingEntity.setNewsNo(newsNo);
-//				crawlingRepository.save(crawlingEntity);
+				crawlingRepository.save(crawlingEntity);
 				continue;
 			}
 		}
@@ -317,7 +317,7 @@ public class CrawlingLogicServiceETNEWS {
 				book.setMedia(list.get(i).get("media").toString());
 				book.setImg(list.get(i).get("imgUrl").toString());
 
-//				bookRepository.save(book);
+				bookRepository.save(book);
 			}
 
 			logger.info("전자신문 크롤링 완료");

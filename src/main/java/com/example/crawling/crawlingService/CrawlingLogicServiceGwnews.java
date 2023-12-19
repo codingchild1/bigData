@@ -57,7 +57,7 @@ public class CrawlingLogicServiceGwnews {
 		CrawlingEntity newsNoByGangwonNewspaperList = crawlingRepository.findByMedia(gangwonNews);
 		long firstNewsNoByGangwonNewspaper = newsNoByGangwonNewspaperList.getNewsNo();  //크롤링 시작 번호
 		long newsNoByGangwonNewspaper = newsNoByGangwonNewspaperList.getNewsNo();       //크롤링 데이터 카운트
-		long lastNewsNoByGangwonNewspaper = newsNoByGangwonNewspaper + 50;              //크롤링 끝 번호
+		long lastNewsNoByGangwonNewspaper = newsNoByGangwonNewspaper + 20;              //크롤링 끝 번호
 
 		/*서울신문*/
 		// 패턴 : 날짜 + 500 + 001 ~ 999
