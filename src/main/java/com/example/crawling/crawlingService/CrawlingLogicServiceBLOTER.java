@@ -94,10 +94,11 @@ public class CrawlingLogicServiceBLOTER {
 				Element title = document.getElementsByClass("heading").first();
 				if (title.equals(null)) continue;
 				String strTitle = title.toString();
-				strTitle = strTitle.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
-				strTitle = strTitle.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9/\\s/g]", "");
-				strTitle = strTitle.replaceAll("h1 classheading", "");
-				strTitle = strTitle.replaceAll("/h1", "");
+				Document nTT = Jsoup.parse(strTitle);
+				String strNTT = nTT.text();             //크롤링 할 때 태그 삭제해서 가져오기
+
+//				strTitle = strTitle.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+//				strTitle = strTitle.replaceAll("[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9/\\s/g]", "");
 
 				//보도 날짜
 				String date = document.select("ul.infomation > li").get(1).text().split(" ")[1];
@@ -150,7 +151,7 @@ public class CrawlingLogicServiceBLOTER {
 				//DB에 collection 에 접근 하기 위한 VO 객체
 				Book book = new Book();
 				book.setNewsNo(newsNo);
-				book.setTitle(strTitle);
+				book.setTitle(strNTT);
 				book.setDate(date);
 				book.setDetail(strDetail);
 				book.setReporter(strRepoter);
