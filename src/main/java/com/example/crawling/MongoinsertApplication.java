@@ -1,10 +1,12 @@
 package com.example.crawling;
 
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import com.example.crawling.dao.BookRepository;
 import com.example.crawling.dao.CrawledNewsDataRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -12,7 +14,7 @@ import javax.annotation.Resource;
 
 @EnableScheduling   // 스케쥴러를 사용하기 위함 (애플리케이션 메인 클래스에 작성)
 @SpringBootApplication
-public class MongoinsertApplication {
+public class MongoinsertApplication extends SpringBootServletInitializer{
 
     @Resource
     private BookRepository bookRepository;
@@ -22,6 +24,10 @@ public class MongoinsertApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MongoinsertApplication.class, args);
+    }
+
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(MongoinsertApplication.class);
     }
 
     @Bean
