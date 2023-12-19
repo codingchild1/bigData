@@ -62,7 +62,7 @@ public class CrawlingLogicServiceETNEWS {
 	}
 
 	 @Scheduled(cron = "0 */30 5/6 * * MON-FRI") // 매시 30분마다 6시간 텀으로 실행 (5시30분 기준) 5:30... 11:30...
-//	@Scheduled(fixedRate = 20000) // 매시 30분마다 6시간 텀으로 실행 (5시30분 기준) 5:30... 11:30...
+//	@Scheduled(fixedRate = 30000) // 매시 30분마다 6시간 텀으로 실행 (5시30분 기준) 5:30... 11:30...
 	public void crawlWebsite() throws NullPointerException {
 		CrawlingVars.newsPattern_ETNews++;
 
@@ -130,7 +130,7 @@ public class CrawlingLogicServiceETNEWS {
 
 
 				Map<String, Object> map = new HashMap<>();
-				map.put("originTitle", title);
+				map.put("originTitle", strNTT);
 				map.put("originDetail", detail);
 				map.put("url", url);
 				map.put("regDate", formatedNow);
