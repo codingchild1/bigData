@@ -9,7 +9,7 @@
     String SERVER_SCHEME = request.getScheme();
     String SERVER_NAME = request.getServerName();
     String SERVER_PORT = String.valueOf(request.getServerPort());
-	String CONTEXT_PATH = request.getContextPath();
+    String CONTEXT_PATH = request.getContextPath();
 
 %>
 
@@ -42,7 +42,7 @@
 <div class="wrap">
     <div class="main-issue">
         <div class="layout">
-            <p class="main-tit">오늘의 이슈</p>
+            <p class="main-tit">금주 이슈</p>
             <div class="main-issue-cont">
                 <div class="main-issue-img-cont">
                     <button type="button">
@@ -51,7 +51,7 @@
                         </div>
                         <p class="main-issue-img-tit">"재난지원금 환수 면제‥보상금 전액 지급"</p>
                     </button>
-                    <a href="https://news.kbs.co.kr/news/pc/main/main.html" class="txt-btn">전체 뉴스보기</a>
+                    <a href="https://www.gwnews.org/" class="txt-btn">전체 뉴스보기</a>
                 </div>
                 <div class="main-issue-list-cont">
                     <ul>
@@ -70,7 +70,7 @@
     </div>
     <div class="main-keyword">
         <div class="layout">
-            <p class="main-tit">오늘의 키워드</p>
+            <p class="main-tit">금주 키워드</p>
             <div class="main-keyword-cont">
                 <%--                <div class="main-keyword-legend">--%>
                 <%--                    <p class="legend legend1">--%>
@@ -104,7 +104,7 @@
         <div class="modal-news-wrap">
             <div class="modal-news-header">
                 <p class="modal-news-logo">
-<%--                    <img src="../../public/images/logo_ytn.png">--%>
+                    <%--                    <img src="../../public/images/logo_ytn.png">--%>
                 </p>
                 <p class="modal-news-tit"><span id="modal_title"></span></p>
                 <div class="modal-news-info">
@@ -126,7 +126,7 @@
                     <p>[이미지출처=보도화면 캡처]</p>
                 </div>
                 <div class="modal-news-cont-txt">
-					<p><span id="modal_detail"></span></p>
+                    <p><span id="modal_detail"></span></p>
                 </div>
             </div>
         </div>
@@ -147,9 +147,36 @@
         drawAmChart();
 
         // get ElasticSearch count
+        // function getEsCount(list) {
+        //     let counts = {};
+        //     let url = {}
+        //
+        //     const c = 'count';
+        //
+        //     const hits = list.hits.hits;
+        //     hits.reduce((a, hit) => {
+        //         const source = hit._source;
+        //         const detail = source.nounDetail;
+        //
+        //         /*
+        //         url[i] = hit._id;
+        //         url[u] = source.url;
+        //         */
+        //         detail.reduce((b, noun) => {
+        //             const morph = noun.morph;
+        //             if (undefined == counts[morph]) {
+        //                 counts[morph] = 0;
+        //                 // counts[morph][id] = 0;
+        //             }
+        //             counts[morph]++;
+        //         }, {});
+        //     }, {});
+        //     return counts;
+        // }
+
+        // test 날짜
         function getEsCount(list) {
             let counts = {};
-            let url = {}
 
             const c = 'count';
 
@@ -157,20 +184,18 @@
             hits.reduce((a, hit) => {
                 const source = hit._source;
                 const detail = source.nounDetail;
+                const date = source.date;
 
-                /*
-                url[i] = hit._id;
-                url[u] = source.url;
-                */
                 detail.reduce((b, noun) => {
                     const morph = noun.morph;
                     if (undefined == counts[morph]) {
-                        counts[morph] = 0;
-                        // counts[morph][id] = 0;
+                        // counts[morph] = 0;
+                        counts[morph] = { count: 0, date: date }; // 날짜 정보를 함께 저장
                     }
-                    counts[morph]++;
+                    counts[morph].count++;
                 }, {});
             }, {});
+
             return counts;
         }
 
@@ -186,14 +211,28 @@
                     console.log(count);
                     // json -> 객체 배열 형태로 변환
                     const dataArray = Object.keys(count).map(key => {
+                        const item = count[key];
                         return {
                             tag: key,
-                            weight: count[key],
+                            // weight: count[key],
+                            weight: item.count,
+                            date: item.date
                         }
                     })
+
+                    // 금주 test
+                    // 현재 날짜
+                    const currentDate = new Date();
+
+                    // 일주일 전 날짜
+                    const oneWeekAgo = new Date(currentDate.getTime() - (7 * 24 * 60 * 60 * 1000));
+
                     let filterData = dataArray.filter(item => {
-                        return item.weight > 2 && item.tag.length >= 2;
-                    })
+                        return item.weight > 3 && item.tag.length >= 2;
+                        // const itemDate = new Date(item.date);
+                        // return itemDate >= oneWeekAgo && itemDate <= currentDate && item.weight > 3 && item.tag.length >= 2;
+                    });
+
                     am4core.useTheme(am4themes_animated);
                     var chart = am4core.create("chartDiv", am4plugins_wordCloud.WordCloud);
                     var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
@@ -246,8 +285,6 @@
 
             const ctx = Sangwon.getContextPath();
             const qs = Sangwon.jsonToQueryString(_json);
-
-            window.console.log(Sangwon);
 
             const url = ctx+'/search'+qs;
 

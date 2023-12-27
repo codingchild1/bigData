@@ -8,13 +8,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Data   /*getter setter toString*/
+@Data   /*getter setter toString lombok*/
 @NoArgsConstructor  /*기본 생성자를 유지하고 인자를 받는 생성자*/
 @AllArgsConstructor /*모든 필드를 가지고 있는 생성자를 자동으로 생성*/
 @Document(collection = "crawling")  /*MongoDB의 test 컬렉션과 연결하도록 설정*/
 public class Book {
     @Id
-    private int newsNo;
+    private long newsNo;
     private String url;    // URL 타입?
     private String title;
     private String date;

@@ -29,6 +29,15 @@ public class HomeController {
 
     private final BoardRepository boardRepository;
 
+
+
+	@GetMapping("/count")
+	public ResponseEntity<Map<String, Object>> getTotalRowCount() throws Exception {
+		Map m = new HashMap<String, Object>();
+		m.put("total_count", homeService.getTotalRowCount());
+		return new ResponseEntity<Map<String, Object>>(m, HttpStatus.OK);
+	}
+
     @RequestMapping("/index")
     public String test(Model model, String newsUrl) throws Exception {
 
@@ -61,14 +70,14 @@ public class HomeController {
 	}
 
 	@GetMapping("/search")
-	public String getSearch(Model model, @RequestParam String keyword, @RequestParam(name = "page", required = false, defaultValue = "0") Integer page) throws Exception{
+	public String getSearch(Model model, @RequestParam String keyword, @RequestParam(name = "searchType", required = false, defaultValue = "content") String searchType, @RequestParam(name = "page", required = false, defaultValue = "0") Integer page) throws Exception{
 		Map<String, String> map = new HashMap<>();
 
 		try {
 			map.put("keyword", keyword);
-			map.put("searchType", "content");
+			map.put("searchType", searchType);
 			map.put("page", page.toString());
-			List<Book> searchMap = homeService.searchMap(map);   // 검색용
+			Map<String, Object> searchMap = homeService.searchMap(map);   // 검색용
 
 			model.addAttribute("searchResult", searchMap);
 			model.addAttribute("keyword", keyword);
@@ -78,19 +87,25 @@ public class HomeController {
 		return "search";
 	}
 
+	@GetMapping("/getLatestNews")
+	public ResponseEntity<List<Book>> getLatestNews() throws Exception{
+		List<Book> latestNews = homeService.getLatestNews();
+		return new ResponseEntity<List<Book>>(latestNews, HttpStatus.OK);
+	}
+
 	@PostMapping("/search")
-	public ResponseEntity<List<Book>> postSearch(@RequestParam Map<String, String> param, @RequestParam String keyword, @RequestParam(name = "page", required = false, defaultValue = "0") Integer page) throws Exception{
+	public ResponseEntity<Map<String, Object>> postSearch(@RequestParam Map<String, String> param, @RequestParam(name = "page", required = false, defaultValue = "0") Integer page) throws Exception{
 		Map<String, String> map = new HashMap<>();
 
-			map.put("keyword", keyword);
-			map.put("searchType", "content");
+			map.put("keyword", (String) param.get("keyword"));
+			map.put("searchType", (String) param.get("searchType"));
 			map.put("page", page.toString());
-			List<Book> searchMap = homeService.searchMap(map);   // 검색용
+			Map<String, Object> searchMap = homeService.searchMap(map);   // 검색용
 
 //			mv.addObject("searchResult", searchMap);
 //			mv.addObject("keyword", keyword);
 
-		return new ResponseEntity<List<Book>>(searchMap, HttpStatus.OK);
+		return new ResponseEntity<Map<String, Object>>(searchMap, HttpStatus.OK);
 	}
 
 	@PutMapping("test/{id}")
