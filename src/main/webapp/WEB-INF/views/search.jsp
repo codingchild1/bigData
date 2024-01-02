@@ -4,7 +4,7 @@
 <%
 
     String name = request.getParameter("keyword");
-    System.out.println(name);
+    String SERVLET_PATH = request.getAttribute("SERVLET_PATH").toString();
 
 %>
 
@@ -22,6 +22,10 @@
     <link rel="shortcut icon" href="../../public/images/favicon.ico">
     <link rel="stylesheet" href="../../public/css/reset.css">
     <link rel="stylesheet" href="../../public/css/common.css">
+
+    <%-- script import 순서 변경 금지 --%>
+    <script>window.SERVLET_PATH = '<%=SERVLET_PATH%>';</script>
+
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
     <%-- module --%>

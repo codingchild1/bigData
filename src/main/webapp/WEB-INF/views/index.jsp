@@ -10,6 +10,7 @@
     String SERVER_NAME = request.getServerName();
     String SERVER_PORT = String.valueOf(request.getServerPort());
     String CONTEXT_PATH = request.getContextPath();
+    String SERVLET_PATH = request.getAttribute("SERVLET_PATH").toString();
 
 %>
 
@@ -25,7 +26,7 @@
     <link rel="stylesheet" href="../../public/css/common.css">
 
     <%-- script import 순서 변경 금지 --%>
-    <script>window.SERVER_SCHEME = '<%=SERVER_SCHEME%>';window.SERVER_NAME = '<%=SERVER_NAME%>';window.SERVER_PORT = '<%=SERVER_PORT%>';window.CONTEXT_PATH = '<%=CONTEXT_PATH%>';</script>
+    <script>window.SERVER_SCHEME = '<%=SERVER_SCHEME%>';window.SERVER_NAME = '<%=SERVER_NAME%>';window.SERVER_PORT = '<%=SERVER_PORT%>';window.CONTEXT_PATH = '<%=CONTEXT_PATH%>';window.SERVLET_PATH = '<%=SERVLET_PATH%>';</script>
 
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 

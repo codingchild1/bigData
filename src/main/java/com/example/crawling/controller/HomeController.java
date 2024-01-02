@@ -1,5 +1,7 @@
 package com.example.crawling.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.example.crawling.dao.BoardRepository;
 import com.example.crawling.dto.BoardSaveDto;
 import com.example.crawling.service.HomeService;
@@ -38,10 +40,17 @@ public class HomeController {
 		return new ResponseEntity<Map<String, Object>>(m, HttpStatus.OK);
 	}
 
+	@RequestMapping(value="/", method={RequestMethod.GET, RequestMethod.POST})
+	public String welcome(){
+		return "welcome";
+	}
+
     @RequestMapping("/index")
-    public String test(Model model, String newsUrl) throws Exception {
+    public String test(HttpServletRequest request, Model model, String newsUrl) throws Exception {
 
 	    SangwonUtil util = new SangwonUtil();
+
+		String sp = SangwonUtil.getServletPath(request);
 
 		try {
 			List<Map<String, Object>> list = homeService.selectNewsData();
@@ -70,8 +79,10 @@ public class HomeController {
 	}
 
 	@GetMapping("/search")
-	public String getSearch(Model model, @RequestParam String keyword, @RequestParam(name = "searchType", required = false, defaultValue = "content") String searchType, @RequestParam(name = "page", required = false, defaultValue = "0") Integer page) throws Exception{
+	public String getSearch(HttpServletRequest request, Model model, @RequestParam String keyword, @RequestParam(name = "searchType", required = false, defaultValue = "content") String searchType, @RequestParam(name = "page", required = false, defaultValue = "0") Integer page) throws Exception{
 		Map<String, String> map = new HashMap<>();
+
+		String sp = SangwonUtil.getServletPath(request);
 
 		try {
 			map.put("keyword", keyword);

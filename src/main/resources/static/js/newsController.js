@@ -1,9 +1,6 @@
 let count = 6;
 $().ready(function () {
 
-    // global
-    window.dd = window.console.log.bind(console);
-
     // var
     const $document = $(document);
     const $pagination = $document.find('div.pagination');
@@ -19,6 +16,11 @@ $().ready(function () {
 
     const $backBtn = $pagination.find('button.prev');
     const $forwardBtn = $pagination.find('button.next');
+
+    // 변수 선언 끝난 후 실행.
+    if("search" == SERVLET_PATH){
+        paginate();
+    }
 
     /*** # event : start ***/
     // click : pagination
@@ -66,8 +68,6 @@ $().ready(function () {
 
         totalPage = Math.ceil(rowcount / pageSize);
         totalBlock = Math.ceil(totalPage / blockSize);
-        dd('dd(rowcount);dd(rowcount);dd(rowcount);');
-        dd(rowcount);
 
         // draw List
         $(".news_list_search").empty();
