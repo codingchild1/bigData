@@ -22,7 +22,7 @@ public class Crawling {
 
 	@PostConstruct
 	public void scheduleCrawlTask() throws Exception{
-		/*강원신문*/
+//		/*강원신문*/
 //		crawlingLogicServiceGwnews.crawlWebsite();
 //
 //		/*전자신문*/
@@ -30,7 +30,7 @@ public class Crawling {
 //		crawlingLogicServiceETNEWS.crawlWebsite();
 //
 //		/*보안신문*/
-////		crawlingLogicServiceBOANNEWS.crawlWebsite();
+////		crawlingLogicServiceBOANNEWS.crawlWebsite();    //사용안함
 //
 //		/*블로터*/
 //		crawlingLogicServiceBLOTER.crawlWebsite();
