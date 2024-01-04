@@ -10,7 +10,7 @@ public class Crawling {
 
 	@Autowired
 	CrawlingLogicServiceGwnews crawlingLogicServiceGwnews;
-	
+
 	@Autowired
 	CrawlingLogicServiceETNEWS crawlingLogicServiceETNEWS;
 
@@ -22,18 +22,18 @@ public class Crawling {
 
 	@PostConstruct
 	public void scheduleCrawlTask() throws Exception{
-		/*강원신문*/
-		crawlingLogicServiceGwnews.crawlWebsite();
-		
-		/*전자신문*/
-		crawlingLogicServiceETNEWS.resetNewsNum();
-		crawlingLogicServiceETNEWS.crawlWebsite();
-
-		/*보안신문*/
-//		crawlingLogicServiceBOANNEWS.crawlWebsite();
-
-		/*블로터*/
-		crawlingLogicServiceBLOTER.crawlWebsite();
+//		/*강원신문*/
+//		crawlingLogicServiceGwnews.crawlWebsite();
+//
+//		/*전자신문*/
+//		crawlingLogicServiceETNEWS.resetNewsNum();
+//		crawlingLogicServiceETNEWS.crawlWebsite();
+//
+//		/*보안신문*/
+////		crawlingLogicServiceBOANNEWS.crawlWebsite();    //사용안함
+//
+//		/*블로터*/
+//		crawlingLogicServiceBLOTER.crawlWebsite();
 
 	}
 }
