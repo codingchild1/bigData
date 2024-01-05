@@ -117,7 +117,7 @@
                     <div class="modal-news-info-btn">
                         <button type="button" class="btn-xs gray-line-btn">기사원문</button>
                         <button type="button" class="btn-xs gray-line-btn">스크랩</button>
-                        <button type="button" class="btn-xs gray-line-btn">뉴스 듣기</button>
+                        <button type="button" id="news-listening" class="btn-xs gray-line-btn">뉴스 듣기</button>
                     </div>
                 </div>
             </div>
@@ -135,7 +135,7 @@
 </div>
 
 
-<script src="/js/newsController.js"></script>
+<script type="module" src="/js/newsController.js"></script>
 
 <script>
     window.dd = window.console.log.bind(console);

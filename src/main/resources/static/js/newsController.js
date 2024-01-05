@@ -1,8 +1,30 @@
 let count = 6;
+
+import Reader from '../ncloud/module/Reader/js/Reader_gyubeompark_ver1.1.min.js';
+
 $().ready(function () {
 
+    // instance
+    const _reader = new Reader();
+
+    // instance options
+    _reader.speed = 1.5;
+    _reader.pitch = 1;
+
+
+
     // var
+
+    // boolean
+    let reading_bool = false;
+
+    // 뉴스 듣기
+    const notClickedText = '뉴스 듣기';
+    const clickedText = '뉴스 듣기 중지';
+
+    // DOM
     const $document = $(document);
+    const $newsListening = $document.find('button#news-listening');
     const $pagination = $document.find('div.pagination');
 
     const pageSize = 5;
@@ -17,12 +39,47 @@ $().ready(function () {
     const $backBtn = $pagination.find('button.prev');
     const $forwardBtn = $pagination.find('button.next');
 
+
+    /*** # init : start ***/
+
+    // 뉴스 듣기 셋팅
+    setReading();
+
     // 변수 선언 끝난 후 실행.
     if("search" == SERVLET_PATH){
         paginate();
     }
 
+    /*** init : end ***/
+
+
+
     /*** # event : start ***/
+
+    // 뉴스 듣기
+    $newsListening.click((e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        const $currentButton = $(e.currentTarget);
+        const originalText = $currentButton.text().trim();
+
+        if(notClickedText == originalText){
+            const detail = $("span#modal_detail").text();
+
+            $currentButton.text(clickedText);
+
+            // start - reading
+            startReading(detail);
+
+        }else{
+            $currentButton.text(notClickedText);
+
+            // stop - reading
+            stopReading();
+        }
+    });
+
     // click : pagination
     $(document).on('click', 'button.pagination-btn', (e) => {
         e.preventDefault();
@@ -48,7 +105,29 @@ $().ready(function () {
         findByUrl(url);
         $(".modal").css("display", "block");
     });
+
     /*** event : end ***/
+
+
+
+    /*** # function : start ***/
+    function setReading(){
+        $newsListening.text(notClickedText);
+    }
+
+    function startReading(text){
+        if(text.length > 0 && false == reading_bool){
+            _reader.read(text);
+            reading_bool = !reading_bool;
+        }
+    }
+
+    function stopReading(){
+        if(true == reading_bool){
+            _reader.cancel();
+            reading_bool = !reading_bool;
+        }
+    }
 
     function searchList(page = 0){
         const $form = $('form#selectInput');
@@ -143,6 +222,9 @@ $().ready(function () {
     $(".modal-news-close").on("click", function (e) {
         console.log(e.target.getAttribute("_id_no"));
         $(".modal").css("display", "none");
+
+        // stop - reading
+        stopReading();
     });
     /*** event : end ***/
 
